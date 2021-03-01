@@ -38,6 +38,14 @@ header {
     overflow: hidden;
 }
 
+p {
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 1px;
+    font-size: 1.125em;
+    color: #000;
+    font-weight: 600;
+}
+
 .navegation {
     position: fixed;
     display: flex;
@@ -87,16 +95,20 @@ header {
     display: flex;
     flex-direction: column;
     color: #fff;
-    font-size: 1.2em;
     line-height: 10px;
 }
 
 .logo span:nth-child(1) {
-    font-size: 1.4em;
+    font-size: 1.8em;
 }
 
-.logo span:nth-child(2) {
+.logo span:nth-child(3) {
     font-size: 0.8em;
+}
+
+.logo span:nth-child(5) {
+    font-size: 1.5em;
+    line-height: 2px;
 }
 
 /*----- Navegación -----*/
@@ -132,7 +144,7 @@ header {
 
 .navegation.scroll {
     background: #fff;
-    padding: 40px 40px 40px 40px;
+    padding: 35px 40px 35px 40px;
 }
 
 .navegation.scroll .logo a {
@@ -146,10 +158,10 @@ header {
 
 .navegation.scroll .marca_logo {
     color: #000;
-    margin-top: -12px;
+    margin-top: -6px;
 }
 
-.navegation.scroll .links_sections li a{
+.navegation.scroll .links_sections li a {
     color: #000;
     font-weight: 600;
 }
@@ -167,7 +179,6 @@ header {
     width: 100%;
     height: 100%;
     display: flex;
-    background-color: aquamarine;
     justify-content: center;
     align-items: center;
     background-image: url(images/imgSlide2.jpg);
@@ -190,7 +201,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 4em;
+    margin-top: 6em;
 }
 
 /*----- Info Banner -----*/
@@ -208,16 +219,19 @@ header {
     position: relative;
     font-size: 4em;
     text-transform: uppercase;
+    margin-bottom: 1rem;
 }
 
 .info_banner p {
-    font-size: 1.2em;
+    font-size: 1.1em;
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
     width: 500px;
     text-align: center;
+    color: #fff;
+    margin-bottom: 2em;
 }
 
 .links_info {
@@ -251,10 +265,185 @@ header {
 
 
 
+/*-----------------------------
+-------- Seccion Team ---------
+------------------------------*/
 
+.team {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 600px;
+}
 
+.image_team {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    clip-path: polygon(100% 0, 100% 60%, 38% 60%, 22% 80%, 6% 60%, 0 60%, 0 0);
+    background-image: url(images/fondo-entrenamiento.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.image_team::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(3, 169, 244, 0.75);
+}
+
+.content_team {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo_team {
+    position: relative;
+    width: 30%;
+    height: 200px;
+    padding-left: 14%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.titulo_team h2 span:nth-child(1) {
+    font-size: 2em;
+    font-family: 'Bangers', cursive;
+    color: #FED130;
+    letter-spacing: 3px;
+}
+
+.titulo_team h2 span:nth-child(3) {
+    font-size: 2.4em;
+    font-weight: bold;
+    line-height: 30px;
+    font-weight: 600;
+}
+
+.info_team {
+    display: flex;
+    align-items: flex-start;
+    width: 70%;
+    height: 200px;
+    margin-left: 22%;
+    padding-right: 10%;
+}
+
+.info_team p {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+/*-----------------------------
+---- Seccion Entrenamiento ----
+------------------------------*/
 .entrenamiento {
     position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    height: 300px;
+    height: auto;
+}
+
+.image_entrenamiento {
+    position: relative;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    clip-path: polygon(100% 0, 100% 50%, 50% 90%, 0 50%, 0 0);
+    background-image: url(images/fondo-entrenamiento.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+}
+
+.image_entrenamiento::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(3, 169, 244, 0.75);
+}
+
+.image_entrenamiento h2  {
+    font-size: 2.6em;
+    color: #fff;
+    text-transform: uppercase;
+    z-index: 1;
+}
+
+.content_entrenamientos {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 5em;
+}
+
+.card_entrenamiento {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    height: 620px;
+    margin: 0 60px 0 60px;
+    align-items: center;
+    text-align: center;
+}
+
+.image-card_entrenamiento {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-color: aquamarine;
+}
+
+.image-card_entrenamiento img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.card_entrenamiento h3 {
+    position: relative;
+    width: 100%;
+    height: auto;
+    font-size: 1.7em;
+    margin-top: 1em;
+    text-transform: uppercase;
+}
+
+.card_entrenamiento p {
+    position: relative;
+    width: 96%;
+    height: auto;
+    font-size: 1em;
 }
