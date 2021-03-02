@@ -90,18 +90,14 @@ p {
 }
 
 /*----- Logo -----*/
-.navegation .logo {
+.logo {
     position: relative;
-    height: auto;
+    display: flex;
+    height: 60px;
     width: 20%;
     align-items: center;
     justify-content: center;
-    display: flex;
     text-align: center;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .logo a {
@@ -111,7 +107,10 @@ p {
     text-align: center;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
 .logo span:nth-child(1) {
@@ -164,7 +163,9 @@ p {
     letter-spacing: 1px;
 }
 
-/*---------- Movil Navegation ----------*/
+/*--------------------------------
+-------- Movil Navegation -------- 
+----------------------------------*/
 .content_navegation.active {
     position: absolute;
     left: 0;
@@ -180,14 +181,7 @@ p {
 }
 
 .logo.active {
-    position: absolute;
-    width: 100%;
-    top: 30px;
-}
-
-.logo.active a {
-    color: #000;
-    font-weight: bold;
+    display: none;
 }
 
 .links-sections_left.active {
@@ -253,10 +247,12 @@ p {
     cursor: pointer;
 }
 
-/*----- Navegation Scroll -----*/
+/*------------------------------
+ ------ Navegation Scroll ------
+ -------------------------------*/
 .navegation.scroll {
     background: #fff;
-    padding: 5% 5% 5% 5%;
+    padding: 2.5% 2.5% 2.5% 2.5%;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
@@ -286,7 +282,9 @@ p {
     letter-spacing: 1px;
 }
 
-/*----- Banner -----*/
+/*--------------------------
+---------- Banner ----------
+----------------------------*/
 .banner {
     position: absolute;
     top: 0;
@@ -308,7 +306,7 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
 }
 
 .content_banner {
@@ -356,7 +354,7 @@ p {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    widows: 100%;
+    width: 100%;
     height: auto;
     margin-top: 5em;
 }
@@ -380,12 +378,9 @@ p {
     background: rgba(3, 169, 244, 0.6);
 }
 
-
-
 /*-----------------------------
 -------- Seccion Team ---------
 ------------------------------*/
-
 .team {
     position: relative;
     display: flex;
@@ -586,6 +581,7 @@ p {
         justify-content: center;
         right: 0;
         align-items: center;
+        width: 10%;
     }
 
     .links-sections_left,
@@ -595,30 +591,197 @@ p {
 
     .navegation {
         background-color: #fff;
-        padding: 5% 5% 5% 5%;
     }
 
-    .navegation .logo {
-        position: absolute;
-        height: auto;
-        width: 100%;
+    .logo {
+        width: 90%;
     }
 
     .logo a {
         color: #000;
         font-weight: bold;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .logo span:nth-child(1) {
+        font-size: 1.7em;
+    }
+
+    .logo span:nth-child(3) {
+        display: none;
+    }
+
+    .logo span:nth-child(5) {
+        font-size: 1.2em;
+        margin-left: 0.5%;
+        line-height: 0;
     }
 }
 
-@media screen and (max-width: 800px) {
-    .navegation .logo {
+
+
+
+
+@media screen and (max-width: 850px) {
+
+    .info_banner h2 {
+        font-size: 3.6em;
+    }
+
+    .info_banner p {
+        font-size: 1em;
+    }
+
+    .links_info {
+        margin-top: 4.6em;
+    }
+
+    .links_info a {
+        width: 150px;
+        height: 46px;
+    }
+
+    .logo span:nth-child(5) {
+        display: none;
+    }
+
+    .logo {
+        flex-direction: row;
+        width: 90%;
+    }
+
+    .logo span:nth-child(3) {
+        display: none;
+    }
+
+    .menu_toggle.active {
+        top: 80%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 600px) {
+    .content_banner {
+        margin-top: 5em;
+    }
+
+    .info_banner {
+        width: 90%;
+        flex-wrap: wrap;
+    }
+
+    .info_banner h2 {
+        font-size: 3.6em;
+    }
+
+    .info_banner p {
+        font-size: 1em;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+        margin-bottom: 1.6em;
+    }
+
+    .links_info {
+        margin-top: 5em;
+    }
+
+    .links_info a {
+        height: 42px;
+    }
+
+    .team {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .image_team {
+        height: 100px;
+        clip-path: polygon(100% 0, 100% 50%, 50% 90%, 0 50%, 0 0);
+    }
+
+    .content_team {
+        flex-direction: column;
+    }
+
+    .titulo_team {
+        position: relative;
         width: 100%;
-        justify-content: space-between;
+        height: auto;
+        padding-left: 0;
+        align-items: center;
+        background-color: magenta;
     }
 
-    .navegation .logo.active {
-        justify-content: center;
+    .titulo_team h2 span:nth-child(1) {
+        font-size: 1.6em;
+        letter-spacing: 4px;
     }
 
-    .logo.active {}
+    .titulo_team h2 span:nth-child(3) {
+        font-size: 1.9em;
+        line-height: 25px;
+    }
+
+    .info_team {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        width: 85%;
+        height: auto;
+        margin-left: 0;
+        margin-top: 2em;
+        padding-right: 0;
+    }
+
+    .info_team p {
+        align-items: center;
+        font-size: 1em;
+    }
+
+    .image_entrenamiento {
+        height: 130px;
+    }
+
+    .image_entrenamiento h2 {
+        font-size: 2.2em;
+    }
+
+    .content_entrenamientos {
+        margin-top: 2em;
+    }
+
+    .card_entrenamiento {
+        width: 300px;
+        height: 600px;
+        margin: 0 50px 0 50px;
+    }
+
+    .image-card_entrenamiento {
+        height: 360px;
+    }
+
+    .card_entrenamiento h3 {
+        font-size: 1.6em;
+        margin-top: 0.6em;
+        margin-bottom: 0.6rem;
+    }
+
+    .card_entrenamiento p {
+        position: relative;
+        width: 96%;
+        height: auto;
+        font-size: 1em;
+    }
 }
