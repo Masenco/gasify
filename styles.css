@@ -4,6 +4,11 @@
 }
 
 @font-face {
+    font-family: 'Didot-LT-Std-Headline';
+    src: url('fonts/Didot-LT-Std-Headline.ttf') format('ttf');
+}
+
+@font-face {
     font-family: 'ProximaNovaT-Thin';
     src: url('fonts/ProximaNovaT-Thin.woff2') format('woff2');
 }
@@ -51,11 +56,23 @@ p {
     display: flex;
     width: 100%;
     height: 50px;
-    justify-content: space-between;
-    align-items: center;
     background: transparent;
     z-index: 1;
-    padding: 50px 40px 50px 40px;
+    padding: 4% 4% 4% 4%;
+    transition: .4s;
+}
+
+.content_navegation {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: auto;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
     transition: .4s;
 }
 
@@ -74,28 +91,27 @@ p {
 
 /*----- Logo -----*/
 .navegation .logo {
-    position: absolute;
-    width: 200px;
+    position: relative;
+    height: auto;
+    width: 20%;
     align-items: center;
     justify-content: center;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: auto;
-    margin-right: auto;
     display: flex;
     text-align: center;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .logo a {
     position: relative;
-    display: flex;
-    flex-direction: column;
     color: #fff;
     line-height: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .logo span:nth-child(1) {
@@ -112,39 +128,136 @@ p {
 }
 
 /*----- Navegación -----*/
-.links_sections {
+.links-sections_right,
+.links-sections_left {
     position: relative;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 40%;
 }
 
-.links_sections li {
-    position: relative;
-    margin: 10px;
+.links-sections_right {
+    justify-content: flex-end;
 }
 
-.links_sections li a {
+.links-sections_left li {
+    margin-right: 15px;
+}
+
+.links-sections_right li {
+    margin-left: 15px;
+}
+
+.links-sections_right li a,
+.links-sections_left li a {
     position: relative;
-    margin-left: 10px;
     font-size: 1em;
     color: #fff;
     transition: letter-spacing .4s;
 }
 
-.links_sections li a:hover {
+.links-sections_right li a:hover,
+.links-sections_left li a:hover {
     color: #03a9f4;
     letter-spacing: 1px;
+}
+
+/*---------- Movil Navegation ----------*/
+.content_navegation.active {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 1111;
+}
+
+.logo.active {
+    position: absolute;
+    width: 100%;
+    top: 30px;
+}
+
+.logo.active a {
+    color: #000;
+    font-weight: bold;
+}
+
+.links-sections_left.active {
+    display: none;
+}
+
+.links-sections_right.active {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    background-color: #fff;
+}
+
+.links-sections_right.active li {
+    margin-left: 0px;
+    margin-bottom: 2em;
+}
+
+.links-sections_right.active li a {
+    position: relative;
+    font-size: 2em;
+    font-weight: bold;
+    color: #000;
+    transition: letter-spacing .4s;
+}
+
+.open_menu.active {
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-image: url(images/closeToggle.png);
+    filter: invert(0);
+}
+
+.menu_toggle.active {
+    position: absolute;
+    width: 100%;
+    bottom: 20%;
+    left: 0;
+}
+
+/*-------- Menu Toggle --------*/
+.menu_toggle {
+    position: relative;
+    display: none;
+}
+
+.open_menu {
+    display: block;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 35px;
+    background-image: url(images/menuToggle.png);
+    background-size: cover;
+    filter: invert(1);
+}
+
+.open_menu:hover {
+    cursor: pointer;
 }
 
 /*----- Navegation Scroll -----*/
 .navegation.scroll {
     background: #fff;
-    padding: 40px 40px 40px 40px;
-}
-
-.navegation.scroll {
-    background: #fff;
-    padding: 35px 40px 35px 40px;
+    padding: 5% 5% 5% 5%;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 .navegation.scroll .logo a {
@@ -161,12 +274,14 @@ p {
     margin-top: -6px;
 }
 
-.navegation.scroll .links_sections li a {
+.navegation.scroll .links-sections_left li a,
+.navegation.scroll .links-sections_right a {
     color: #000;
     font-weight: 600;
 }
 
-.navegation.scroll .links_sections li a:hover {
+.navegation.scroll .links-sections_left li a:hover,
+.navegation.scroll .links-sections_right li a:hover {
     color: #03a9f4;
     letter-spacing: 1px;
 }
@@ -220,6 +335,8 @@ p {
     font-size: 4em;
     text-transform: uppercase;
     margin-bottom: 1rem;
+    font-family: 'Didot-LT-Std-Headline';
+    font-weight: lighter;
 }
 
 .info_banner p {
@@ -390,7 +507,7 @@ p {
     background: rgba(3, 169, 244, 0.75);
 }
 
-.image_entrenamiento h2  {
+.image_entrenamiento h2 {
     font-size: 2.6em;
     color: #fff;
     text-transform: uppercase;
@@ -432,6 +549,7 @@ p {
     width: 100%;
     height: 100%;
 }
+
 .card_entrenamiento h3 {
     position: relative;
     width: 100%;
@@ -439,6 +557,7 @@ p {
     font-size: 1.7em;
     margin-top: 1em;
     text-transform: uppercase;
+    margin-bottom: 1rem;
 }
 
 .card_entrenamiento p {
@@ -446,4 +565,60 @@ p {
     width: 96%;
     height: auto;
     font-size: 1em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*--------- Responsive ----------*/
+@media screen and (max-width: 1100px) {
+    .menu_toggle {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        right: 0;
+        align-items: center;
+    }
+
+    .links-sections_left,
+    .links-sections_right {
+        display: none;
+    }
+
+    .navegation {
+        background-color: #fff;
+        padding: 5% 5% 5% 5%;
+    }
+
+    .navegation .logo {
+        position: absolute;
+        height: auto;
+        width: 100%;
+    }
+
+    .logo a {
+        color: #000;
+        font-weight: bold;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .navegation .logo {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .navegation .logo.active {
+        justify-content: center;
+    }
+
+    .logo.active {}
 }
