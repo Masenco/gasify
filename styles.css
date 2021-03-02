@@ -225,7 +225,9 @@ p {
     left: 0;
 }
 
-/*-------- Menu Toggle --------*/
+/*--------------------------- 
+-------- Menu Toggle --------
+-----------------------------*/
 .menu_toggle {
     position: relative;
     display: none;
@@ -236,8 +238,8 @@ p {
     position: relative;
     justify-content: center;
     align-items: center;
-    height: 35px;
-    width: 35px;
+    height: 38px;
+    width: 38px;
     background-image: url(images/menuToggle.png);
     background-size: cover;
     filter: invert(1);
@@ -670,12 +672,16 @@ p {
 
 
 @media screen and (max-width: 600px) {
+    .navegation {
+        height: 60px;
+    }
+
     .content_banner {
-        margin-top: 5em;
+        margin-top: 2em;
     }
 
     .info_banner {
-        width: 90%;
+        width: 96%;
         flex-wrap: wrap;
     }
 
@@ -684,7 +690,7 @@ p {
     }
 
     .info_banner p {
-        font-size: 1em;
+        font-size: 1.1em;
         left: 0;
         right: 0;
         margin-left: auto;
@@ -694,11 +700,16 @@ p {
     }
 
     .links_info {
-        margin-top: 5em;
+        margin-top: 6em;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .links_info a {
-        height: 42px;
+        width: 180px;
+        height: 45px;
+        font-size: 1.3em;
     }
 
     .team {
@@ -721,16 +732,16 @@ p {
         height: auto;
         padding-left: 0;
         align-items: center;
-        background-color: magenta;
+        margin-top: 1em;
     }
 
     .titulo_team h2 span:nth-child(1) {
-        font-size: 1.6em;
+        font-size: 1.7em;
         letter-spacing: 4px;
     }
 
     .titulo_team h2 span:nth-child(3) {
-        font-size: 1.9em;
+        font-size: 2em;
         line-height: 25px;
     }
 
@@ -747,7 +758,7 @@ p {
 
     .info_team p {
         align-items: center;
-        font-size: 1em;
+        font-size: 1.1em;
     }
 
     .image_entrenamiento {
