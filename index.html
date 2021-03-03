@@ -26,10 +26,10 @@
                 <a href=""><span>C.M</span><br><span class="nombre_logo">(Cristian Meneguzzi)</span><br><span class="marca_logo">Running team</span></a>
             </div>
             <ul class="links-sections_right">
-                <li><a href="#top">Página principal</a></li>
-                <li><a href="#entrenamiento">Entrenamiento</a></li>
-                <li><a href="#team">Team</a></li>
-                <li><a href="#contact">Contacto</a></li>
+                <li><a href="#top" onclick="closeMenu();">Página principal</a></li>
+                <li><a href="#entrenamiento" onclick="closeMenu();">Entrenamiento</a></li>
+                <li><a href="#team" onclick="closeMenu();">Team</a></li>
+                <li><a href="#contact" onclick="closeMenu();">Contacto</a></li>
             </ul>
             <ul class="menu_toggle">
                 <li><a onclick="openMenu();" class="open_menu"></a></li>
@@ -41,7 +41,8 @@
                 <div class="info_banner">
                     <h2>Únete al team!</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, non.</p>
-                    <div class="links_info"><a href="#entrenamiento">¿Quienes somos?</a><a href="">Team</a></div>
+                    <div class="links_info"><a href="#entrenamiento">¿Empezamos?</a>
+                        <a href="#team">Team</a></div>
                 </div>
             </div>
         </div>
@@ -51,6 +52,7 @@
     <section class="entrenamiento" id="entrenamiento">
         <div class="image_entrenamiento"><h2>Preparate</h2></div>
         <div class="content_entrenamientos">
+            <p class="intro_entrenamiento">Te brindamos la mejor preparación y asesoramiento, pero, antes que nada, es mejor ver como entrenamos.</p>
             <div class="card_entrenamiento">
                 <div class="image-card_entrenamiento">
                     <img src="images/bannerBack.jpg" alt="">
@@ -115,5 +117,11 @@
                 'navegation');
             nav.classList.toggle("scroll", window.scrollY > 0);
         });
+    </script>
+    <script src="src/scroll-out.js"></script>
+    <script type="text/javascript">
+    ScrollOut({
+        targets: 'h3, h2, p, a, span, .card_entrenamiento'
+    });
     </script>
 </body></html>

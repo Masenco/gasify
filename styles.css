@@ -23,6 +23,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'ProximaNova-Light';
+    scroll-behavior: smooth;
 }
 
 ul {
@@ -73,7 +74,7 @@ p {
     margin-right: auto;
     justify-content: center;
     align-items: center;
-    transition: .4s;
+    transition: .5s;
 }
 
 .navegation::before {
@@ -174,10 +175,37 @@ p {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
     height: 100vh;
     background-color: #fff;
     z-index: 1111;
+    transition: .5s;
+}
+
+.content_navegation::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform: translate(110%, 0);
+    background-color: #03a9f4;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 87%, 37% 0);
+    transition: .4s;
+}
+
+.content_navegation.active::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #03a9f4;
+    transform: none;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%, 30% 0);
+    transition: .4s;
+
 }
 
 .logo.active {
@@ -185,16 +213,32 @@ p {
 }
 
 .links-sections_left.active {
-    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    transition: .5s;
+}
+
+.links-sections_left.active li a {
+    color: #000;
+    font-size: 1.3em;
+    font-weight: bold;
 }
 
 .links-sections_right.active {
     display: flex;
     position: relative;
+    top: -40px;
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    background-color: #fff;
+    transition: .5s;
 }
 
 .links-sections_right.active li {
@@ -215,14 +259,16 @@ p {
     width: 50px;
     height: 50px;
     background-image: url(images/closeToggle.png);
-    filter: invert(0);
+    filter: invert(1);
+    transition: .5s;
 }
 
 .menu_toggle.active {
     position: absolute;
     width: 100%;
-    bottom: 20%;
+    bottom: 25%;
     left: 0;
+    transition: .5s;
 }
 
 /*--------------------------- 
@@ -284,6 +330,59 @@ p {
     letter-spacing: 1px;
 }
 
+/*---------- Scroll animations ---------- */
+.info_banner h2[data-scroll="in"] {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.info_banner h2[data-scroll="out"] {
+    transform: scale(0.5);
+    opacity: 0;
+}
+
+.info_banner p[data-scroll="in"] {
+    transform: translateX(0);
+}
+
+.info_banner p[data-scroll="out"] {
+    transform: translateX(100px);
+}
+
+.links_info a[data-scroll="in"] {
+    transform: translateX(0);
+}
+
+.links_info a[data-scroll="out"] {
+    transform: translateX(-100px);
+}
+
+.card_entrenamiento[data-scroll="in"] {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.card_entrenamiento[data-scroll="out"] {
+    transform: scale(0.8);
+    opacity: 0;
+}
+
+.titulo_team h2[data-scroll="in"] {
+    transform: translateX(0);
+}
+
+.titulo_team h2[data-scroll="out"] {
+    transform: translateX(-300px);
+}
+
+.info_team p[data-scroll="in"] {
+    transform: translateX(0);
+}
+
+.info_team p[data-scroll="out"] {
+    transform: translateX(300px);
+}
+
 /*--------------------------
 ---------- Banner ----------
 ----------------------------*/
@@ -317,6 +416,7 @@ p {
     justify-content: center;
     align-items: center;
     margin-top: 6em;
+    overflow: hidden;
 }
 
 /*----- Info Banner -----*/
@@ -337,6 +437,8 @@ p {
     margin-bottom: 1rem;
     font-family: 'Didot-LT-Std-Headline';
     font-weight: lighter;
+    transition: .8s;
+    transition-timing-function: cubic-bezier(0.68, -0.13, 0.58, 1);
 }
 
 .info_banner p {
@@ -349,6 +451,7 @@ p {
     text-align: center;
     color: #fff;
     margin-bottom: 2em;
+    transition: 1s;
 }
 
 .links_info {
@@ -373,7 +476,8 @@ p {
     justify-content: center;
     align-items: center;
     background: rgba(3, 169, 244, 1);
-    transition: .4s;
+    transition: .5s;
+    transition-timing-function: cubic-bezier(0.68, -0.13, 0.58, 1);
 }
 
 .links_info a:hover {
@@ -425,6 +529,7 @@ p {
     margin-right: auto;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 .titulo_team {
@@ -436,6 +541,11 @@ p {
     text-align: center;
     justify-content: center;
     align-items: flex-start;
+
+}
+
+.titulo_team h2 {
+    transition: .5s;
 }
 
 .titulo_team h2 span:nth-child(1) {
@@ -466,6 +576,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: baseline;
+    transition: .5s;
 }
 
 /*-----------------------------
@@ -505,7 +616,10 @@ p {
 }
 
 .image_entrenamiento h2 {
-    font-size: 2.6em;
+    position: absolute;
+    display: flex;
+    top: 1.7em;
+    font-size: 2.9em;
     color: #fff;
     text-transform: uppercase;
     z-index: 1;
@@ -521,8 +635,24 @@ p {
     margin-top: 5em;
 }
 
+.intro_entrenamiento {
+    top: -4.5em;
+    display: flex;
+    font-size: 1.1em;
+    position: relative;
+    justify-content: center;
+    width: 100%;
+    padding-left: 30%;
+    padding-right: 30%;
+    text-align: center;
+    height: auto;
+    font-style: italic;
+    font-weight: bold;
+}
+
 .card_entrenamiento {
     position: relative;
+    top: -2em;
     display: flex;
     flex-direction: column;
     width: 320px;
@@ -530,6 +660,9 @@ p {
     margin: 0 60px 0 60px;
     align-items: center;
     text-align: center;
+    transition: transform .5s,
+        opacity .5s;
+    transition-timing-function: cubic-bezier(0.68, -0.13, 0.58, 1);
 }
 
 .image-card_entrenamiento {
@@ -584,6 +717,11 @@ p {
         right: 0;
         align-items: center;
         width: 10%;
+        filter: invert(1);
+    }
+
+    .navegation.scroll .menu_toggle {
+        filter: invert(0);
     }
 
     .links-sections_left,
@@ -591,16 +729,12 @@ p {
         display: none;
     }
 
-    .navegation {
-        background-color: #fff;
-    }
-
     .logo {
         width: 90%;
     }
 
     .logo a {
-        color: #000;
+        color: #fff;
         font-weight: bold;
         flex-direction: row;
         justify-content: flex-start;
@@ -773,7 +907,14 @@ p {
         margin-top: 2em;
     }
 
+    .intro_entrenamiento {
+        top: -1em;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
     .card_entrenamiento {
+        top: 40px;
         width: 300px;
         height: 600px;
         margin: 0 50px 0 50px;
