@@ -6,10 +6,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="funciones.js"></script>
+    <link rel="stylesheet" href="src/flexslider.css">
+    <script src="src/scripts/funciones.js"></script>
     <title>C.M Running Team</title>
 </head>
 
@@ -39,8 +41,8 @@
         <div class="banner" id="banner">
             <div class="content_banner">
                 <div class="info_banner">
-                    <h2>Únete al team!</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, non.</p>
+                    <h1>Únete al team!</h1>
+                    <p>Si quieres ir rápido vé solo, si quieres llegar lejos, trabaja en equipo.</p>
                     <div class="links_info"><a href="#entrenamiento">¿Empezamos?</a>
                         <a href="#team">Team</a></div>
                 </div>
@@ -50,45 +52,105 @@
     <!--------------- Entrenamiento ----------------
    ------------------------------------------->
     <section class="entrenamiento" id="entrenamiento">
-        <div class="image_entrenamiento"><h2>Preparate</h2></div>
+        <div class="image_entrenamiento"><h2>Entrená con nosotros</h2></div>
         <div class="content_entrenamientos">
-            <p class="intro_entrenamiento">Te brindamos la mejor preparación y asesoramiento, pero, antes que nada, es mejor ver como entrenamos.</p>
+            <p class="intro_entrenamiento">Brindamos la mejor preparación y asesoramiento, contamos con los siguientes entrenamientos:</p>
+            <div class="card_entrenamiento" id="card_entrenamiento">
+                <div class="image-card_entrenamiento">
+                    <img src="src/images/bannerBack.jpg" alt="">
+                </div>
+                <h3>Presencial</h3>
+                <p>Rosario: parque independencia <span>(Esquina Pellegrini y Pueyrredón)</span> <br>
+                <span>De 18 a 20:30 Hs</span><br>
+                •AK-AL-10-S <br>
+                •TRALL-PISTA
+            </p>
+            <a href="#card_entrenamiento" onclick="abrirInfoP();" class="ver_mas">Ver más</a>
+            </div>
+            <div class="mas_info presencial">
+                <h3>Presencial</h3>
+                <p>Nos orientamos al entrenamiento tanto de principiantes, como para atletas que desean competir.
+                    <br>
+                    <br>
+                   Organizamos tu entrenamiento de acuerdo a tu objetivo: 5k - 10k - media maratón(21k) y maratón(42k),
+                   en las diferentes disciplinas: 
+                   <br>
+                   <span class="list_Start">
+                   •Calle.
+                   <br>
+                   •Trail.
+                   <br>
+                   •Pista.
+                   <br>
+                   •Carreras de aventura.
+                   </span>
+                </p>
+                   <a onclick="cerrarInfoP();">X</a>
+            </div>
+
             <div class="card_entrenamiento">
                 <div class="image-card_entrenamiento">
-                    <img src="images/bannerBack.jpg" alt="">
+                    <img src="src/images/bannerBack.jpg" alt="">
                 </div>
-                <h3>Entrenamiento</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae facere voluptate repellat, error adipisci unde obcaecati tenetur consequuntur optio rem.</p>
+                <h3>Funcional</h3>
+                <p>•Hipertrófia <br>
+                •Resistencia a la fuerza <br>
+                •Bajar de peso</p>
+                <a href="#card_entrenamiento" onclick="abrirInfoF();" class="ver_mas active">Ver más</a>
             </div>
+            <div class="mas_info funcional">
+                <h3>Funcional</h3>
+                <p>Armamos una planificación progresiva para:
+                    <br>
+                    <span class="list_Start">
+                    • Hipertrofia (aumento de masa muscular).
+                    <br>
+                    • Resistencia a la fuerza.
+                    <br>
+                    • Bajar de peso.
+                    </span>
+                    <br>
+                    <br>
+                    <span style="color: #fff;">Beneficios:</span>
+                    <br>
+                    <span class="list_Start">
+                    • Es capaz de involucrar todos los músculos del cuerpo, mejora la coordinación, agilidad y resistencia.
+                    <br>
+                    • Pierdes peso y tonificas.
+                    <br>
+                    • Mejora la calidad de vida.
+                    </span>
+                </p>
+                   <a onclick="cerrarInfoF();">X</a>
+            </div>
+            
             <div class="card_entrenamiento">
                 <div class="image-card_entrenamiento">
-                    <img src="images/bannerBack.jpg" alt="">
+                    <img src="src/images/bannerBack.jpg" alt="">
                 </div>
-                <h3>Entrenamiento</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate temporibus eligendi, maxime unde similique earum praesentium dignissimos doloribus reprehenderit deserunt.</p>
+                <h3>A distancia</h3>
+                <p>•Entrenamiento planificado en base a tus capacidades físicas y objetivos. <br>
+                   •Seguimiento semanal <br>
+                   •Videos explicativos</p>
+                <a href="#card_entrenamiento" onclick="abrirInfoD();" class="ver_mas">Ver más</a>
             </div>
-            <div class="card_entrenamiento">
-                <div class="image-card_entrenamiento">
-                    <img src="images/bannerBack.jpg" alt="">
-                </div>
-                <h3>Entrenamiento</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ratione aut temporibus, minima molestiae eius animi quam beatae vitae quos.</p>
+            <div class="mas_info distancia">
+                <h3>A distancia</h3>
+                <p>Es solicitado mayormente por personas
+                    que no residen en la ciudad de Rosario y buscan tener resultados eficientes!
+                    <br>
+                    <br>
+                    <span style="color:#fff;">Ofrecemos:</span>
+                    <br>
+                    <span class="list_Start">
+                    •Planificación de entrenamiento running semanalmente + seguimiento del entrenador.
+                    <br>
+                    •Videos explicativos de técnica, coordinación y fuerza, para complementar tu entrenamiento.
+                    </span>
+                </p>
+                   <a onclick="cerrarInfoD();">X</a>
             </div>
-            <div class="card_entrenamiento">
-                <div class="image-card_entrenamiento">
-                    <img src="images/bannerBack.jpg" alt="">
-                </div>
-                <h3>Entrenamiento</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil qui dignissimos eligendi quae quia ipsum quibusdam fuga, possimus quis atque.</p>
             </div>
-            <div class="card_entrenamiento">
-                <div class="image-card_entrenamiento">
-                    <img src="images/bannerBack.jpg" alt="">
-                </div>
-                <h3>Entrenamiento</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil qui dignissimos eligendi quae quia ipsum quibusdam fuga, possimus quis atque.</p>
-            </div>
-        </div>
     </section>
 
     <!--------------- Team ----------------
@@ -100,17 +162,61 @@
                 <h2><span>KEEP</span><br><span>Running</span></h2>
             </div>
             <div class="info_team">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium quos dolores assumenda eum quam exercitationem, aspernatur, quasi, tempore veritatis sapiente ipsam rerum dicta aliquid excepturi modi porro quisquam incidunt animi.</p>
+                <h4>Somos un grupo de running que se inicio el año 2015 en la ciudad de Rosario,
+                    liderado por el profesor, licenciado y atleta de élite
+                     Cristian Meneguzzi.</h4>
             </div>
         </div>
+<div class="slider_team">
+<!-- Place somewhere in the <body> of your page -->
+<div class="flexslider">
+  <ul class="slides">
+    <li data-thumb="./src/images/imgSlide2.jpg">
+      <img src="./src/images/imgSlide2.jpg"/>
+    </li>
+    <li data-thumb="./src/images/imgSlide3.jpg"">
+      <img src="./src/images/imgSlide3.jpg"/>
+    </li>
+    <li data-thumb="./src/images/imgSlide4.jpg"">
+      <img src="./src/images/imgSlide4.jpg"/>
+    </li>
+    <li data-thumb="./src/images/imgSlide2.jpg"">
+      <img src="./src/images/imgSlide2.jpg"/>
+    </li>
+  </ul>
+</div>
+</div>
     </section>
+    
 
-
+ <!--------------- Eventos ----------------
+   ------------------------------------------->
+   <section class="events" id="events">
+     
+<div class="slider_events">
+    
+<div class="info_events"></div>
+</div>
+   </section>
 
 
 
     <!--------------- Scripts ----------------
    ------------------------------------------->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+crossorigin="anonymous"></script>
+
+<script src="src/scripts/jquery.flexslider.js"></script>
+
+<script>
+jQuery(function($) {
+  $('.flexslider').flexslider({
+    animation: "slide",
+    controlNav: "thumbnails"
+  });
+});
+</script>
+
     <script type="text/javascript">
         window.addEventListener('scroll', function() {
             const nav = document.getElementById(
@@ -118,10 +224,12 @@
             nav.classList.toggle("scroll", window.scrollY > 0);
         });
     </script>
-    <script src="src/scroll-out.js"></script>
+
+    <script src="src/scripts/scroll-out.js"></script>
+
     <script type="text/javascript">
     ScrollOut({
-        targets: 'h3, h2, p, a, span, .card_entrenamiento'
+        targets: 'h1, h2, h3, h4, p, a, span, .card_entrenamiento'
     });
     </script>
 </body></html>
