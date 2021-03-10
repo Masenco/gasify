@@ -20,9 +20,9 @@
         <div class="navegation" id="navegation">
             <div class="content_navegation">
                 <ul class="links-sections_left">
-                <li><a href="">Facebook</a></li>
-                <li><a href="">Instagram</a></li>
-                <li><a href="">Whatsapp</a></li>
+                <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href=""><i class="fab fa-instagram"></i></a></li>
+                <li><a href=""><i class="fab fa-whatsapp"></i></a></li>
             </ul>
             <div class="logo">
                 <a href=""><span>C.M</span><br><span class="nombre_logo">(Cristian Meneguzzi)</span><br><span class="marca_logo">Running team</span></a>
@@ -31,11 +31,11 @@
                 <li><a href="#top" onclick="closeMenu();">Página principal</a></li>
                 <li><a href="#entrenamiento" onclick="closeMenu();">Entrenamiento</a></li>
                 <li><a href="#team" onclick="closeMenu();">Team</a></li>
-                <li><a href="#contact" onclick="closeMenu();">Contacto</a></li>
+                <li><a href="#events" onclick="closeMenu();">Eventos</a></li>
             </ul>
-            <ul class="menu_toggle">
-                <li><a onclick="openMenu();" class="open_menu"></a></li>
-            </ul>
+            <div class="menu_toggle">
+                <a onclick="openMenu();" class="open_menu"></a>
+            </div>
         </div>
         </div>
         <div class="banner" id="banner">
@@ -65,7 +65,7 @@
                 •AK-AL-10-S <br>
                 •TRALL-PISTA
             </p>
-            <a href="#card_entrenamiento" onclick="abrirInfoP();" class="ver_mas">Ver más</a>
+            <a href="#card_entrenamiento" onclick="abrirInfoP();" class="ver_mas">Ver más →</a>
             </div>
             <div class="mas_info presencial">
                 <h3>Presencial</h3>
@@ -96,7 +96,7 @@
                 <p>•Hipertrófia <br>
                 •Resistencia a la fuerza <br>
                 •Bajar de peso</p>
-                <a href="#card_entrenamiento" onclick="abrirInfoF();" class="ver_mas active">Ver más</a>
+                <a href="#card_entrenamiento" onclick="abrirInfoF();" class="ver_mas active">Ver más →</a>
             </div>
             <div class="mas_info funcional">
                 <h3>Funcional</h3>
@@ -132,7 +132,7 @@
                 <p>•Entrenamiento planificado en base a tus capacidades físicas y objetivos. <br>
                    •Seguimiento semanal <br>
                    •Videos explicativos</p>
-                <a href="#card_entrenamiento" onclick="abrirInfoD();" class="ver_mas">Ver más</a>
+                <a href="#card_entrenamiento" onclick="abrirInfoD();" class="ver_mas">Ver más →</a>
             </div>
             <div class="mas_info distancia">
                 <h3>A distancia</h3>
@@ -188,19 +188,53 @@
 </div>
     </section>
     
-
  <!--------------- Eventos ----------------
    ------------------------------------------->
    <section class="events" id="events">
-     
-<div class="slider_events">
-    
-<div class="info_events"></div>
+       <div class="image_events"> <h2>Eventos</h2></div>
+     <div class="info_events">
+        
+     </div>
+<div class="slider_container">
+    <ul class="slider_events">
+        <li><a href=""><h2>Nombre</h2><h3>Fecha</h3><p>Lugar</p><img src="./src/images/imgSlide2.jpg" alt=""></a></li>
+        <li><a href=""><h2>Nombre</h2><h3>Fecha</h3><p>Lugar</p><img src="./src/images/imgSlide3.jpg" alt=""></a></li>
+    </ul>
 </div>
    </section>
 
-
-
+    <!--------------- Footer ----------------
+   ------------------------------------------->
+<footer>
+        <div class="contentF">
+            <div class="sec aboutUs">
+                <h2>Información</h2>
+                <p>
+                    Se recomienda practicar deporte con el apoyo de un prfesional.
+                    <br>
+                    En caso de duda, es recomendable acudir a su médico de confianza para comprobar si su estado físico es optimo para realizar este tipo de actividad, así como para realizarse un chequeo general.</p>
+            </div>
+            <div class="sec contact">
+                <h2>Medios</h2>
+                <ul class="contactInfo">
+                    <li><span><i class="fas fa-map-marker-alt"></i></span><span>Calle Nombre xxx<br>Rosario, Santa Fe<br>ARG</span></li>
+                    <li><span><i class="fas fa-phone-alt"></i></span><span><a href="tel:+542355341232">+542355341232</a><br><a href="tel:+542355341232">+542355341232</a></span></li>
+                    <li><span><i class="fas fa-envelope"></i></span><a href="mailto:tomiatampi@gmail.com" target="_blank">xxxxxxx@gmail.com</a></li>
+                </ul>
+            </div>
+            <div class="sec developer">
+                <h2>Desarrollo</h2>
+                <p>Front-end web developer:<span>Tomás Atampi</span></p>
+                <ul class="listA">
+                    <li><a><i class="fab fa-instagram"></i></a></li>
+                    <li><a><i class="far fa-envelope"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copy">
+            <p><a href="">@2021 Cristian Meneguzzi running team</a></p>
+        </div>
+    </footer>
     <!--------------- Scripts ----------------
    ------------------------------------------->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
