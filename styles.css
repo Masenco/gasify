@@ -199,7 +199,7 @@ p {
     height: 100%;
     top: 0;
     left: 0;
-    transform: translate(110%, 0);
+    transform: translate(120%, 0);
     background-color: #03a9f4;
     clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 87%, 37% 0);
     transition: .4s;
@@ -214,7 +214,7 @@ p {
     left: 0;
     background-color: #03a9f4;
     transform: none;
-    clip-path: polygon(100% 0, 100% 100%, 0 100%, 30% 0);
+    clip-path: polygon(100% 0, 100% 100%, 0 100%, 22% 0);
     transition: .4s;
 }
 
@@ -225,12 +225,12 @@ p {
 .links-sections_left.active {
     position: absolute;
     display: flex;
-    bottom: 30px;
+    bottom: 60px;
     justify-content: center;
     width: 100%;
     padding: 0;
     transition: .5s;
-    margin-left: 8%;
+    margin-left: 5.3%;
 }
 
 .links-sections_left.active li {
@@ -272,7 +272,7 @@ p {
     position: absolute;
     display: flex;
     width: 100%;
-    margin-top: -20%;
+    margin-top: -6%;
     left: 0;
     transition: .5s;
 }
@@ -764,8 +764,8 @@ p {
 }
 
 .ver_mas {
-    position: absolute;
-    margin-top: 10px;
+    position: relative;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -774,7 +774,7 @@ p {
     bottom: 0;
     transition: .3s;
     color: rgb(3, 169, 244);
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-weight: bold;
 }
 
@@ -865,7 +865,7 @@ p {
     align-items: center;
     width: 100%;
     height: auto;
-    margin-top: 5em;
+    margin-top: 3em;
 }
 
 .image_events {
@@ -1287,7 +1287,9 @@ footer li {
 
 
 @media screen and (max-width: 850px) {
-
+    .image_entrenamiento h2 {
+        font-size: 2.3em;
+    }
     .info_banner h2 {
         font-size: 3.6em;
     }
@@ -1333,6 +1335,13 @@ footer li {
 
 
 @media screen and (max-width: 600px) {
+    .menu_toggle.active {
+        margin-top: -20%;
+    }
+
+    .links-sections_left.active {
+        margin-left: 9.1%;
+    }
 
     .navegation {
         height: 60px;
@@ -1442,14 +1451,14 @@ footer li {
     }
 
     .image_entrenamiento {
-        height: 180px;
+        height: 190px;
     }
 
     .image_entrenamiento h2 {
         width: 300px;
         text-align: center;
         font-size: 2em;
-        margin-top: -2px;
+        margin-top: 0;
     }
 
     .content_entrenamientos {
@@ -1468,8 +1477,8 @@ footer li {
     .card_entrenamiento {
         top: 30px;
         width: 300px;
-        height: 600px;
-        margin: 0 50px 20px 50px;
+        height: auto;
+        margin: 0 40px 50px 40px;
     }
 
     .image-card_entrenamiento {
@@ -1477,7 +1486,7 @@ footer li {
     }
 
     .card_entrenamiento h3 {
-        font-size: 1.6em;
+        font-size: 1.7em;
         margin-top: 0.6em;
         margin-bottom: -1px;
     }
@@ -1486,20 +1495,12 @@ footer li {
         position: relative;
         width: 96%;
         height: auto;
-        font-size: 1.1em;
-    }
-
-    .ver_mas {
-        bottom: 35px;
-    }
-
-    .ver_mas.active {
-        bottom: 5em;
+        font-size: 1.3em;
     }
 
     .mas_info {
         width: 380px;
-        top: 14%;
+        top: 12%;
         font-family: 'Roboto',
             sans-serif;
     }
@@ -1529,7 +1530,7 @@ footer li {
 
     footer p {
         color: #fff;
-        font-size: 0.8em;
+        font-size: 1.1em;
     }
 
     .contentF .sec {
@@ -1544,8 +1545,8 @@ footer li {
         margin-bottom: 2em;
     }
 
-    .sec.aboutUs h2 {
-        position: relative;
+    .sec h2 {
+        font-size: 1.6em;
         text-align: center;
     }
 
@@ -1554,7 +1555,8 @@ footer li {
         right: 0;
         margin-left: auto;
         margin-right: auto;
-        height: 2px;
+        height: 3px;
+        width: 60px;
     }
 
     .contact {
@@ -1571,6 +1573,14 @@ footer li {
         align-items: center;
         justify-content: center;
         margin-left: -5%;
+    }
+
+    .contact .contactInfo li span:nth-child(2) {
+        font-size: 1.3em;
+    }
+
+    .contact .contactInfo li a:nth-child(2) {
+        font-size: 1.3em;
     }
 
     .developer {
@@ -1612,4 +1622,43 @@ footer li {
         font-style: 0.8em;
     }
 
+    .image_events h2 {
+        top: 1.5em;
+        font-size: 2.8em;
+    }
+
+    .info_events h2 {
+        font-size: 2.6em;
+    }
+
+    .slider_container {
+        margin-top: 1em;
+        height: 460px;
+    }
+
+    .slider_events li a h2 {
+        margin-top: 0;
+        top: 12px;
+        font-size: 3.3em;
+        letter-spacing: 5px;
+    }
+
+    .slider_events li a h3 {
+        margin-top: 0;
+        top: 3em;
+        font-size: 1.7em;
+    }
+
+    .slider_events li a p {
+        margin-top: 0;
+        bottom: 12px;
+        font-size: 1.3em;
+    }
+
+    .slider_events li a img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.3);
+    }
 }
