@@ -161,8 +161,7 @@ p {
     color: #fff;
 }
 
-.links-sections_right li a:hover,
-.links-sections_left li a:hover {
+.links-sections_right li a:hover {
     color: #03a9f4;
     letter-spacing: 1px;
 }
@@ -500,9 +499,9 @@ p {
     background: rgba(3, 169, 244, 0.6);
 }
 
-/*-------------------------------------
--------- Seccion Team -----------------
---------------------------------------*/
+/*-------------------------------------------
+-------------- Seccion Team -----------------
+--------------------------------------------*/
 .team {
     position: relative;
     display: flex;
@@ -620,9 +619,9 @@ p {
     margin: 0;
 }
 
-/*-------------------------------------
--------- Seccion Entrenamiento --------
----------------------------------------*/
+/*------------------------------------------------
+-------------- Seccion Entrenamiento -------------
+-------------------------------------------------*/
 .entrenamiento {
     position: relative;
     display: flex;
@@ -772,10 +771,21 @@ p {
     width: auto;
     height: auto;
     bottom: 0;
-    transition: .3s;
+    transition: .2s;
     color: rgb(3, 169, 244);
     font-size: 1.2em;
     font-weight: bold;
+    animation: verMas 0.9s linear infinite alternate;
+}
+
+@keyframes verMas {
+    0% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 .ver_mas:hover {
@@ -810,16 +820,15 @@ p {
     height: 100%;
     top: 0;
     left: 0;
-    background: rgba(3, 169, 244, 0.87);
-    filter: blur(3px);
+    background: #fff;
     z-index: -1;
-
+    box-shadow: 5px 5px 15px -3px #000000;
 }
 
 .mas_info h3 {
     position: relative;
     font-size: 1.7em;
-    color: #fff;
+    color: #000;
     margin-bottom: 1em;
 }
 
@@ -827,6 +836,12 @@ p {
     width: 85%;
     font-size: 1.2em;
     font-weight: bold;
+    color: #000;
+}
+
+.mas_info p span {
+    font-size: 1em;
+    color: #000;
 }
 
 .mas_info a {
@@ -843,15 +858,23 @@ p {
     display: flex;
 }
 
-.sLista {
-    color: #fff;
+.mas_info.presencial .list_Start {
+    width: auto;
 }
 
 .list_Start {
     display: flex;
+    width: 90%;
     justify-content: center;
+    flex-direction: column;
     text-align: start;
     font-style: italic;
+}
+
+.list_Start li {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 5px;
 }
 
 /*------------------------------------------------
@@ -874,7 +897,7 @@ p {
     top: 0;
     left: 0;
     width: 100%;
-    height: 180px;
+    height: 160px;
     clip-path: polygon(100% 0, 100% 50%, 50% 90%, 0 50%, 0 0);
     background-image: url(src/images/bannerBack.jpg);
     background-size: cover;
@@ -896,7 +919,7 @@ p {
 .image_events h2 {
     position: absolute;
     display: flex;
-    top: 1.6em;
+    top: 1.4em;
     font-size: 3em;
     color: #fff;
     text-transform: uppercase;
@@ -1066,14 +1089,14 @@ footer .contentF {
 }
 
 footer p {
-    color: #fff;
+    color: #222;
     font-size: 0.8em;
 }
 
 footer li {
     list-style: none;
     text-decoration: none;
-    color: #fff;
+    color: #222;
     display: flex;
 }
 
@@ -1082,13 +1105,13 @@ footer li {
 }
 
 .contentF .sec.aboutUs {
-    width: 40%;
+    width: 45%;
     padding-right: 2%;
 }
 
 .contentF h2 {
     position: relative;
-    color: #fff;
+    color: #222;
     font-weight: 600;
     font-size: 1.2em;
     margin-bottom: 15px;
@@ -1106,7 +1129,7 @@ footer li {
 
 .contact {
     position: relative;
-    width: 30%;
+    width: 25%;
 }
 
 .contact ul li {
@@ -1123,11 +1146,11 @@ footer li {
 }
 
 .contact .contactInfo li span {
-    color: #fff;
+    color: #222;
 }
 
 .contact .contactInfo li span:nth-child(1) {
-    color: #fff;
+    color: #222;
     font-size: 18px;
     height: 26px;
     width: 18px;
@@ -1136,17 +1159,13 @@ footer li {
 
 .contact .contactInfo li span:nth-child(2) {
     font-size: 0.9em;
-    color: #fff;
+    color: #222;
 }
 
 .contact .contactInfo li a {
     font-size: 0.8em;
-    color: #fff;
+    color: #222;
     text-decoration: none;
-}
-
-.contact .contactInfo li a:hover {
-    color: #000;
 }
 
 .developer {
@@ -1177,7 +1196,7 @@ footer li {
     margin-right: 10px;
     border-radius: 4px;
     cursor: pointer;
-    color: #fff;
+    color: #222;
 }
 
 .listA li a .fab {
@@ -1200,36 +1219,8 @@ footer li {
 
 .copy a {
     font-style: 0.6em;
-    color: #000;
+    color: #111;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1290,6 +1281,7 @@ footer li {
     .image_entrenamiento h2 {
         font-size: 2.3em;
     }
+
     .info_banner h2 {
         font-size: 3.6em;
     }
@@ -1505,10 +1497,6 @@ footer li {
             sans-serif;
     }
 
-    .mas_info::before {
-        filter: blur(2px);
-    }
-
     .mas_info h3 {
         font-size: 1.8em;
         margin-bottom: 5px;
@@ -1516,6 +1504,10 @@ footer li {
 
     .mas_info a {
         font-size: 2.2em;
+    }
+
+    .list_Start {
+        width: 90%;
     }
 
     footer {
@@ -1530,7 +1522,7 @@ footer li {
 
     footer p {
         color: #fff;
-        font-size: 1.1em;
+        font-size: 1em;
     }
 
     .contentF .sec {
@@ -1546,7 +1538,7 @@ footer li {
     }
 
     .sec h2 {
-        font-size: 1.6em;
+        font-size: 1.3em;
         text-align: center;
     }
 
