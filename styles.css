@@ -178,6 +178,10 @@ section {
     font-size: 1.8em;
 }
 
+.links-sections_left a i:hover {
+    letter-spacing: 0;
+}
+
 .links-sections_left li:nth-of-type(1) a i {
     font-size: 1.65em;
 }
@@ -331,8 +335,23 @@ section {
     padding-bottom: 3%;
 }
 
+.links-sections_left,
+.links-sections_right,
+.logo a {
+    transition-duration: .5s;
+}
+
+.navegation.scroll:hover .links-sections_left {
+    font-size: 1.2em;
+}
+
+.navegation.scroll:hover .links-sections_right {
+    font-size: 1.1em;
+}
+
 .navegation.scroll:hover .logo a {
     top: 0;
+    font-size: 0.9em;
 }
 
 .navegation.scroll .logo a {
@@ -673,8 +692,8 @@ section {
 .image_entrenamiento h2 {
     position: absolute;
     display: flex;
-    top: 2em;
-    font-size: 2.6em;
+    top: 1.2em;
+    font-size: 3.4em;
     color: #fff;
     text-transform: uppercase;
     font-weight: 100;
@@ -895,6 +914,7 @@ section {
     width: 100%;
     height: auto;
     margin-top: 3em;
+    margin-top: 3em;
 }
 
 .image_events {
@@ -910,6 +930,7 @@ section {
     background-repeat: no-repeat;
     justify-content: center;
     align-items: center;
+    margin-top: 1em;
 }
 
 .image_events::before {
@@ -925,8 +946,8 @@ section {
 .image_events h2 {
     position: absolute;
     display: flex;
-    top: 1.4em;
-    font-size: 3em;
+    top: 0.8em;
+    font-size: 3.8em;
     color: #fff;
     text-transform: uppercase;
     z-index: 1;
@@ -940,14 +961,6 @@ section {
     position: relative;
     width: 100%;
     height: auto;
-}
-
-.info_events h2 {
-    position: relative;
-    font-size: 2.6em;
-    font-weight: bold;
-    color: #000;
-    text-transform: uppercase;
 }
 
 .slider_container {
@@ -1012,11 +1025,11 @@ section {
 .slider_events li a h2 {
     position: absolute;
     display: flex;
-    margin-top: -2em;
+    margin-top: -3em;
     justify-content: center;
     height: auto;
     z-index: 11;
-    font-size: 6em;
+    font-size: 5em;
     font-family: 'Bangers',
         cursive;
     color: #FED130;
@@ -1027,12 +1040,12 @@ section {
 
 .slider_events li a h3 {
     position: absolute;
-    margin-top: -0.5em;
+    margin-top: -2.3em;
     display: flex;
     justify-content: center;
     height: auto;
     z-index: 11;
-    font-size: 4em;
+    font-size: 3em;
     font-weight: 100;
     text-transform: uppercase;
     color: #fff;
@@ -1043,7 +1056,7 @@ section {
 
 .slider_events li a p {
     position: absolute;
-    margin-top: 3em;
+    margin-top: -1em;
     display: flex;
     justify-content: center;
     height: auto;
