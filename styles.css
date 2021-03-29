@@ -57,11 +57,8 @@ header {
     width: 100%;
     height: 100vh;
     background: transparent;
+    margin: 0;
     overflow: hidden;
-}
-
-section {
-    background-color: #fffcf6;
 }
 
 .navegation {
@@ -70,11 +67,24 @@ section {
     width: 100%;
     height: 50px;
     background: transparent;
-    z-index: 1;
-    padding: 4% 4% 4% 4%;
     transition: .4s;
     text-transform: uppercase;
-    z-index: 111111;
+    z-index: 11111111;
+    padding: 4%;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.navegation::before {
+    position: absolute;
+    content: "";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 1px;
+    background: #fff;
+    bottom: 0;
 }
 
 .content_navegation {
@@ -88,15 +98,6 @@ section {
     transition: .5s;
 }
 
-.navegation::before {
-    position: absolute;
-    content: "";
-    width: 80%;
-    height: 1px;
-    background: #fff;
-    bottom: 0;
-    margin: 0 auto;
-}
 
 /*----- Logo -----*/
 .logo {
@@ -310,8 +311,8 @@ section {
     position: relative;
     justify-content: center;
     align-items: center;
-    height: 38px;
-    width: 38px;
+    height: 35px;
+    width: 35px;
     background-image: url(src/images/menuToggle.png);
     background-size: cover;
     filter: invert(1);
@@ -467,7 +468,6 @@ section {
     justify-content: center;
     align-items: center;
     margin-top: 6em;
-    overflow: hidden;
 }
 
 /*----- Info Banner -----*/
@@ -1086,12 +1086,11 @@ footer {
     height: auto;
     display: flex;
     justify-content: space-between;
-    margin-top: 100px;
+    margin-top: 70px;
     padding: 20px 80px;
-    background: #03a9f4;
+    background: #000;
     flex-wrap: wrap;
     z-index: 10;
-    font-family: 'ProximaNova-Light';
 }
 
 footer::after {
@@ -1100,8 +1099,8 @@ footer::after {
     left: 0;
     top: -60px;
     width: 100%;
-    height: 80px;
-    background: #03a9f4;
+    height: 60px;
+    background: #000;
     border-radius: 100% 100% 0 0;
 }
 
@@ -1110,50 +1109,35 @@ footer .contentF {
     justify-content: space-between;
     flex-wrap: wrap;
     flex-direction: row;
+    font-family: 'Roboto',
+        sans-serif;
+    font-weight: 500;
 }
 
 footer p {
-    color: #222;
-    font-size: 0.8em;
+    color: #999;
+    font-size: 0.9em;
 }
 
 footer li {
     list-style: none;
     text-decoration: none;
-    color: #222;
     display: flex;
 }
 
-.contentF .sec {
-    margin-right: 30px;
+.sec {
+    margin-top: 2%;
 }
 
-.contentF .sec.aboutUs {
-    width: 45%;
-    padding-right: 2%;
-}
-
-.contentF h2 {
-    position: relative;
-    color: #222;
-    font-weight: 600;
-    font-size: 1.2em;
-    margin-bottom: 15px;
-}
-
-.contentF h2::before {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 40px;
-    height: 3px;
-    background: #c70039;
+.aboutUs {
+    width: 43%;
+    padding-right: 10%;
 }
 
 .contact {
     position: relative;
-    width: 25%;
+    width: 27%;
+    margin-left: -2%;
 }
 
 .contact ul li {
@@ -1162,7 +1146,6 @@ footer li {
 
 .contact .contactInfo {
     position: relative;
-
 }
 
 .contact .contactInfo li {
@@ -1170,11 +1153,11 @@ footer li {
 }
 
 .contact .contactInfo li span {
-    color: #222;
+    color: #999;
 }
 
 .contact .contactInfo li span:nth-child(1) {
-    color: #222;
+    color: #999;
     font-size: 18px;
     height: 26px;
     width: 18px;
@@ -1183,12 +1166,12 @@ footer li {
 
 .contact .contactInfo li span:nth-child(2) {
     font-size: 0.9em;
-    color: #222;
+    color: #999;
 }
 
 .contact .contactInfo li a {
-    font-size: 0.8em;
-    color: #222;
+    font-size: 0.9em;
+    color: #999;
     text-decoration: none;
 }
 
@@ -1223,14 +1206,13 @@ footer li {
 
 .listA li a .fab {
     font-size: 26px;
-    color: #222;
+    color: #999;
 }
 
 .copy {
     margin-top: 2em;
     margin-bottom: -15px;
     display: flex;
-    flex-direction: column;
     position: relative;
     width: 100%;
     height: auto;
@@ -1238,8 +1220,10 @@ footer li {
 }
 
 .copy a {
-    font-style: 0.6em;
-    color: #111;
+    font-size: 0.9em;
+    color: #999;
+    width: auto;
+    margin: 0 auto;
 }
 
 
@@ -1347,6 +1331,10 @@ footer li {
 
 
 @media screen and (max-width: 600px) {
+    .menu_toggle {
+        margin-right: 6%;
+    }
+
     .menu_toggle.active {
         margin-top: -20%;
     }
@@ -1528,9 +1516,12 @@ footer li {
     }
 
     footer {
-        background: #03a9f4;
         flex-direction: column;
         padding: 20px 30px;
+    }
+
+    footer::after {
+        top: -40px;
     }
 
     footer .contentF {
@@ -1538,31 +1529,21 @@ footer li {
     }
 
     footer p {
-        color: #fff;
         font-size: 1em;
     }
 
-    .contentF .sec {
+    .sec {
         margin-right: 0;
         width: 100%;
+        background-color: #000;
+        margin-top: 10%;
     }
 
-    .contentF .sec.aboutUs {
+    .aboutUs {
         text-align: center;
         width: 100%;
         padding-right: 0;
         margin-bottom: 2em;
-    }
-
-    .sec h2 {
-        font-size: 1.3em;
-        text-align: center;
-    }
-
-    .sec h2::before {
-        margin: 0 auto;
-        height: 3px;
-        width: 60px;
     }
 
     .contact {
@@ -1570,6 +1551,7 @@ footer li {
         width: 100%;
         text-align: center;
         margin-bottom: 0.6em;
+        margin-left: 0;
     }
 
     .contact .contactInfo {
@@ -1620,16 +1602,14 @@ footer li {
     }
 
     .copy {
-        margin-top: 1em;
+        width: 100%;
         bottom: -16px;
-    }
-
-    .copy a {
-        font-style: 0.8em;
+        margin: 0;
+        margin-top: 2em;
     }
 
     .image_events h2 {
-        top: 1.5em;
+        top: 1em;
         font-size: 2.8em;
     }
 
