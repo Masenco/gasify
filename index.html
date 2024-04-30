@@ -1,270 +1,54 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
+    <title>Calculadoras</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="src/flexslider.css">
-    <script src="src/scripts/funciones.js"></script>
-    <title>C.M Running Team</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <header>
-        <div class="navegation" id="navegation">
-            <div class="content_navegation">
-                <ul class="links-sections_left">
-                <li><a href="https://www.facebook.com/CMRUNNINGTEAM" target="_blanck"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="https://www.instagram.com/cm_runningteam/?hl=es-la" target="_blanck"><i class="fab fa-instagram"></i></a></li>
-                <li><a href="https://api.whatsapp.com/send?phone=+543413036475&text=Hola,%20quiero%20más%20información%20sobre%20el%20equipo%20de%20running%20y%20los%20entrenamientos!" target="_blanck"><i class="fab fa-whatsapp"></i></a></li>
-            </ul>
-            <div class="logo">
-                <a href="#top"><span>C.M</span><br><span class="nombre_logo">(Cristian Meneguzzi)</span><br><span class="marca_logo">Running team</span></a>
-            </div>
-            <ul class="links-sections_right">
-                <li><a href="#top" onclick="closeMenu();">Página principal</a></li>
-                <li><a href="#entrenamiento" onclick="closeMenu();">Entrenamiento</a></li>
-                <li><a href="#team" onclick="closeMenu();">Team</a></li>
-                <li><a href="#events" onclick="closeMenu();">Eventos</a></li>
-            </ul>
-            <div class="menu_toggle">
-                <a onclick="openMenu();" class="open_menu"></a>
-            </div>
+    <h1>Curso: gasista de unidades unifuncionales, CFL 401 </h1>
+    <div class="container">
+        <div class="calculator">
+            <h2>Calculadora de m3</h2>
+            <input type="number" id="length" placeholder="Longitud (m)">
+            <input type="number" id="width" placeholder="Ancho (m)">
+            <input type="number" id="height" placeholder="Altura (m)">
+            <button onclick="calculateVolume()">Calcular</button>
+            <p id="result"></p>
         </div>
-        </div>
-        <div class="banner" id="banner">
-            <div class="content_banner">
-                <div class="info_banner">
-                    <h1>Únete al team!</h1>
-                    <p>Si quieres ir rápido vé solo, si quieres llegar lejos, trabaja en equipo.</p>
-                    <div class="links_info"><a href="#entrenamiento">¿Empezamos?</a>
-                        <a href="#team">Team</a></div>
+        <div class="calculator">
+            <h2>Calculadora de consumo en m3</h2>
+            <div id="dataSets">
+                <div class="dataSet">
+                    <input type="number" class="data" placeholder="Ingrese calorías del artefacto">
+                    <button onclick="removeDataSet(this)" class="eliminar">Eliminar</button>
                 </div>
             </div>
+            <button onclick="calculateDivisionAndSum()">Calcular</button>
+            <p id="divisionResult"></p>
+            <p id="sumResult"></p>
+            <button onclick="addDataSet()">Agregar otro artefacto</button>
         </div>
-    </header>
-    <!--------------- Entrenamiento ----------------
-   ------------------------------------------->
-    <section class="entrenamiento" id="entrenamiento">
-        <div class="image_entrenamiento"><h2>Entrená con nosotros</h2></div>
-        <div class="content_entrenamientos">
-            <p class="intro_entrenamiento">Brindamos la mejor preparación y asesoramiento, contamos con los siguientes entrenamientos:</p>
-            <div class="card_entrenamiento" id="card_entrenamiento">
-                <div class="image-card_entrenamiento">
-                    <img src="src/images/imgPresencial.jpg" alt="cm-entrenamiento">
+        <div class="calculator">
+            <h2>Calculadora de rejillas de 100cm2</h2>
+            <div id="subtractionCalculator">
+                <div class="dataSet">
+                    <input type="number" class="data" placeholder="Ingrese calorías a evacuar u oxigenar">
+                    <button onclick="removeDataSet(this)" class="eliminar">Eliminar</button>
                 </div>
-                <h3>Presencial</h3>
-                <p>Rosario: parque independencia <span>(Esquina Pellegrini y Pueyrredón)</span> <br>
-                <span>De 18 a 20:30 Hs</span><br>
-                •AK-AL-10-S <br>
-                •TRALL-PISTA
-            </p>
-            <a href="#card_entrenamiento" onclick="abrirInfoP();" class="ver_mas">Ver más →</a>
             </div>
-            <div class="mas_info presencial">
-                <h3>Presencial</h3>
-                <p>Nos orientamos al entrenamiento tanto de principiantes, como para atletas que desean competir.
-                    <br>
-                    <br>
-                   Organizamos tu entrenamiento de acuerdo a tu objetivo: 5k - 10k - media maratón(21k) y maratón(42k),
-                   en las diferentes disciplinas: 
-                   <br>
-                   <ul class="list_Start">
-                   <li>•Calle.</li>
-                   <li>•Trail.</li>
-                   <li>•Pista.</li>
-                   <li>•Carreras de aventura.</li>
-                   </ul>
-                </p>
-                   <a onclick="cerrarInfoP();">X</a>
-            </div>
-
-            <div class="card_entrenamiento">
-                <div class="image-card_entrenamiento">
-                    <img src="src/images/bannerBack.jpg" alt="cm-entrenamiento">
-                </div>
-                <h3>Funcional</h3>
-                <p>•Hipertrófia <br>
-                •Resistencia a la fuerza <br>
-                •Bajar de peso</p>
-                <a href="#card_entrenamiento" onclick="abrirInfoF();" class="ver_mas active">Ver más →</a>
-            </div>
-            <div class="mas_info funcional">
-                <h3>Funcional</h3>
-                <p>Planificación progresiva para:
-                    <br>
-                    <ul class="list_Start">
-                    <li>• Hipertrofía (aumento de masa muscular).</li>
-                    <li>• Resistencia a la fuerza.</li>
-                    <li>• Bajar de peso.</li>
-                    </ul>
-                    <br>
-                    <span style="font-size: 1.2em; font-weight: bold;">Beneficios:</span>
-                    <ul class="list_Start">
-                   <li>• Involucra todos los músculos del cuerpo, mejora la coordinación, agilidad y resistencia.</li>
-                   <li>• Pierdes peso y tonificas.</li>
-                   <li>• Mejora la calidad de vida.</li>
-                    </ul>
-                </p>
-                   <a onclick="cerrarInfoF();">X</a>
-            </div>
-            
-            <div class="card_entrenamiento">
-                <div class="image-card_entrenamiento">
-                    <img src="src/images/bannerBack.jpg" alt="cm-entrenamiento">
-                </div>
-                <h3>A distancia</h3>
-                <p>•Entrenamiento planificado en base a tus capacidades físicas y objetivos. <br>
-                   •Seguimiento semanal <br>
-                   •Videos explicativos</p>
-                <a href="#card_entrenamiento" onclick="abrirInfoD();" class="ver_mas">Ver más →</a>
-            </div>
-            <div class="mas_info distancia">
-                <h3>A distancia</h3>
-                <p>Solicitado mayormente por personas
-                    que no residen en la ciudad de Rosario y buscan tener resultados eficientes!
-                    <br>
-                    <br>
-                    <span>Ofrecemos:</span>
-                    <br>
-                    <ul class="list_Start">
-                   <li>•Planificación de entrenamiento running semanalmente + seguimiento del entrenador.</li>
-                   <li>•Videos explicativos de técnica, coordinación y fuerza para complementar tu entrenamiento.</li>
-                    </ul>
-                </p>
-                   <a onclick="cerrarInfoD();">X</a>
-            </div>
-            </div>
-    </section>
-    <!--------------- Team ----------------
-   ------------------------------------------->
-    <section class="team" id="team">
-        <div class="image_team"></div>
-        <div class="content_team">
-            <div class="titulo_team">
-                <h2><span>KEEP</span><br><span>Running</span></h2>
-            </div>
-            <div class="info_team">
-                <h4>Somos un grupo de running que se inicio el año 2015 en la ciudad de Rosario,
-                    liderado por el profesor, licenciado y atleta de élite
-                     Cristian Meneguzzi.</h4>
-            </div>
+            <button onclick="calculateSubtraction()">Calcular</button>
+            <p id="subtractionResult"></p>
+            <p id="subtractionCount"></p>
+            <button onclick="addSubtractionData()">Agregar otro artefacto</button>
         </div>
-<div class="slider_team">
-<!-- Place somewhere in the <body> of your page -->
-<div class="flexslider">
-  <ul class="slides">
-    <li data-thumb="./src/images/imgSlide2.jpg">
-      <img src="./src/images/imgSlide2.jpg" alt="">
-    </li>
-    <li data-thumb="./src/images/imgSlide3.jpg">
-      <img src="./src/images/imgSlide3.jpg" alt=""/>
-    </li>
-    <li data-thumb="./src/images/imgSlide4.jpg">
-      <img src="./src/images/imgSlide4.jpg" alt=""/>
-    </li>
-    <li data-thumb="./src/images/imgSlide8.jpg">
-      <img src="./src/images/imgSlide8.jpg" alt=""/>
-    </li>
-    <li data-thumb="./src/images/imgSlide11.jpg">
-      <img src="./src/images/imgSlide11.jpg" alt=""/>
-    </li>
-    <li data-thumb="./src/images/imgSlide12.jpg">
-      <img src="./src/images/imgSlide12.jpg" alt=""/>
-    </li>
-    <li data-thumb="./src/images/imgSlide14.jpg">
-      <img src="./src/images/imgSlide14.jpg" alt=""/>
-    </li>
-     <li data-thumb="./src/images/imgSlide15.jpg">
-      <img src="./src/images/imgSlide15.jpg" alt=""/>
-    </li>
-     <li data-thumb="./src/images/imgSlide18.jpg">
-      <img src="./src/images/imgSlide18.jpg" alt=""/>
-    </li>
-    <li data-thumb="./src/images/imgSlide19.jpg">
-      <img src="./src/images/imgSlide19.jpg" alt=""/>
-    </li>
-  </ul>
-</div>
-</div>
-    </section>
-    
- <!--------------- Eventos ----------------
-   ------------------------------------------->
-   <section class="events" id="events">
-       <div class="image_events"> <h2>Eventos</h2></div>
-<div class="slider_container">
-    <ul class="slider_events">
-        <li><a href=""><h2>Nombre</h2><h3>Fecha</h3><p>Lugar</p><img src="./src/images/imgSlide2.jpg" alt=""></a></li>
-        <li><a href=""><h2>Nombre</h2><h3>Fecha</h3><p>Lugar</p><img src="./src/images/imgSlide3.jpg" alt=""></a></li>
-    </ul>
-</div>
-   </section>
+    </div>
+    <script src="functions.js"></script>
+</body>
+</html>
 
-    <!--------------- Footer ----------------
-   ------------------------------------------->
-<footer>
-        <div class="contentF">
-            <div class="sec aboutUs">
-                <p>
-                    Se recomienda practicar deporte con el apoyo de un profesional.
-                    <br>
-                    En caso de duda, es recomendable acudir a su médico de confianza para comprobar si su estado físico es optimo para realizar este tipo de actividad, así como para realizarse un chequeo general.</p>
-            </div>
-            <div class="sec contact">
-                <ul class="contactInfo">
-                    <li><span><i class="fas fa-map-marker-alt"></i></span><span>Calle Nombre xxx<br>Rosario, Santa Fe<br>ARG</span></li>
-                    <li><span><i class="fas fa-phone-alt"></i></span><span><a href="tel:+3413036475">+3413036475</a></span></li>
-                    <li><span><i class="fas fa-envelope"></i></span><a href="mailto:cmrunningteam2015@gmail.com" target="_blank">cmrunningteam2015@gmail.com</a></li>
-                </ul>
-            </div>
-            <div class="sec developer">
-                <p>Front-end web developer:<span>Tomás Atampi</span></p>
-                <ul class="listA">
-                    <li><a><i class="fab fa-instagram"></i></a></li>
-                    <li><a><i class="fab fa-whatsapp"></i></a></li>
-                </ul>
-            </div>
-            <div class="sec copy">
-            <a href="">@2021 Cristian Meneguzzi running team</a>
-        </div>
-        </div>
-    </footer>
-    <!--------------- Scripts ----------------
-   ------------------------------------------->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
-crossorigin="anonymous"></script>
 
-<script src="src/scripts/jquery.flexslider.js"></script>
-
-<script>
-jQuery(function($) {
-  $('.flexslider').flexslider({
-    animation: "slide",
-    controlNav: "thumbnails"
-  });
-});
-</script>
-
-    <script type="text/javascript">
-        window.addEventListener('scroll', function() {
-            const nav = document.getElementById(
-                'navegation');
-            nav.classList.toggle("scroll", window.scrollY > 0);
-        });
-    </script>
-
-    <script src="src/scripts/scroll-out.js"></script>
-
-    <script type="text/javascript">
-    ScrollOut({
-        targets: 'h1, h2, h3, h4, p, a, span, .card_entrenamiento'
-    });
-    </script>
-</body></html>
