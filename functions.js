@@ -64,11 +64,10 @@ function calculateSubtraction() {
     document.getElementById('subtractionCount').innerHTML = "Total de rejillas necesarias: " + count;
 }
 
-
 function addSubtractionData() {
     var subtractionCalculator = document.getElementById('subtractionCalculator');
     var newDataSet = document.createElement('div');
     newDataSet.className = 'dataSet';
-    newDataSet.innerHTML = '<input type="number" class="data" placeholder="Ingrese calorías a evacuar u oxigenar"><button onclick="removeDataSet(this)" class="eliminar">Eliminar</button>';
+    newDataSet.innerHTML = '<input type="number" class="data" placeholder="Calorías a evacuar u oxigenar"><button onclick="removeDataSet(this)" class="eliminar">Eliminar</button>';
     subtractionCalculator.appendChild(newDataSet);
 }
