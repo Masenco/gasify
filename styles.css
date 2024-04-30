@@ -1,5 +1,6 @@
 body {
     font-family:'Roboto Condensed', sans-serif;
+    color: #fff;
     margin: 0;
     padding: 0;
     background-color: #202325;
@@ -35,13 +36,13 @@ h1 {
     text-align: center;
     width: 100%;
     height: auto;
-    font-size: 1.8em;
+    font-size: 2em;
     text-transform: uppercase;
     font-weight: bold;
 }
 
 .calculator h2 {
-    font-size: 1.2em;
+    font-size: 1.8em;
 }
 
 input[type="number"] {
@@ -106,8 +107,25 @@ p {
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (min-width: 400px) {
     h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    button {
+        font-size: 1.2em;
+    }
+
+    button.eliminar {
+        font-size: 1em;
+    }
+
+    input[type="number"] {
+        width: calc(85% - 20px);
         font-size: 1.2em;
     }
 }
