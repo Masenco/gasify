@@ -56,8 +56,9 @@ function calculateSubtraction() {
     if (total < 21500) {
         count = 1;
     } else {
-        while (total >= 21500) {
-            total -= 21500;
+        count = Math.floor(total / 21500);
+        total -= count * 21500;
+        if (total > 0) {
             count++;
         }
     }
