@@ -27,9 +27,18 @@
 <meta name="theme-color" content="#ffffff">
 </head>
 <body>
+    <div class="overlay" onclick="toggleMenu()"></div>
+     <div class="toggle" onclick="toggleMenu()">+</div>
     <h1>Curso: gasista de unidades unifuncionales, CFL 401</h1>
+    <div class="menu">
+        <ul>
+            <li><a href="#cm3">Calc. m3</a></li>
+            <li><a href="#cc3">Calc. consumo en m3</a></li>
+            <li><a href="#cr">Calc. rejillas de 100cm2</a></li>
+        </ul>
+    </div>
     <div class="container">
-        <div class="calculator">
+        <div class="calculator" id="cm3">
             <h2>Calculadora de m3</h2>
             <input type="number" id="length" placeholder="Longitud (m)">
             <input type="number" id="width" placeholder="Ancho (m)">
@@ -37,7 +46,7 @@
             <button onclick="calculateVolume()">Calcular</button>
             <p id="result"></p>
         </div>
-        <div class="calculator">
+        <div class="calculator" id="cc3">
             <h2>Calculadora de consumo en m3</h2>
             <div id="dataSets">
                 <div class="dataSet">
@@ -50,7 +59,7 @@
             <p id="sumResult"></p>
             <button onclick="addDataSet()">Agregar otro artefacto</button>
         </div>
-        <div class="calculator">
+        <div class="calculator" id="cr">
             <h2>Calculadora de rejillas de 100cm2</h2>
             <div id="subtractionCalculator">
                 <div class="dataSet">

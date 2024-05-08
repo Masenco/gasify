@@ -72,3 +72,46 @@ function addSubtractionData() {
     newDataSet.innerHTML = '<input type="number" class="data" placeholder="Calorías a evacuar u oxigenar"><button onclick="removeDataSet(this)" class="eliminar">Eliminar</button>';
     subtractionCalculator.appendChild(newDataSet);
 }
+
+function toggleMenu() {
+    var menu = document.querySelector('.menu');
+    var overlay = document.querySelector('.overlay');
+    var toggleIcon = document.querySelector('.toggle');
+
+    if (menu.style.display === 'none' || menu.style.display === '') {
+        menu.style.display = 'flex';
+        overlay.style.display = 'flex'; // Mostrar el overlay
+        toggleIcon.classList.add('active'); // Agregar la clase active al icono del menú
+        // Agregar manejador de eventos al overlay para cerrar el menú al hacer clic
+        overlay.addEventListener('click', function() {
+            menu.style.display = 'none';
+            overlay.style.display = 'none'; // Ocultar el overlay
+            toggleIcon.classList.remove('active'); // Quitar la clase active al icono del menú
+        });
+    } else {
+        menu.style.display = 'none';
+        overlay.style.display = 'none'; // Ocultar el overlay
+        toggleIcon.classList.remove('active'); // Quitar la clase active al icono del menú
+        // Eliminar el manejador de eventos al cerrar el menú
+        overlay.removeEventListener('click', function() {
+            menu.style.display = 'none';
+            overlay.style.display = 'none'; // Ocultar el overlay
+            toggleIcon.classList.remove('active'); // Quitar la clase active al icono del menú
+        });
+    }
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var menuLinks = document.querySelectorAll('.menu a');
+    var overlay = document.querySelector('.overlay');
+    var toggleIcon = document.querySelector('.toggle');
+    menuLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+            var menu = document.querySelector('.menu');
+            menu.style.display = 'none';
+            overlay.style.display = 'none'; // Ocultar el overlay
+        toggleIcon.classList.remove('active'); // Quitar la clase active al icono del menú
+        });
+    });
+});
