@@ -101,6 +101,13 @@ button.eliminar:hover {
     background-color: #c4215a;
 }
 
+#option {
+    background-color: #121212;
+    color: #fff;
+    width: 50px;
+    height: 25px;
+}
+
 p {
     margin-top: 10px;
 }
