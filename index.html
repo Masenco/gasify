@@ -5,30 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadoras</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-<link rel="apple-touch-icon" sizes="57x57" href="img/icon/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="img/icon/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="img/icon/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="img/icon/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="img/icon/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="img/icon/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="img/icon/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="img/icon/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="img/icon/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192"  href="img/icon/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="img/icon/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="img/icon/favicon-16x16.png">
-<link rel="manifest" href="img/icon/manifest.json">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="img/icon/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="apple-touch-icon" sizes="57x57" href="img/icon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/icon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/icon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/icon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/icon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/icon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="img/icon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/icon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/icon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="img/icon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/icon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/icon/favicon-16x16.png">
+    <link rel="manifest" href="img/icon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="img/icon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 </head>
 <body>
     <div class="overlay" onclick="toggleMenu()"></div>
-     <div class="toggle" onclick="toggleMenu()">+</div>
+    <div class="toggle" onclick="toggleMenu()">+</div>
     <h1>Curso: gasista de unidades unifuncionales, CFL 401</h1>
     <div class="menu">
         <ul>
@@ -59,6 +59,17 @@
             <p id="sumResult"></p>
             <button onclick="addDataSet()">Agregar otro artefacto</button>
         </div>
+        <div class="calculator" id="ct">
+            <h2>Calculadora Térmica</h2>
+            <label for="option">¿El ambiente a calefaccionar es un dormitorio o un baño?</label>
+            <select id="option">
+                <option value="SI">Sí</option>
+                <option value="NO">No</option>
+            </select>
+            <input type="number" id="value" placeholder="Ingrese m3 del ambiente">
+            <button onclick="calculateCustom()">Calcular</button>
+            <p id="customResult"></p>
+        </div>
         <div class="calculator" id="cr">
             <h2>Calculadora de rejillas de 100cm2</h2>
             <div id="subtractionCalculator">
@@ -76,4 +87,5 @@
     <script src="functions.js"></script>
 </body>
 </html>
+
 

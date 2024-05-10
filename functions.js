@@ -101,7 +101,6 @@ function toggleMenu() {
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', function() {
     var menuLinks = document.querySelectorAll('.menu a');
     var overlay = document.querySelector('.overlay');
@@ -111,7 +110,20 @@ document.addEventListener('DOMContentLoaded', function() {
             var menu = document.querySelector('.menu');
             menu.style.display = 'none';
             overlay.style.display = 'none'; // Ocultar el overlay
-        toggleIcon.classList.remove('active'); // Quitar la clase active al icono del menú
+            toggleIcon.classList.remove('active'); // Quitar la clase active al icono del menú
         });
     });
 });
+
+function calculateCustom() {
+    var value = parseFloat(document.getElementById('value').value);
+    var option = document.getElementById('option').value;
+    var result = value * 50;
+    if (option === 'SI') {
+        document.getElementById('customResult').innerText = "Calorías minímas para climatizar el ambiente: " 
+        + result + "kcal " + "(el calefactor debe ser TB)";
+    } else {
+        document.getElementById('customResult').innerText = "Calorías minímas para climatizar el ambiente: " 
+        + result + "kcal " + "(el calefactor puede ser de CA o TB)";
+    }
+}
