@@ -40,7 +40,7 @@ body {
 
 .calculator {
     align-items: center;
-    background-color: #161B22;
+    background-color: #1b222b;
     border-radius: 25px;
     box-shadow: 5px 8px 20px 0px rgba(0, 0, 0, 0.8);
     display: flex;
