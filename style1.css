@@ -20,7 +20,7 @@
                 
 
 body {
-    background-color: #1d2563;
+    background-color: #000000;
     color: #fff;
     font-family: 'Roboto Condensed', sans-serif;
     height: 100%;
@@ -35,14 +35,14 @@ body {
     min-height: 100vh;
     justify-content: center;
     width: 100%;
-    background-color: #1d2563;
+    background-color: #000000;
 }
 
 .calculator {
     align-items: center;
-    background-color: #13183f;
+    background-color: #222222;
     border-radius: 25px;
-    box-shadow: 5px 9px 21px 0px #000000;
+    box-shadow: 5px 8px 20px 0px rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
     max-height: 350px;
