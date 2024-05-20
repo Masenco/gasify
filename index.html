@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadoras</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style1.css" id="style">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +27,7 @@
     <meta name="theme-color" content="#ffffff">
 </head>
 <body>
+    <div onclick="toggleStyles()" class="toggleStyles"></div>
     <div class="overlay" onclick="toggleMenu()"></div>
     <div class="toggle" onclick="toggleMenu()">+</div>
     <h1>Curso: gasista de unidades unifuncionales, CFL 401</h1>
@@ -207,10 +208,10 @@
                         document.getElementById('resultado').textContent = "No se encontró ningún valor fijo asociado a la columna donde se encuentra " + y + ".";
                     }
                 } else {
-                    document.getElementById('resultado').textContent = "No se encontró ningún número siguiente más cercano a " + y + " en la fila correspondiente a " + x + ".";
+                    document.getElementById('resultado').textContent = "No se encontró ningún valor siguiente más cercano a " + y + " en la fila correspondiente a " + x + ".";
                 }
             } else {
-                document.getElementById('resultado').textContent = "No se encontró ningún número igual o cercano a" + y + " en la tabla.";
+                document.getElementById('resultado').textContent = "No se encontró ningún valor igual o cercano a" + y + " en la tabla.";
             }
         }
     </script>

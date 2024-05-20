@@ -8,7 +8,7 @@ function calculateVolume() {
     if (!isNaN(volume)) {
         document.getElementById('result').innerHTML = "El volumen es: " + volume.toFixed(2) + " metros cúbicos";
     } else {
-        document.getElementById('result').innerHTML = "Por favor ingrese números válidos para la longitud, ancho y altura.";
+        document.getElementById('result').innerHTML = "Por favor ingrese números válidos para la longitud, anchura y altura.";
     }
 }
 
@@ -127,3 +127,24 @@ function calculateCustom() {
         + result + "kcal " + "(el calefactor puede ser de CA o TB)";
     }
 }
+
+function calculateGasPipeDiameter() {
+    var lengthGasPipe = parseFloat(document.getElementById('lengthGasPipe').value);
+    var consumption = parseFloat(document.getElementById('consumption').value);
+
+    if (!isNaN(lengthGasPipe) && !isNaN(consumption)) {
+        var flowRate = consumption; // Flujo volumétrico en metros cúbicos por hora
+        var velocity = flowRate / (Math.PI * Math.pow((0.0254), 2)); // Convertir metros cúbicos por hora a metros cúbicos por segundo
+        var diameter = Math.sqrt((4 * flowRate) / (Math.PI * velocity));
+        document.getElementById('gasPipeDiameterResult').innerHTML = "El diámetro del caño de gas necesario es: " + diameter.toFixed(2) + " mm";
+    } else {
+        document.getElementById('gasPipeDiameterResult').innerHTML = "Por favor ingrese números válidos para la longitud del caño y el consumo.";
+    }
+}
+
+function toggleStyles() {
+    var currentStyle = document.getElementById('style').href;
+    var newStyle = currentStyle.includes('style1.css') ? 'style2.css' : 'style1.css';
+    document.getElementById('style').href = newStyle;
+}
+
