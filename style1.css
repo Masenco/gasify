@@ -20,7 +20,7 @@
                 
 
 body {
-    background-color: #111538;
+    background-color: #1d2563;
     color: #fff;
     font-family: 'Roboto Condensed', sans-serif;
     height: 100%;
@@ -35,12 +35,12 @@ body {
     min-height: 100vh;
     justify-content: center;
     width: 100%;
-    background-color: #111538;
+    background-color: #1d2563;
 }
 
 .calculator {
     align-items: center;
-    background-color: #191d3a;
+    background-color: #13183f;
     border-radius: 25px;
     box-shadow: 5px 9px 21px 0px #000000;
     display: flex;
@@ -125,6 +125,7 @@ button {
     padding: 8px;
     transition: 0.2s;
     width: auto;
+    height: auto;
 }
 
 button:hover {
@@ -141,11 +142,12 @@ button.eliminar:hover {
     background-color: #c4215a;
 }
 
-#option {
+#option, #gridSize {
     background-color: #121212;
     color: #fff;
-    width: 50px;
-    height: 25px;
+    width: auto;
+    height: auto;
+    padding: 1px;
 }
 
 p {
@@ -292,6 +294,9 @@ p {
 }
 
 @media only screen and (max-width: 500px) {
+    .calculator {
+margin-bottom: 40px;
+    }
     button {
         font-size: 1em;
     }

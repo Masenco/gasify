@@ -45,6 +45,7 @@ function calculateSubtraction() {
     var dataInputs = document.querySelectorAll('#subtractionCalculator .data');
     var total = 0;
     var count = 0;
+    var gridSize = document.getElementById('gridSize').value;
 
     for (var i = 0; i < dataInputs.length; i++) {
         var data = parseFloat(dataInputs[i].value);
@@ -53,13 +54,25 @@ function calculateSubtraction() {
         }
     }
 
-    if (total < 21500) {
-        count = 1;
-    } else {
-        count = Math.floor(total / 21500);
-        total -= count * 21500;
-        if (total > 0) {
-            count++;
+    if (gridSize === "15x15") {
+        if (total < 21500) {
+            count = 1;
+        } else {
+            count = Math.floor(total / 21500);
+            total -= count * 21500;
+            if (total > 0) {
+                count++;
+            }
+        }
+    } else if (gridSize === "30x15") {
+        if (total < 43000) {
+            count = 1;
+        } else {
+            count = Math.floor(total / 43000);
+            total -= count * 43000;
+            if (total > 0) {
+                count++;
+            }
         }
     }
     document.getElementById('subtractionCount').innerHTML = "Total de rejillas necesarias: " + count;

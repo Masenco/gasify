@@ -73,19 +73,24 @@
             <button onclick="calculateCustom()">Calcular</button>
             <p id="customResult"></p>
         </div>
-        <div class="calculator" id="cr">
-            <h2>Calculadora de rejillas de 100cm2</h2>
-            <div id="subtractionCalculator">
-                <div class="dataSet">
-                    <input type="number" class="data" placeholder="Calorías a evacuar u oxigenar">
-                    <button onclick="removeDataSet(this)" class="eliminar">Eliminar</button>
-                </div>
-            </div>
-            <button onclick="calculateSubtraction()">Calcular</button>
-            <p id="subtractionResult"></p>
-            <p id="subtractionCount"></p>
-            <button onclick="addSubtractionData()">Agregar otro artefacto</button>
+       <div class="calculator" id="cr">
+    <h2>Calculadora de rejillas</h2>
+    <label for="gridSize">Seleccione el tamaño de la rejilla:</label>
+    <select id="gridSize" onchange="calculateSubtraction()">
+        <option value="15x15">15x15</option>
+        <option value="30x15">30x15</option>
+    </select>
+    <div id="subtractionCalculator">
+        <div class="dataSet">
+            <input type="number" class="data" placeholder="Calorías a evacuar u oxigenar">
+            <button onclick="removeDataSet(this)" class="eliminar">Eliminar</button>
         </div>
+    </div>
+    <button onclick="calculateSubtraction()">Calcular</button>
+    <p id="subtractionResult"></p>
+    <p id="subtractionCount"></p>
+    <button onclick="addSubtractionData()">Agregar otro artefacto</button>
+</div>
 <div class="calculator" id="cc">
             <h2>Calculadora de diámetro de caño</h2>
             <input type="number" id="inputX" step="0.01" placeholder="Ingrese longitud (metros)">
