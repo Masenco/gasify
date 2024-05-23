@@ -45,9 +45,8 @@ body {
     box-shadow: 5px 8px 20px 0px rgba(0, 0, 0, 0.8);
     display: flex;
     flex-direction: column;
-    max-height: 350px;
+    max-height: 400px;
     overflow-y: auto; 
-    justify-content: flex-start;
     margin: 20px;
     padding: 20px;
     text-align: center;
@@ -92,7 +91,7 @@ h1 {
 }
 
 .calculator select {
-    font-size: 0.9em;
+    font-size: 1em;
 }
 
 input[type="number"] {
@@ -142,12 +141,25 @@ button.eliminar:hover {
     background-color: #c4215a;
 }
 
-#option, #gridSize {
+select, #gridSize, #option {
     background-color: #121212;
     color: #fff;
     width: auto;
     height: auto;
     padding: 1px;
+    font-size: 1em;
+}
+
+#searchKeyword {
+    width: 140px;
+    height: auto;
+    font-size: 1em;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #121212;
+    color: #fff;
+    border: none;
 }
 
 p {
@@ -197,6 +209,16 @@ p {
     font-weight: bold;
     color: #fff;
     font-size: 20px;
+}
+
+.calculator ul {
+    list-style-type:circle;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .toggle {
@@ -295,7 +317,8 @@ p {
 
 @media only screen and (max-width: 500px) {
     .calculator {
-margin-bottom: 40px;
+        margin-bottom: 40px;
+        max-height: none;
     }
     button {
         font-size: 1em;
@@ -306,16 +329,33 @@ margin-bottom: 40px;
     }
 
     h1 {
-        font-size: 1.6em;
+        font-size: 1.7em;
         margin-top: 50px;
     }
 
-    h2 {
-        font-size: 1.2em;
+    .calculator h2 {
+        font-size: 1.9em;
     }
 
     input[type="number"] {
-        font-size: 15px;
+        font-size: 20px;
         width: calc(85% - 20px);
     }
+
+    select, #gridSize, #option {
+    font-size: 1.2em;
+}
+
+    #searchKeyword {
+    font-size: 1.2em;
+    width: 150px;
+}
+
+    #element, select {
+    font-size: 1em;
+    padding: 5px;
+}
+.calculator label {
+    font-size: 1.2em;
+}
 }

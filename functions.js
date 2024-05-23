@@ -161,3 +161,92 @@ function toggleStyles() {
     document.getElementById('style').href = newStyle;
 }
 
+
+
+
+var selectedElements = []; // Array para almacenar elementos seleccionados
+var selectedQuantities = []; // Array para almacenar cantidades de elementos
+var selectedValues = []; // Array para almacenar valores de elementos
+
+function addElement() {
+    var elementSelect = document.getElementById("element");
+    var quantityInput = document.getElementById("quantity");
+    
+    var selectedValue = parseFloat(elementSelect.value);
+    var quantity = parseInt(quantityInput.value);
+
+    if (!isNaN(selectedValue) && !isNaN(quantity) && quantity > 0) {
+        selectedElements.push(elementSelect.options[elementSelect.selectedIndex].text);
+        selectedQuantities.push(quantity);
+        selectedValues.push(selectedValue * quantity);
+        quantityInput.value = ""; // Limpiar el campo de cantidad
+        updateElementList(); // Actualizar la lista de elementos agregados
+    } else {
+        alert("Por favor, seleccione un elemento y especifique una cantidad válida.");
+    }
+}
+
+function updateElementList() {
+    var elementList = document.getElementById("elementList");
+    elementList.innerHTML = ""; // Limpiar la lista
+    
+    // Agregar elementos a la lista
+    for (var i = 0; i < selectedElements.length; i++) {
+        var listItem = document.createElement("li");
+        listItem.textContent = selectedElements[i] + " - Cantidad: " + selectedQuantities[i];
+        
+        // Crear botón de eliminación
+        var deleteButton = document.createElement("button");
+        deleteButton.textContent = "Eliminar";
+        deleteButton.classList.add("eliminar"); // Agregar la clase "eliminar"
+        deleteButton.dataset.index = i; // Almacenar el índice del elemento a eliminar
+        deleteButton.onclick = function() {
+            // Obtener el índice del elemento a eliminar desde el atributo dataset
+            var index = parseInt(this.dataset.index);
+            // Eliminar el elemento y su cantidad de las matrices
+            selectedElements.splice(index, 1);
+            selectedQuantities.splice(index, 1);
+            selectedValues.splice(index, 1);
+            // Actualizar la lista de elementos mostrada
+            updateElementList();
+        };
+        
+        // Agregar botón de eliminación al elemento de la lista
+        listItem.appendChild(deleteButton);
+        
+        // Agregar elemento a la lista
+        elementList.appendChild(listItem);
+    }
+}
+
+function calculateTotal() {
+    var total = 0;
+    for (var i = 0; i < selectedValues.length; i++) {
+        total += selectedValues[i];
+    }
+    var elementResult = document.getElementById("elementResult");
+    // Redondear el total a 5 números y convertirlo a cadena con coma como separador decimal
+    var formattedTotal = total.toLocaleString('es-ES', {maximumFractionDigits: 3});
+    elementResult.textContent = "El valor es: " + formattedTotal + " metros.";
+}
+
+function filterOptions() {
+    var keyword = document.getElementById("searchKeyword").value.toLowerCase();
+    var select = document.getElementById("element");
+    
+    for (var i = 0; i < select.options.length; i++) {
+        var optionText = select.options[i].text.toLowerCase();
+        // Eliminar acentos y caracteres especiales del texto de la opción
+        optionText = optionText.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        // Eliminar acentos y caracteres especiales de la palabra clave
+        var keywordNormalized = keyword.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        if (optionText.indexOf(keywordNormalized) > -1) {
+            select.options[i].style.display = ""; // Mostrar la opción si coincide con la palabra clave
+        } else {
+            select.options[i].style.display = "none"; // Ocultar la opción si no coincide con la palabra clave
+        }
+    }
+}
+
+
+

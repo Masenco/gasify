@@ -96,7 +96,6 @@ h1 {
 
 .calculator select {
     font-size: 0.9em;
-    color: #2A3F54;
 }
 
 input[type="number"] {
@@ -143,12 +142,24 @@ button.eliminar:hover {
     background-color: #c4215a;
 }
 
-#option {
-    background-color: #FFFFFF;
-    color: #2A3F54;
+select, #gridSize, #option {
+    background-color: #111;
+    color: #e0e0e0;
     width: auto;
     height: auto;
     padding: 1px;
+}
+
+#searchKeyword {
+    width: 140px;
+    height: auto;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    color: #2A3F54;
+    border: none;
 }
 
 p {
@@ -278,6 +289,7 @@ p {
 @media only screen and (max-width: 500px) {
     .calculator {
         margin-bottom: 40px;
+        max-height: none;
     }
     button {
         font-size: 1em;
@@ -288,16 +300,33 @@ p {
     }
 
     h1 {
-        font-size: 1.6em;
+        font-size: 1.7em;
         margin-top: 50px;
     }
 
-    h2 {
-        font-size: 1.2em;
+    .calculator h2 {
+        font-size: 1.9em;
     }
 
     input[type="number"] {
-        font-size: 15px;
+        font-size: 20px;
         width: calc(85% - 20px);
     }
+
+    select, #gridSize, #option {
+    font-size: 1.2em;
+}
+
+    #searchKeyword {
+    font-size: 1.2em;
+    width: 150px;
+}
+
+    #element, select {
+    font-size: 1em;
+    padding: 5px;
+}
+    .calculator label {
+    font-size: 1.2em;
+}
 }
