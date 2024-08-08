@@ -32,7 +32,6 @@
 </head>
 
 <body>
-    <div onclick="toggleStyles()" class="toggleStyles"></div>
     <div class="overlay" onclick="toggleMenu()"></div>
     <div class="toggle" onclick="toggleMenu()">+</div>
     <h1>Curso: gasista de unidades unifuncionales, CFL 401</h1>
@@ -42,122 +41,34 @@
             <li><a href="#cc3">Calc. consumo en m3</a></li>
             <li><a href="#ct">Calc. térmica</a></li>
             <li><a href="#cr">Calc. rejillas de 100cm2</a></li>
-            <li><a href="#cc">Calc. diámetro de caño</a></li>
         </ul>
     </div>
-    <div class="container">
-        <div class="calculator" id="cm3">
-            <h2>Calculadora de m3</h2>
-            <input type="number" id="length" placeholder="Longitud (m)">
-            <input type="number" id="width" placeholder="Ancho (m)">
-            <input type="number" id="height" placeholder="Altura (m)">
-            <button onclick="calculateVolume()">Calcular</button>
-            <p id="result"></p>
-        </div>
-        <div class="calculator" id="cc3">
-            <h2>Calculadora de consumo en m3</h2>
-            <div id="dataSets">
-                <div class="dataSet">
-                    <input type="number" class="data" placeholder="Ingrese calorías del artefacto">
-                    <button onclick="removeDataSet(this)" class="eliminar">Eliminar</button>
-                </div>
+ <div class="container">
+    <div class="calculator tablaDiam">
+            <h2>Tabla de Cálculos</h2>
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Tramo:</th>
+                        <th>Long. Inicial (m)</th>
+                        <th>Consumo (m3)</th>
+                        <th>Diám. Inicial (mm)</th>
+                        <th>Long. Equiv (m)</th>
+                        <th>Long. Total (m)</th>
+                        <th>Diám. Final (mm)</th>
+                        <th>Diám. Adapt (mm)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se generarán dinámicamente aquí -->
+                </tbody>
+            </table>
+            <button onclick="agregarFila()">Agregar Fila</button>
             </div>
-            <button onclick="calculateDivisionAndSum()">Calcular</button>
-            <p id="divisionResult"></p>
-            <p id="sumResult"></p>
-            <button onclick="addDataSet()">Agregar otro artefacto</button>
-        </div>
-        <div class="calculator" id="ct">
-            <h2>Calculadora Térmica</h2>
-            <label for="option">¿El ambiente a calefaccionar es un dormitorio o un baño?</label>
-            <select id="option">
-                <option value="SI">Sí</option>
-                <option value="NO">No</option>
-            </select>
-            <input type="number" id="value" placeholder="Ingrese m3 del ambiente">
-            <button onclick="calculateCustom()">Calcular</button>
-            <p id="customResult"></p>
-        </div>
-        <div class="calculator" id="cr">
-            <h2>Calculadora de rejillas</h2>
-            <label for="gridSize">Seleccione el tamaño de la rejilla:</label>
-            <select id="gridSize" onchange="calculateSubtraction()">
-                <option value="15x15">15x15</option>
-                <option value="30x15">30x15</option>
-            </select>
-            <div id="subtractionCalculator">
-                <div class="dataSet">
-                    <input type="number" class="data" placeholder="Calorías a evacuar u oxigenar">
-                    <button onclick="removeDataSet(this)" class="eliminar">Eliminar</button>
-                </div>
-            </div>
-            <button onclick="calculateSubtraction()">Calcular</button>
-            <p id="subtractionCount"></p>
-            <button onclick="addSubtractionData()">Agregar otro artefacto</button>
-        </div>
-        <div class="calculator" id="cc">
-            <label for="tipoTabla">Tipo de caño:</label>
-    <select id="tipoTabla">
-        <option value="actual">Epoxi</option>
-        <option value="termofusion">Termofusión</option>
-    </select>
-    <br>
-
-    <label for="inputX">Ingrese longitud (mtrs):</label>
-    <input type="number" id="inputX" step="any">
-    <br>
-    <label for="inputY">Ingrese caudal (m3):</label>
-    <input type="number" id="inputY" step="any">
-    <br>
-    <button onclick="encontrarNumeroCercano()">Calcular</button>
-    <div id="resultado"></div>
-
-        </div>
-        <script>
-        var tablaActual = [
-            [0, 9.5, 13, 19, 25, 32, 38, 51],
-            [2, 1.745, 3.580, 9.895, 20.260, 35.695, 55.835, 114.615],
-            [3, 1.425, 2.925, 8.065, 16.540, 28.900, 45.585, 93.580],
-            [4, 1.235, 2.535, 6.985, 14.325, 25.030, 39.480, 81.050],
-            [5, 1.105, 2.265, 6.250, 12.810, 22.685, 35.310, 72.490],
-            [6, 1.005, 2.070, 5.705, 11.695, 20.435, 32.230, 66.165],
-            [7, 0.930, 1.915, 5.280, 10.835, 18.920, 29.845, 61.265],
-            [8, 0.870, 1.790, 4.940, 10.130, 17.695, 27.910, 57.295],
-            [9, 0.820, 1.690, 4.655, 9.550, 16.685, 26.320, 54.025],
-            [10, 0.780, 1.600, 4.420, 9.060, 15.825, 24.965, 51.245],
-            [12, 0.710, 1.460, 4.035, 8.270, 14.450, 22.790, 46.790],
-            [14, 0.660, 1.365, 3.735, 7.655, 13.375, 21.100, 43.315],
-            [16, 0.615, 1.265, 3.495, 7.160, 12.510, 19.595, 40.515],
-            [18, 0.580, 1.195, 3.290, 6.750, 11.795, 18.605, 38.190],
-            [20, 0.550, 1.130, 3.125, 6.405, 11.190, 17.655, 36.240],
-            [22, 0.525, 1.080, 2.980, 6.105, 10.670, 16.830, 34.550],
-            [24, 0.500, 1.035, 2.850, 5.845, 10.215, 16.110, 33.060],
-            [26, 0.480, 0.990, 2.740, 5.620, 9.815, 15.485, 31.785],
-            [28, 0.465, 0.960, 2.640, 5.415, 9.460, 14.920, 30.630],
-            [30, 0.450, 0.925, 2.550, 5.230, 9.135, 14.100, 29.580],
-            [32, 0.435, 0.895, 2.470, 5.065, 8.850, 13.955, 29.075],
-            [34, 0.420, 0.870, 2.395, 4.910, 8.580, 13.535, 27.785],
-            [36, 0.410, 0.845, 2.330, 4.775, 8.340, 13.155, 27.005],
-            [38, 0.400, 0.820, 2.265, 4.650, 8.120, 12.805, 26.295],
-            [40, 0.390, 0.800, 2.210, 4.525, 7.910, 12.480, 25.615],
-            [42, 0.380, 0.780, 2.155, 4.420, 7.720, 12.180, 25.005],
-            [44, 0.370, 0.765, 2.105, 4.320, 7.545, 11.900, 24.430],
-            [46, 0.360, 0.750, 2.060, 4.220, 7.370, 11.630, 23.880],
-            [48, 0.355, 0.730, 2.015, 4.135, 7.225, 11.395, 23.395],
-            [50, 0.350, 0.715, 1.975, 4.035, 7.075, 11.165, 22.920],
-            [55, 0.330, 0.685, 1.885, 3.860, 6.750, 10.845, 21.850],
-            [60, 0.315, 0.655, 1.805, 3.695, 6.460, 10.190, 20.920],
-            [65, 0.305, 0.630, 1.735, 3.545, 6.205, 9.790, 20.120],
-            [70, 0.295, 0.610, 1.670, 3.405, 5.970, 9.415, 19.390],
-            [75, 0.285, 0.590, 1.615, 3.290, 5.765, 9.095, 18.730],
-            [80, 0.275, 0.575, 1.560, 3.175, 5.565, 8.795, 18.110],
-            [85, 0.270, 0.560, 1.515, 3.075, 5.380, 8.515, 17.560],
-            [90, 0.265, 0.550, 1.470, 2.985, 5.205, 8.265, 17.030],
-            [95, 0.260, 0.535, 1.430, 2.900, 5.050, 8.025, 16.535],
-            [100, 0.255, 0.525, 1.395, 2.820, 4.905, 7.800, 16.080]
-        ];
-
-        var tablaTermofusion = [
+    </div>
+    <script>
+       var tablaTermofusion = [
   [0, 20, 25, 32, 40, 50, 63, 75, 90, 110],
   [1, 5.594, 12.377, 27.244, 54.867, 105.108, 195.331, 276.299, 413.150, 751.360],
   [2, 3.956, 8.752, 19.264, 38.797, 74.323, 138.120, 195.373, 292.141, 531.292],
@@ -220,47 +131,193 @@
   [195, 0.401, 0.886, 1.951, 3.929, 7.527, 13.988, 19.786, 29.586, 53.806],
   [200, 0.396, 0.875, 1.926, 3.880, 7.432, 13.812, 19.537, 29.214, 53.129]
         ];
+        const valoresFijosTermofusion = [0, 20, 25, 32, 40, 50, 63, 75, 90, 110];
 
-        var valoresFijosActuales = [0, 9.5, 13, 19, 25, 32, 38, 51];
-        var valoresFijosTermofusion = [0, 20, 25, 32, 40, 50, 63, 75, 90, 110];
+        // Cargar datos desde localStorage al iniciar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            const datosGuardados = localStorage.getItem('tablaData');
+            if (datosGuardados) {
+                const datos = JSON.parse(datosGuardados);
+                datos.forEach(dato => {
+                    agregarFila(dato);
+                });
+            }
+        });
 
-        function encontrarNumeroCercano() {
-    var tipoTabla = document.getElementById('tipoTabla').value;
-    var tablaSeleccionada = tipoTabla === 'actual' ? tablaActual : tablaTermofusion;
-    var valoresFijosSeleccionados = tipoTabla === 'actual' ? valoresFijosActuales : valoresFijosTermofusion;
+        function calcularTabla() {
+            const filas = document.querySelectorAll('#dataTable tbody tr');
+            filas.forEach(fila => {
+                const x = parseFloat(fila.querySelector('.input-x').value) || 0;
+                const y = parseFloat(fila.querySelector('.input-y').value) || 0;
+                const valor5 = parseFloat(fila.querySelector('.input-5').value) || 0;
+                const valor6 = parseFloat(fila.querySelector('.sum').textContent) || 0;
 
-    var x = parseFloat(document.getElementById('inputX').value);
-    var y = parseFloat(document.getElementById('inputY').value);
+                // Calcular columna 4
+                let filaSeleccionadaIndex = -1;
+                for (let i = 0; i < tablaTermofusion.length; i++) {
+                    if (tablaTermofusion[i][0] >= x) {
+                        filaSeleccionadaIndex = i;
+                        break;
+                    }
+                }
 
-    if (isNaN(x) || isNaN(y)) {
-        document.getElementById('resultado').textContent = "Por favor, ingrese valores numéricos válidos.";
-        return;
-    }
+                if (filaSeleccionadaIndex === -1) {
+                    fila.querySelector('.result').textContent = "No se encontró una fila para el valor de X.";
+                    fila.querySelector('.result-2').textContent = "";
+                    return;
+                }
 
-    // Buscar el índice de la fila con el valor más cercano mayor o igual a x
-    var filaSeleccionada = tablaSeleccionada.find(row => row[0] >= x);
-    if (!filaSeleccionada) {
-        document.getElementById('resultado').textContent = "No se encontró una fila para el valor de X.";
-        return;
-    }
+                const filaSeleccionada = tablaTermofusion[filaSeleccionadaIndex];
+                let columnaSeleccionada = filaSeleccionada.length - 1; // Por defecto, la última columna
 
-    // Buscar el índice de la columna con el valor más cercano mayor o igual a y
-    var columnaSeleccionada = filaSeleccionada.findIndex(value => value >= y);
-    if (columnaSeleccionada === -1) {
-        columnaSeleccionada = filaSeleccionada.length - 1;
-    }
+                for (let j = 1; j < filaSeleccionada.length; j++) { // Comenzamos en 1 para omitir la primera columna
+                    if (filaSeleccionada[j] >= y) {
+                        columnaSeleccionada = j;
+                        break;
+                    }
+                }
 
-    // Asegurarse de que la columna seleccionada esté dentro del rango de valores fijos
-    if (columnaSeleccionada >= valoresFijosSeleccionados.length) {
-        columnaSeleccionada = valoresFijosSeleccionados.length - 1;
-    }
+                if (columnaSeleccionada >= valoresFijosTermofusion.length) {
+                    columnaSeleccionada = valoresFijosTermofusion.length - 1;
+                }
 
-    // Mostrar el resultado
-    document.getElementById('resultado').innerHTML = "El diámetro del caño debe ser de: " +
-        valoresFijosSeleccionados[columnaSeleccionada] + "mm."
-}
+                const resultado = valoresFijosTermofusion[columnaSeleccionada];
+                fila.querySelector('.result').textContent = resultado + "mm.";
 
+                // Calcular columna 6
+                const suma = x + valor5;
+                fila.querySelector('.sum').textContent = suma;
+
+                // Calcular columna 7
+                const valorXColumna7 = parseFloat(fila.querySelector('.sum').textContent) || 0;
+                const valorYColumna7 = parseFloat(fila.querySelector('.input-y').value) || 0;
+
+                let filaSeleccionadaIndex2 = -1;
+                for (let i = 0; i < tablaTermofusion.length; i++) {
+                    if (tablaTermofusion[i][0] >= valorXColumna7) {
+                        filaSeleccionadaIndex2 = i;
+                        break;
+                    }
+                }
+
+                if (filaSeleccionadaIndex2 === -1) {
+                    fila.querySelector('.result-2').textContent = "No se encontró una fila para el valor de Columna 6.";
+                    return;
+                }
+
+                const filaSeleccionada2 = tablaTermofusion[filaSeleccionadaIndex2];
+                let columnaSeleccionada2 = filaSeleccionada2.length - 1; // Por defecto, la última columna
+
+                for (let j = 1; j < filaSeleccionada2.length; j++) { // Comenzamos en 1 para omitir la primera columna
+                    if (filaSeleccionada2[j] >= valorYColumna7) {
+                        columnaSeleccionada2 = j;
+                        break;
+                    }
+                }
+
+                if (columnaSeleccionada2 >= valoresFijosTermofusion.length) {
+                    columnaSeleccionada2 = valoresFijosTermofusion.length - 1;
+                }
+
+                const resultado2 = valoresFijosTermofusion[columnaSeleccionada2];
+                fila.querySelector('.result-2').textContent = resultado2 + "mm.";
+            });
+
+            // Guardar los datos de la tabla en localStorage
+            guardarDatosTabla();
+        }
+
+        function agregarFila(datos = {}) {
+            const tabla = document.querySelector('#dataTable tbody');
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td><input type="text" class="input-name" value="${datos.nombre || ''}" oninput="calcularTabla()"></td>
+                <td><input type="number" class="input-x" value="${datos.x || ''}" oninput="calcularTabla()"></td>
+                <td><input type="number" class="input-y" value="${datos.y || ''}" oninput="calcularTabla()"></td>
+                <td class="result">${datos.resultado || ''}</td>
+                <td><input type="number" class="input-5" value="${datos.valor5 || ''}" oninput="calcularTabla()"></td>
+                <td class="sum">${datos.suma || ''}</td>
+                <td class="result-2">${datos.resultado2 || ''}</td>
+                <td><input type="text" class="input-name-8" value="${datos.nombre8 || ''}" oninput="calcularTabla()"></td>
+                <td><button onclick="eliminarFila(this)" class="buttonEliminar">X</button></td>
+            `;
+            tabla.appendChild(fila);
+            calcularTabla(); // Recalcular después de agregar una fila
+        }
+
+        function eliminarFila(boton) {
+            const tabla = document.querySelector('#dataTable tbody');
+            tabla.removeChild(boton.parentElement.parentElement);
+            guardarDatosTabla(); // Guardar datos después de eliminar una fila
+        }
+
+        function guardarDatosTabla() {
+            const filas = document.querySelectorAll('#dataTable tbody tr');
+            const datos = Array.from(filas).map(fila => {
+                return {
+                    nombre: fila.querySelector('.input-name').value,
+                    x: fila.querySelector('.input-x').value,
+                    y: fila.querySelector('.input-y').value,
+                    resultado: fila.querySelector('.result').textContent,
+                    valor5: fila.querySelector('.input-5').value,
+                    suma: fila.querySelector('.sum').textContent,
+                    resultado2: fila.querySelector('.result-2').textContent,
+                    nombre8: fila.querySelector('.input-name-8').value
+                };
+            });
+            localStorage.setItem('tablaData', JSON.stringify(datos));
+        }
     </script>
+    <div class="container">
+        <div class="calculator" id="cm3">
+            <h2>Calculadora de m3</h2>
+            <input type="number" id="length" placeholder="Longitud (m)">
+            <input type="number" id="width" placeholder="Ancho (m)">
+            <input type="number" id="height" placeholder="Altura (m)">
+            <button onclick="calculateVolume()">Calcular</button>
+            <p id="result"></p>
+        </div>
+        <div class="calculator" id="cc3">
+            <h2>Calculadora de consumo en m3</h2>
+            <div id="dataSets">
+                <div class="dataSet">
+                    <input type="number" class="data" placeholder="Ingrese calorías del artefacto">
+                    <button onclick="removeDataSet(this)" class="eliminar">Eliminar</button>
+                </div>
+            </div>
+            <button onclick="calculateDivisionAndSum()">Calcular</button>
+            <p id="divisionResult"></p>
+            <p id="sumResult"></p>
+            <button onclick="addDataSet()">Agregar otro artefacto</button>
+        </div>
+        <div class="calculator" id="ct">
+            <h2>Calculadora Térmica</h2>
+            <label for="option">¿El ambiente a calefaccionar es un dormitorio o un baño?</label>
+            <select id="option">
+                <option value="SI">Sí</option>
+                <option value="NO">No</option>
+            </select>
+            <input type="number" id="value" placeholder="Ingrese m3 del ambiente">
+            <button onclick="calculateCustom()">Calcular</button>
+            <p id="customResult"></p>
+        </div>
+        <div class="calculator" id="cr">
+            <h2>Calculadora de rejillas</h2>
+            <label for="gridSize">Seleccione el tamaño de la rejilla:</label>
+            <select id="gridSize" onchange="calculateSubtraction()">
+                <option value="15x15">15x15</option>
+                <option value="30x15">30x15</option>
+            </select>
+            <div id="subtractionCalculator">
+                <div class="dataSet">
+                    <input type="number" class="data" placeholder="Calorías a evacuar u oxigenar">
+                    <button onclick="removeDataSet(this)" class="eliminar">Eliminar</button>
+                </div>
+            </div>
+            <button onclick="calculateSubtraction()">Calcular</button>
+            <p id="subtractionCount"></p>
+            <button onclick="addSubtractionData()">Agregar otro artefacto</button>
+        </div>
         <div class="calculator" id="customCalculator">
             <h2>Calculadora de pérdida en acc</h2>
             <label for="element">Seleccione accesorios:</label>
@@ -474,11 +531,10 @@
             <button onclick="addElement()">Agregar acc</button>
             <button onclick="calculateTotal()">Calcular</button>
             <ul id="elementList"></ul> <!-- Lista para mostrar elementos agregados -->
-            <p id="elementResult"></p>
+            <p id="elementResult2"></p>
         </div>
     </div>
-    </div>
-
 </body>
 
 </html>
+

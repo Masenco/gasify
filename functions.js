@@ -1,3 +1,4 @@
+
 // Función para calcular el volumen
 function calculateVolume() {
     // Obtiene los valores de longitud, anchura y altura desde los elementos del DOM
@@ -172,13 +173,6 @@ function calculateGasPipeDiameter() {
     }
 }
 
-// Función para alternar estilos CSS
-function toggleStyles() {
-    var currentStyle = document.getElementById('style').href;
-    var newStyle = currentStyle.includes('style1.css') ? 'style2.css' : 'style1.css';
-    document.getElementById('style').href = newStyle;
-}
-
 // Arrays para almacenar elementos seleccionados, sus cantidades y valores
 var selectedElements = [];
 var selectedQuantities = [];
@@ -243,7 +237,7 @@ function calculateTotal() {
     for (var i = 0; i < selectedValues.length; i++) {
         total += selectedValues[i];
     }
-    var elementResult = document.getElementById("elementResult");
+    var elementResult = document.getElementById("elementResult2");
     // Redondear el total a 5 números y convertirlo a cadena con coma como separador decimal
     var formattedTotal = total.toLocaleString('es-ES', {
         maximumFractionDigits: 3
