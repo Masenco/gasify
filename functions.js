@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// Función para calcular un valor personalizado
+// Función para calcular calorías necesarias para calefaccionar un ambiente
 function calculateCustom() {
     var value = parseFloat(document.getElementById('value').value);
     var option = document.getElementById('option').value;
@@ -231,7 +231,7 @@ function updateElementList() {
     }
 }
 
-// Función para calcular el total de los valores seleccionados
+// Función para calcular el total de los accesorios seleccionados
 function calculateTotal() {
     var total = 0;
     for (var i = 0; i < selectedValues.length; i++) {

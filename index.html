@@ -37,14 +37,16 @@
     <h1>Curso: gasista de unidades unifuncionales, CFL 401</h1>
     <div class="menu">
         <ul>
+             <li><a href="#tC">Tabla de calc</a></li>
             <li><a href="#cm3">Calc. m3</a></li>
             <li><a href="#cc3">Calc. consumo en m3</a></li>
             <li><a href="#ct">Calc. térmica</a></li>
             <li><a href="#cr">Calc. rejillas de 100cm2</a></li>
+            <li><a href="#customCalculator">Calc. pérdida en acc</a></li>
         </ul>
     </div>
  <div class="container">
-    <div class="calculator tablaDiam">
+    <div class="calculator tablaDiam" id="tC">
             <h2>Tabla de Cálculos</h2>
             <table id="dataTable">
                 <thead>
@@ -64,7 +66,7 @@
                     <!-- Las filas se generarán dinámicamente aquí -->
                 </tbody>
             </table>
-            <button onclick="agregarFila()">Agregar Fila</button>
+            <button onclick="agregarFila()">Agregar tramo</button>
             </div>
     </div>
     <script>
@@ -231,15 +233,15 @@
             const tabla = document.querySelector('#dataTable tbody');
             const fila = document.createElement('tr');
             fila.innerHTML = `
-                <td><input type="text" class="input-name" value="${datos.nombre || ''}" oninput="calcularTabla()"></td>
-                <td><input type="number" class="input-x" value="${datos.x || ''}" oninput="calcularTabla()"></td>
-                <td><input type="number" class="input-y" value="${datos.y || ''}" oninput="calcularTabla()"></td>
-                <td class="result">${datos.resultado || ''}</td>
-                <td><input type="number" class="input-5" value="${datos.valor5 || ''}" oninput="calcularTabla()"></td>
-                <td class="sum">${datos.suma || ''}</td>
-                <td class="result-2">${datos.resultado2 || ''}</td>
-                <td><input type="text" class="input-name-8" value="${datos.nombre8 || ''}" oninput="calcularTabla()"></td>
-                <td><button onclick="eliminarFila(this)" class="buttonEliminar">X</button></td>
+                <td data-cell="Tramo"><input type="text" class="input-name" value="${datos.nombre || ''}" oninput="calcularTabla()"></td>
+                <td data-cell="Long. Inicial (m)"><input type="number" class="input-x" value="${datos.x || ''}" oninput="calcularTabla()"></td>
+                <td data-cell="Consumo (m3)"><input type="number" class="input-y" value="${datos.y || ''}" oninput="calcularTabla()"></td>
+                <td data-cell="Diám. Inicial (mm)" class="result">${datos.resultado || ''}</td>
+                <td data-cell="Long. Equiv (m)"><input type="number" class="input-5" value="${datos.valor5 || ''}" oninput="calcularTabla()"></td>
+                <td data-cell="Long. Total (m)" class="sum">${datos.suma || ''}</td>
+                <td data-cell="Diám. Final (mm)" class="result-2">${datos.resultado2 || ''}</td>
+                <td data-cell="Diám. Adaptado (mm)"><input type="text" class="input-name-8" value="${datos.nombre8 || ''}" oninput="calcularTabla()"></td>
+                <td data-cell="Acción"><button onclick="eliminarFila(this)" class="buttonEliminar">X</button></td>
             `;
             tabla.appendChild(fila);
             calcularTabla(); // Recalcular después de agregar una fila

@@ -72,7 +72,7 @@ table {
 
 table td,
 th {
-    border: 1px solid;
+    border: 1px solid #313131;
     padding: 5px;
 }
 
@@ -139,6 +139,18 @@ padding: 5px;
 
 .tablaDiam .buttonEliminar:hover {
 background-color: #c4215a;
+}
+
+.tablaDiam thead {
+    background: hsl(0 0% 0% / 0.5);
+}
+
+.tablaDiam tr:nth-of-type(2n) {
+    background: hsl(0 0% 0% / 0.3);
+}
+
+.result, .result-2, .sum {
+color: rgb(0, 216, 0);
 }
 
 input[type="number"] {
@@ -224,7 +236,7 @@ p {
     width: 100%;
     height: auto;
     text-align: center;
-    top: 15%;
+    top: 20%;
     left: 50%;
     transform: translateX(-50%);
     padding: 10px;
@@ -243,7 +255,7 @@ p {
 }
 
 .menu ul li {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     margin-right: 10px;
 }
 
@@ -257,7 +269,7 @@ p {
     font-size: large;
     font-weight: bold;
     color: #fff;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .calculator ul {
@@ -382,7 +394,7 @@ p {
     }
 
     .calculator h2 {
-        font-size: 1.9em;
+        font-size: 1.6em;
     }
 
     input[type="number"] {
@@ -412,23 +424,45 @@ p {
         font-size: 1.2em;
     }
     .container .tablaDiam {
-    width: calc(160% - 5px); /* Ajusta este valor si es necesario */
-    padding: 5px;
+    width: calc(100% - 10px);
 }
 .container .tablaDiam table{
-   font-size: 10px;
+   font-size: 19px;
    margin: 0;
    padding: 0;
+   width: 100%;
 
 }
 .container .tablaDiam table td input{
-   height: 30px;
-   font-size: 10px;
+    width: 100px;
+   height: 35px;
+   font-size: 17px;
 }
 
 .tablaDiam .buttonEliminar {
-font-size: 10px;
-padding: 3px;
+font-size: 15px;
+padding: 6px;
 margin: 2px;
 }
+
+.tablaDiam table th {
+    display: none;
+}
+.tablaDiam table td {
+    display: block;
+    padding: 0.5rem 1 rem;
+    padding: 10px;
+}
+.tablaDiam table tr {
+    margin-bottom: 30px;
+}
+.tablaDiam table td::before {
+    content: attr(data-cell) ": ";
+    font-weight: 700;
+    text-transform: capitalize;
+}
+.container .tablaDiam {
+    max-height: 630px;
+}
+
 }
