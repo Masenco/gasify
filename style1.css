@@ -18,19 +18,20 @@
     border-radius: 8px;
 }
 
-
 body {
+    display: flex;
+    flex-direction: column;
     background-color: #0D1117;
     color: #fff;
     font-family: 'Roboto Condensed', sans-serif;
-    height: 100%;
+    min-height: 100vh;
     width: 100%;
     margin: 0;
 }
 
 .table-container {
-display: flex;
-flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
@@ -72,7 +73,7 @@ table {
 
 table td,
 th {
-    border: 1px solid #313131;
+    border: 2px solid #313131;
     padding: 5px;
 }
 
@@ -127,18 +128,18 @@ input[type="text"] {
 }
 
 .container .tablaDiam {
-    width: calc(100% - 50px); /* Ajusta este valor si es necesario */
+    width: calc(100% - 50px);
     max-height: 400px;
 }
 
 .tablaDiam .buttonEliminar {
-background-color: #ff3077;
-font-size: 12px;
-padding: 5px;
+    background-color: #ff3077;
+    font-size: 12px;
+    padding: 5px;
 }
 
 .tablaDiam .buttonEliminar:hover {
-background-color: #c4215a;
+    background-color: #c4215a;
 }
 
 .tablaDiam thead {
@@ -150,7 +151,7 @@ background-color: #c4215a;
 }
 
 .result, .result-2, .sum {
-color: rgb(0, 216, 0);
+    color: rgb(0, 216, 0);
 }
 
 input[type="number"] {
@@ -236,7 +237,7 @@ p {
     width: 100%;
     height: auto;
     text-align: center;
-    top: 20%;
+    top: 25%;
     left: 50%;
     transform: translateX(-50%);
     padding: 10px;
@@ -313,28 +314,24 @@ p {
     backdrop-filter: blur(5px);
 }
 
-@media only screen and (max-width: 500px) {
-    button {
-        font-size: 1em;
-    }
+#app {
+    margin: 0 auto;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    margin-top: 20px;
+}
 
-    button.eliminar {
-        font-size: 1em;
-    }
-
-    h1 {
-        font-size: 1.6em;
-        margin-top: 50px;
-    }
-
-    h2 {
-        font-size: 1.2em;
-    }
-
-    input[type="number"] {
-        font-size: 15px;
-        width: calc(85% - 20px);
-    }
+#canvas-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 600px;
+    background-color: #fff;
 }
 
 @media only screen and (max-width: 950px) {
@@ -362,6 +359,15 @@ p {
 }
 
 @media only screen and (max-width: 500px) {
+    #controls {
+        margin-bottom: 10px;
+    }
+    #controls button{
+        font-size: 15px;
+        margin: 4px;
+        margin-top: 15px;
+        padding: 5px;
+    }
     .calculator {
         margin-bottom: 40px;
         max-height: none;
@@ -424,45 +430,43 @@ p {
         font-size: 1.2em;
     }
     .container .tablaDiam {
-    width: calc(100% - 10px);
-}
-.container .tablaDiam table{
-   font-size: 19px;
-   margin: 0;
-   padding: 0;
-   width: 100%;
+        width: calc(100% - 10px);
+    }
+    .container .tablaDiam table{
+       font-size: 19px;
+       margin: 0;
+       padding: 0;
+       width: 100%;
+    }
+    .container .tablaDiam table td input{
+        width: 200px;
+       height: 38px;
+       font-size: 17px;
+    }
 
-}
-.container .tablaDiam table td input{
-    width: 100px;
-   height: 35px;
-   font-size: 17px;
-}
+    .tablaDiam .buttonEliminar {
+        font-size: 15px;
+        padding: 8px;
+        margin: 2px;
+    }
 
-.tablaDiam .buttonEliminar {
-font-size: 15px;
-padding: 6px;
-margin: 2px;
-}
-
-.tablaDiam table th {
-    display: none;
-}
-.tablaDiam table td {
-    display: block;
-    padding: 0.5rem 1 rem;
-    padding: 10px;
-}
-.tablaDiam table tr {
-    margin-bottom: 30px;
-}
-.tablaDiam table td::before {
-    content: attr(data-cell) ": ";
-    font-weight: 700;
-    text-transform: capitalize;
-}
-.container .tablaDiam {
-    max-height: 630px;
-}
-
+    .tablaDiam table th {
+        display: none;
+    }
+    .tablaDiam table td {
+        display: block;
+        padding: 0.5rem 1rem;
+        padding: 10px;
+    }
+    .tablaDiam table tr {
+        margin-bottom: 30px;
+    }
+    .tablaDiam table td::before {
+        content: attr(data-cell) ": ";
+        font-weight: 700;
+        text-transform: capitalize;
+    }
+    .container .tablaDiam {
+        max-height: 630px;
+    }
 }

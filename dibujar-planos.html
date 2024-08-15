@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style1.css">
+    <title>Herramienta para dibujo de planos</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@excalidraw/excalidraw/dist/excalidraw.development.js"></script>
+</head>
+<body>
+     <div class="overlay" onclick="toggleMenu()"></div>
+    <div class="toggle" onclick="toggleMenu()">+</div>
+    <div class="menu">
+        <ul>
+             <li><a href="index.html">Página principal</a></li>
+        </ul>
+    </div>
+     <!-- Excalidraw Integration -->
+    <div id="app" style="height: 500px; width: 100%;"></div>
+    
+    <script>
+            const { Excalidraw } = ExcalidrawLib;
+
+    const App = () => {
+        return React.createElement(
+            'div',
+            { style: { height: '100%', width: '100%'} },
+            React.createElement(Excalidraw)
+        );
+    };
+
+    const rootElement = document.getElementById('app');
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(React.createElement(App));
+    
+         window.onload = () => {
+            const excalidrawContainer = document.querySelector('#app');
+            if (excalidrawContainer) {
+                excalidrawContainer.style.width = '90%';
+                excalidrawContainer.style.height = '600px';
+                excalidrawContainer.style.position = "relative";
+            }
+        };
+    </script>
+    <!-- Primera tabla (4 columnas) -->
+    <div class="container">
+        <div class="calculator tablaDiam" id="tC1">
+            <h2>Lista de materiales</h2>
+            <table id="dataTable1">
+                <thead>
+                    <tr>
+                        <th>Accesorios</th>
+                        <th>Marca</th>
+                        <th>Matrícula</th>
+                        <th>Material</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se generarán dinámicamente aquí -->
+                </tbody>
+            </table>
+            <button onclick="agregarFila('dataTable1')">Agregar material</button>
+        </div>
+    </div>
+
+    <!-- Segunda tabla (5 columnas) -->
+    <div class="container">
+        <div class="calculator tablaDiam" id="tC2">
+            <h2>Artefactos</h2>
+            <table id="dataTable2">
+                <thead>
+                    <tr>
+                        <th>Punto</th>
+                        <th>Descripción</th>
+                        <th>Marca</th>
+                        <th>Matrícula</th>
+                        <th>kcal.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se generarán dinámicamente aquí -->
+                </tbody>
+            </table>
+            <button onclick="agregarFila('dataTable2')">Agregar artefacto</button>
+        </div>
+    </div>
+
+    <!-- Tercera tabla (4 columnas) -->
+    <div class="container">
+        <div class="calculator tablaDiam" id="tC3">
+            <h2>Lista de materiales gabinete</h2>
+            <table id="dataTable3">
+                <thead>
+                    <tr>
+                        <th>Accesorios</th>
+                        <th>Marca</th>
+                        <th>Matrícula</th>
+                        <th>Material</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se generarán dinámicamente aquí -->
+                </tbody>
+            </table>
+            <button onclick="agregarFila('dataTable3')">Agregar material</button>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

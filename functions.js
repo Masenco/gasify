@@ -1,3 +1,88 @@
+// Función para alternar el menú
+function toggleMenu() {
+    var menu = document.querySelector('.menu');
+    var overlay = document.querySelector('.overlay');
+    var toggleIcon = document.querySelector('.toggle');
+
+    if (menu.style.display === 'none' || menu.style.display === '') {
+        menu.style.display = 'flex';
+        overlay.style.display = 'flex'; // Mostrar el overlay
+        toggleIcon.classList.add('active'); // Agregar la clase active al icono del menú
+        // Agregar manejador de eventos al overlay para cerrar el menú al hacer clic
+        overlay.addEventListener('click', function () {
+            menu.style.display = 'none';
+            overlay.style.display = 'none'; // Ocultar el overlay
+            toggleIcon.classList.remove('active'); // Quitar la clase active al icono del menú
+        });
+    } else {
+        menu.style.display = 'none';
+        overlay.style.display = 'none'; // Ocultar el overlay
+        toggleIcon.classList.remove('active'); // Quitar la clase active al icono del menú
+        // Eliminar el manejador de eventos al cerrar el menú
+        overlay.removeEventListener('click', function () {
+            menu.style.display = 'none';
+            overlay.style.display = 'none'; // Ocultar el overlay
+            toggleIcon.classList.remove('active'); // Quitar la clase active al icono del menú
+        });
+    }
+}
+function descargarTabla() {
+    const table = document.getElementById('dataTable');
+
+    // Crear una hoja de estilo temporal para aplicar estilos solo durante la captura
+    const style = document.createElement('style');
+    style.id = 'temporaryStyles';
+    style.innerHTML = `
+    table td, th {
+                  border: 2px solid #000;
+                  }
+    .tablaDiam thead {
+                   background: transparent !important; /* Fondo transparente */
+                   color: black !important; /* Texto negro */
+                  }
+    .tablaDiam tr:nth-of-type(2n) {
+                   background: transparent !important;
+                  } 
+    .tablaDiam input {
+                  background: transparent !important; /* Fondo transparente para inputs */
+                  color: black !important; /* Texto negro en inputs */
+                  }
+    .result, .result-2, .sum {
+                  color: black !important;
+                  }              
+    `;
+    document.head.appendChild(style);
+
+    // Eliminar la última columna de la tabla
+    const headers = table.querySelectorAll('th');
+    const lastColumnIndex = headers.length - 1;
+
+    table.querySelectorAll('tr').forEach(row => {
+        const cells = row.querySelectorAll('th, td');
+        cells[lastColumnIndex]?.remove(); // Elimina la última celda si existe
+    });
+
+    // Convertir tabla a imagen
+    html2canvas(table, {
+        useCORS: true,
+        backgroundColor: null // Hacer el fondo transparente
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'tabla.png';
+        link.click();
+
+        // Restaurar la tabla original y eliminar estilos temporales
+        document.head.removeChild(style);
+        location.reload(); // Recargar la página para restaurar la tabla original
+    }).catch(error => {
+        console.error('Error al capturar la tabla:', error);
+        // Restaurar la tabla original en caso de error
+        document.head.removeChild(style);
+    });
+}
+
+
 
 // Función para calcular el volumen
 function calculateVolume() {
@@ -100,35 +185,6 @@ function addSubtractionData() {
     newDataSet.className = 'dataSet';
     newDataSet.innerHTML = '<input type="number" class="data" placeholder="Calorías a evacuar u oxigenar"><button onclick="removeDataSet(this)" class="eliminar">Eliminar</button>';
     subtractionCalculator.appendChild(newDataSet);
-}
-
-// Función para alternar el menú
-function toggleMenu() {
-    var menu = document.querySelector('.menu');
-    var overlay = document.querySelector('.overlay');
-    var toggleIcon = document.querySelector('.toggle');
-
-    if (menu.style.display === 'none' || menu.style.display === '') {
-        menu.style.display = 'flex';
-        overlay.style.display = 'flex'; // Mostrar el overlay
-        toggleIcon.classList.add('active'); // Agregar la clase active al icono del menú
-        // Agregar manejador de eventos al overlay para cerrar el menú al hacer clic
-        overlay.addEventListener('click', function () {
-            menu.style.display = 'none';
-            overlay.style.display = 'none'; // Ocultar el overlay
-            toggleIcon.classList.remove('active'); // Quitar la clase active al icono del menú
-        });
-    } else {
-        menu.style.display = 'none';
-        overlay.style.display = 'none'; // Ocultar el overlay
-        toggleIcon.classList.remove('active'); // Quitar la clase active al icono del menú
-        // Eliminar el manejador de eventos al cerrar el menú
-        overlay.removeEventListener('click', function () {
-            menu.style.display = 'none';
-            overlay.style.display = 'none'; // Ocultar el overlay
-            toggleIcon.classList.remove('active'); // Quitar la clase active al icono del menú
-        });
-    }
 }
 
 // Agrega manejadores de eventos al cargar el contenido del DOM

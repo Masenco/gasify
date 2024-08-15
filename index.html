@@ -29,6 +29,9 @@
     <meta name="msapplication-TileImage" content="img/icon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <script src="functions.js" defer></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+
 </head>
 
 <body>
@@ -37,6 +40,7 @@
     <h1>Curso: gasista de unidades unifuncionales, CFL 401</h1>
     <div class="menu">
         <ul>
+             <li><a href="dibujar-planos.html">Dibujar plano</a></li>
              <li><a href="#tC">Tabla de calc</a></li>
             <li><a href="#cm3">Calc. m3</a></li>
             <li><a href="#cc3">Calc. consumo en m3</a></li>
@@ -67,6 +71,7 @@
                 </tbody>
             </table>
             <button onclick="agregarFila()">Agregar tramo</button>
+            <button onclick="descargarTabla()">Descargar tabla como imagen</button>
             </div>
     </div>
     <script>
