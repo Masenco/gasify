@@ -151,88 +151,96 @@
             }
         });
 
-        function calcularTabla() {
-            const filas = document.querySelectorAll('#dataTable tbody tr');
-            filas.forEach(fila => {
-                const x = parseFloat(fila.querySelector('.input-x').value) || 0;
-                const y = parseFloat(fila.querySelector('.input-y').value) || 0;
-                const valor5 = parseFloat(fila.querySelector('.input-5').value) || 0;
-                const valor6 = parseFloat(fila.querySelector('.sum').textContent) || 0;
-
-                // Calcular columna 4
-                let filaSeleccionadaIndex = -1;
-                for (let i = 0; i < tablaTermofusion.length; i++) {
-                    if (tablaTermofusion[i][0] >= x) {
-                        filaSeleccionadaIndex = i;
-                        break;
-                    }
-                }
-
-                if (filaSeleccionadaIndex === -1) {
-                    fila.querySelector('.result').textContent = "No se encontró una fila para el valor de X.";
-                    fila.querySelector('.result-2').textContent = "";
-                    return;
-                }
-
-                const filaSeleccionada = tablaTermofusion[filaSeleccionadaIndex];
-                let columnaSeleccionada = filaSeleccionada.length - 1; // Por defecto, la última columna
-
-                for (let j = 1; j < filaSeleccionada.length; j++) { // Comenzamos en 1 para omitir la primera columna
-                    if (filaSeleccionada[j] >= y) {
-                        columnaSeleccionada = j;
-                        break;
-                    }
-                }
-
-                if (columnaSeleccionada >= valoresFijosTermofusion.length) {
-                    columnaSeleccionada = valoresFijosTermofusion.length - 1;
-                }
-
-                const resultado = valoresFijosTermofusion[columnaSeleccionada];
-                fila.querySelector('.result').textContent = resultado + "mm.";
-
-                // Calcular columna 6
-                const suma = x + valor5;
-                fila.querySelector('.sum').textContent = suma;
-
-                // Calcular columna 7
-                const valorXColumna7 = parseFloat(fila.querySelector('.sum').textContent) || 0;
-                const valorYColumna7 = parseFloat(fila.querySelector('.input-y').value) || 0;
-
-                let filaSeleccionadaIndex2 = -1;
-                for (let i = 0; i < tablaTermofusion.length; i++) {
-                    if (tablaTermofusion[i][0] >= valorXColumna7) {
-                        filaSeleccionadaIndex2 = i;
-                        break;
-                    }
-                }
-
-                if (filaSeleccionadaIndex2 === -1) {
-                    fila.querySelector('.result-2').textContent = "No se encontró una fila para el valor de Columna 6.";
-                    return;
-                }
-
-                const filaSeleccionada2 = tablaTermofusion[filaSeleccionadaIndex2];
-                let columnaSeleccionada2 = filaSeleccionada2.length - 1; // Por defecto, la última columna
-
-                for (let j = 1; j < filaSeleccionada2.length; j++) { // Comenzamos en 1 para omitir la primera columna
-                    if (filaSeleccionada2[j] >= valorYColumna7) {
-                        columnaSeleccionada2 = j;
-                        break;
-                    }
-                }
-
-                if (columnaSeleccionada2 >= valoresFijosTermofusion.length) {
-                    columnaSeleccionada2 = valoresFijosTermofusion.length - 1;
-                }
-
-                const resultado2 = valoresFijosTermofusion[columnaSeleccionada2];
-                fila.querySelector('.result-2').textContent = resultado2 + "mm.";
-            });
-
-            // Guardar los datos de la tabla en localStorage
-            guardarDatosTabla();
+  function calcularTabla() {
+    const filas = document.querySelectorAll('#dataTable tbody tr');
+    filas.forEach(fila => {
+        // Validar y ajustar el valor máximo de .input-y
+        const inputY = fila.querySelector('.input-y');
+        const maxValue = 751.360;
+        if (parseFloat(inputY.value) > maxValue) {
+            inputY.value = maxValue;
         }
+
+        const x = parseFloat(fila.querySelector('.input-x').value) || 0;
+        const y = parseFloat(inputY.value) || 0; // Usar el valor ajustado de .input-y
+        const valor5 = parseFloat(fila.querySelector('.input-5').value) || 0;
+        const valor6 = parseFloat(fila.querySelector('.sum').textContent) || 0;
+
+        // Calcular columna 4
+        let filaSeleccionadaIndex = -1;
+        for (let i = 0; i < tablaTermofusion.length; i++) {
+            if (tablaTermofusion[i][0] >= x) {
+                filaSeleccionadaIndex = i;
+                break;
+            }
+        }
+
+        if (filaSeleccionadaIndex === -1) {
+            fila.querySelector('.result').textContent = "Revisar longitud o caudal.";
+            fila.querySelector('.result-2').textContent = "";
+            return;
+        }
+
+        const filaSeleccionada = tablaTermofusion[filaSeleccionadaIndex];
+        let columnaSeleccionada = filaSeleccionada.length - 1; // Por defecto, la última columna
+
+        for (let j = 1; j < filaSeleccionada.length; j++) { // Comenzamos en 1 para omitir la primera columna
+            if (filaSeleccionada[j] >= y) {
+                columnaSeleccionada = j;
+                break;
+            }
+        }
+
+        if (columnaSeleccionada >= valoresFijosTermofusion.length) {
+            columnaSeleccionada = valoresFijosTermofusion.length - 1;
+        }
+
+        const resultado = valoresFijosTermofusion[columnaSeleccionada];
+        fila.querySelector('.result').textContent = resultado + "mm.";
+
+        // Calcular columna 6
+        const suma = x + valor5;
+        fila.querySelector('.sum').textContent = suma;
+
+        // Calcular columna 7
+        const valorXColumna7 = parseFloat(fila.querySelector('.sum').textContent) || 0;
+        const valorYColumna7 = parseFloat(inputY.value) || 0; // Usar el valor ajustado de .input-y
+
+        let filaSeleccionadaIndex2 = -1;
+        for (let i = 0; i < tablaTermofusion.length; i++) {
+            if (tablaTermofusion[i][0] >= valorXColumna7) {
+                filaSeleccionadaIndex2 = i;
+                break;
+            }
+        }
+
+        if (filaSeleccionadaIndex2 === -1) {
+            fila.querySelector('.result-2').textContent = "Revisar longitud o caudal.";
+            return;
+        }
+
+        const filaSeleccionada2 = tablaTermofusion[filaSeleccionadaIndex2];
+        let columnaSeleccionada2 = filaSeleccionada2.length - 1; // Por defecto, la última columna
+
+        for (let j = 1; j < filaSeleccionada2.length; j++) { // Comenzamos en 1 para omitir la primera columna
+            if (filaSeleccionada2[j] >= valorYColumna7) {
+                columnaSeleccionada2 = j;
+                break;
+            }
+        }
+
+        if (columnaSeleccionada2 >= valoresFijosTermofusion.length) {
+            columnaSeleccionada2 = valoresFijosTermofusion.length - 1;
+        }
+
+        const resultado2 = valoresFijosTermofusion[columnaSeleccionada2];
+        fila.querySelector('.result-2').textContent = resultado2 + "mm.";
+    });
+
+    // Guardar los datos de la tabla en localStorage
+    guardarDatosTabla();
+}
+
 
         function agregarFila(datos = {}) {
             const tabla = document.querySelector('#dataTable tbody');
@@ -240,12 +248,25 @@
             fila.innerHTML = `
                 <td data-cell="Tramo"><input type="text" class="input-name" value="${datos.nombre || ''}" oninput="calcularTabla()"></td>
                 <td data-cell="Long. Inicial (m)"><input type="number" class="input-x" value="${datos.x || ''}" oninput="calcularTabla()"></td>
-                <td data-cell="Consumo (m3)"><input type="number" class="input-y" value="${datos.y || ''}" oninput="calcularTabla()"></td>
+                <td data-cell="Consumo (m3)"><input type="number" class="input-y" max="751.360" step="0.001" value="${datos.y || ''}" oninput="calcularTabla()"></td>
                 <td data-cell="Diám. Inicial (mm)" class="result">${datos.resultado || ''}</td>
                 <td data-cell="Long. Equiv (m)"><input type="number" class="input-5" value="${datos.valor5 || ''}" oninput="calcularTabla()"></td>
                 <td data-cell="Long. Total (m)" class="sum">${datos.suma || ''}</td>
                 <td data-cell="Diám. Final (mm)" class="result-2">${datos.resultado2 || ''}</td>
-                <td data-cell="Diám. Adaptado (mm)"><input type="text" class="input-name-8" value="${datos.nombre8 || ''}" oninput="calcularTabla()"></td>
+                <td data-cell="Diám. Adaptado (mm)">
+            <select class="input-name-8" oninput="calcularTabla()">
+                <option value="Opción 0" ${datos.nombre8 === 'Opción 0' ? 'selected' : ''}>Sin modificación</option>
+                <option value="Opción 1" ${datos.nombre8 === 'Opción 1' ? 'selected' : ''}>20mm</option>
+                <option value="Opción 2" ${datos.nombre8 === 'Opción 2' ? 'selected' : ''}>25mm</option>
+                <option value="Opción 3" ${datos.nombre8 === 'Opción 3' ? 'selected' : ''}>32mm</option>
+                <option value="Opción 4" ${datos.nombre8 === 'Opción 4' ? 'selected' : ''}>40mm</option>
+                <option value="Opción 5" ${datos.nombre8 === 'Opción 5' ? 'selected' : ''}>50mm</option>
+                <option value="Opción 6" ${datos.nombre8 === 'Opción 6' ? 'selected' : ''}>63mm</option>
+                <option value="Opción 7" ${datos.nombre8 === 'Opción 7' ? 'selected' : ''}>75mm</option>
+                <option value="Opción 8" ${datos.nombre8 === 'Opción 8' ? 'selected' : ''}>90mm</option>
+                <option value="Opción 9" ${datos.nombre8 === 'Opción 9' ? 'selected' : ''}>110mm</option>
+            </select>
+        </td>
                 <td data-cell="Acción"><button onclick="eliminarFila(this)" class="buttonEliminar">X</button></td>
             `;
             tabla.appendChild(fila);

@@ -212,6 +212,8 @@ select,
     font-size: 1em;
 }
 
+
+
 #searchKeyword {
     width: 140px;
     height: auto;
@@ -432,17 +434,23 @@ p {
     .container .tablaDiam {
         width: calc(100% - 10px);
     }
-    .container .tablaDiam table{
+    .container .tablaDiam table {
        font-size: 19px;
        margin: 0;
        padding: 0;
        width: 100%;
-        justify-content: flex-star;
     }
     .container .tablaDiam table td input{
         width: 200px;
        height: 38px;
        font-size: 17px;
+       text-align: center;
+    }
+
+    .container .tablaDiam table td{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .tablaDiam .buttonEliminar {
@@ -469,5 +477,13 @@ p {
     }
     .container .tablaDiam {
         max-height: 630px;
+        
+    }
+    #dataTable select {
+    font-size: 17px;
+    margin-top: 5px;
+    text-align: center;
+    width: 170px;
+    height: 33px;
     }
 }

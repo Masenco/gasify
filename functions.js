@@ -35,6 +35,7 @@ function descargarTabla() {
     style.innerHTML = `
     table td, th {
                   border: 2px solid #000;
+                  color: black !important; /* Texto negro */
                   }
     .tablaDiam thead {
                    background: transparent !important; /* Fondo transparente */
@@ -46,7 +47,14 @@ function descargarTabla() {
     .tablaDiam input {
                   background: transparent !important; /* Fondo transparente para inputs */
                   color: black !important; /* Texto negro en inputs */
+                  border: none;
                   }
+    #dataTable select {
+                  background: transparent !important; /* Fondo transparente para inputs */
+                  color: black !important; /* Texto negro en inputs */
+                  border: none;
+                  text-align: center;
+    }              
     .result, .result-2, .sum {
                   color: black !important;
                   }              
