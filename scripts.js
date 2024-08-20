@@ -248,9 +248,13 @@ function descargarTabla(tableId, fileName) {
     const style = document.createElement('style');
     style.id = 'temporaryStyles';
     style.innerHTML = `
-    #${tableId} td, #${tableId} th {
+    .container {
+     background: transparent !important;
+    }
+    #${tableId} td, #${tableId} th, #${tableId} tr {
         border: 1px solid #000;
         color: black !important;
+        background: transparent !important;
     }
     #${tableId} thead {
         background: transparent !important;
@@ -295,7 +299,7 @@ function descargarTablaGas(tableId, fileName) {
     style.id = 'temporaryStyles';
     style.innerHTML = `
      #${tableId} {
-        border: 2px solid #000;
+        border: none;
         color: black !important;
     }
     #${tableId} td, #${tableId} th {

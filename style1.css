@@ -213,8 +213,6 @@ select,
     font-size: 1em;
 }
 
-
-
 #searchKeyword {
     width: 140px;
     height: auto;
@@ -317,12 +315,14 @@ p {
     backdrop-filter: blur(5px);
 }
 
+
+
  .gas-table {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: calc(100% - 10px);
+    max-width: calc(100% - 30px);
     border-collapse: collapse;
     display: flex;
 }
@@ -336,17 +336,24 @@ p {
 }
 
 .gas-table td {
-    padding: 10px;
+    padding: 12px;
     text-align: start;
     font-weight: bold;
+    font-size: 19px;
 }
 
 .gas-table input[type="text"] {
     width: auto;
     padding: 5px;
     height: 30px;
-    font-size: 1em;
+    font-size: 19px;
     text-align: start;
+    text-transform: none;
+    font-weight: 700;
+}
+
+.gas-table #numero, #piso, #dto, input{
+    width: 150px;
 }
 
 .center {
@@ -383,6 +390,40 @@ p {
     height: 600px;
     background-color: #fff;
 }
+#tC1 table {
+    width: 80% !important;
+}
+#tC2 table {
+    width: 85% !important;
+}
+#tC3 table {
+    width: 80% !important;
+}
+ 
+#tC1 td input, #tC2 td input, #tC3 td input{
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: none !important;
+    width: 95%;
+    height: auto;
+    padding: 2px;
+    margin: 0;
+}
+
+#tC1, #tC2, #tC3, thead tr:nth-child(1){
+    font-size: 1.5em;
+    width: 100% !important;
+}
+
+#tC1, #tC2, #tC3, thead tr:nth-child(2){
+    font-size: 18px;
+    font-weight: 700;
+    width: 100% !important;
+}
+
+#tC tr{
+    font-size: 16px;
+}
 
 @media only screen and (max-width: 950px) {
     .gas-table table, thead, tbody, tr, td, th {
@@ -417,7 +458,34 @@ p {
         margin: 10px auto;
         width: calc(95% - 10px);
     }
+#tC1 td input, #tC2 td input, #tC3 td input{
+    width: 40%;
+    padding: 4px;
+}
 
+#tC1 table {
+    width: 50% !important;
+}
+#tC2 table {
+    width: 50% !important;
+}
+#tC3 table {
+    width: 50% !important;
+}
+
+#tC1 thead tr:nth-child(1) th {
+    display: block;
+    margin-bottom: -30px;
+}
+#tC2 thead tr:nth-child(1) th {
+    display: block;
+    margin-bottom: -30px;
+}
+#tC3 thead tr:nth-child(1) th {
+    display: block;
+    margin-bottom: -30px;
+}
+ 
     .container {
         align-items: center;
         flex-direction: column;
@@ -433,9 +501,7 @@ p {
     input[type="number"] {
         width: calc(80% - 20px);
     }
-}
 
-@media only screen and (max-width: 500px) {
     #controls {
         margin-bottom: 10px;
     }
