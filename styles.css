@@ -1,0 +1,201 @@
+body {
+     font-family: "Roboto", sans-serif;;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #01212e;
+}
+
+.login {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.login a {
+    margin: 5px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#userInfo {
+    position: relative;
+    font-size: 15px;
+}
+
+.tablaProductos {
+width: 100%;
+height: auto;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+#productsTable {
+width: auto;
+}
+
+#productsTable input {
+    color: #000;
+    border: none;
+    border-radius: 30px;
+    width: 300px;
+}
+
+#productsTable td:nth-child(2) input {
+    width: 100px;
+}
+
+#productsTable th {
+    font-size: 16px;
+    color: #fff;
+}
+
+#productsTable td {
+    text-align: center;
+}
+
+.tablaProductos button {
+     font-family: "Roboto", sans-serif;
+    background-color: #ffffff;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    color: #01212e;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 900;
+    font-style: normal;
+    padding: 12px;
+    margin: 5px;
+}
+
+
+
+.formulario-crearcuenta {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    padding-top: 100px;
+    background-image: linear-gradient(to bottom right, #00292d 45%, #01212e 40%);
+}
+
+#formulario-crear {
+    width: auto;
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formulario-iniciosesion {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    padding-top: 100px;
+    background-image: linear-gradient(to bottom right, #00292d 45%, #01212e 40%);
+}
+
+#formulario-sesion {
+    width: 250px;
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#formulario-sesion a {
+    font-size: 15px;
+    color: #7c2cdd;
+    margin-top: 5px;
+}
+
+#formulario-sesion label {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+input {
+    padding: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+}
+
+input[type="submit"] {
+    font-family: "Roboto", sans-serif;
+    background-color: #ffffff;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    color: #01212e;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 900;
+    font-style: normal;
+    margin-top: 50px;
+    width: 80%;
+}
+
+input[type="email"], [type="password"] {
+    font-family: "Roboto", sans-serif;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    background-color: #ffffff6c;
+    color: #222;
+    margin: 5px;
+    font-weight: 400;
+    font-style: normal;
+    width: 100%;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.removeProduct {
+    background-color: #ff3077 !important;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 8px 12px 8px 12px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.removeProduct:hover {
+    background-color: #c4215a;
+}
+
+ul {
+    margin-top: 20px;
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+h1, h2 {
+    text-align: center;
+    position: relative;
+    font-size: 30px;
+    color: #fff;
+    text-transform: uppercase;
+}

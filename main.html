@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadoras</title>
+    <link rel="stylesheet" href="style1.css" id="style">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="apple-touch-icon" sizes="57x57" href="img/icon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/icon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/icon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/icon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/icon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/icon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="img/icon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/icon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/icon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="img/icon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/icon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/icon/favicon-16x16.png">
+    <link rel="manifest" href="img/icon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="img/icon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <script src="functions.js" defer></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+
+</head>
+<body>
+    <div class="overlay" onclick="toggleMenu()"></div>
+    <div class="toggle" onclick="toggleMenu()">+</div>
+    <h1>Curso: gasista de unidades unifuncionales, CFL 401</h1>
+    <div class="menu">
+        <ul>
+             <li><a href="dibujar-planos.html">Dibujar plano</a></li>
+             <li><a href="#tC">Tabla de calc</a></li>
+            <li><a href="#cm3">Calc. m3</a></li>
+            <li><a href="#cc3">Calc. consumo en m3</a></li>
+            <li><a href="#ct">Calc. térmica</a></li>
+            <li><a href="#cr">Calc. rejillas de 100cm2</a></li>
+            <li><a href="#customCalculator">Calc. pérdida en acc</a></li>
+        </ul>
+    </div>
+ <div class="container">
+    <div class="calculator tablaDiam" id="tC">
+            <h2>Tabla de Cálculos</h2>
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Tramo:</th>
+                        <th>Long. Inicial (m)</th>
+                        <th>Consumo (m3)</th>
+                        <th>Diám. Inicial (mm)</th>
+                        <th>Long. Equiv (m)</th>
+                        <th>Long. Total (m)</th>
+                        <th>Diám. Final (mm)</th>
+                        <th>Diám. Adapt (mm)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se generarán dinámicamente aquí -->
+                </tbody>
+            </table>
+            <button onclick="agregarFila()">Agregar tramo</button>
+            <button onclick="descargarTabla()">Descargar tabla como imagen</button>
+            </div>
+    </div>
+    <div class="container">
+        <div class="calculator" id="cm3">
+            <h2>Calculadora de m3</h2>
+            <input type="number" id="length" placeholder="Longitud (m)">
+            <input type="number" id="width" placeholder="Ancho (m)">
+            <input type="number" id="height" placeholder="Altura (m)">
+            <button onclick="calculateVolume()">Calcular</button>
+            <p id="result"></p>
+        </div>
+        <div class="calculator" id="cc3">
+            <h2>Calculadora de consumo en m3</h2>
+            <div id="dataSets">
+                <div class="dataSet">
+                    <input type="number" class="data" placeholder="Ingrese calorías del artefacto">
+                    <button onclick="removeDataSet(this)" class="eliminar">Eliminar</button>
+                </div>
+            </div>
+            <button onclick="calculateDivisionAndSum()">Calcular</button>
+            <p id="divisionResult"></p>
+            <p id="sumResult"></p>
+            <button onclick="addDataSet()">Agregar otro artefacto</button>
+        </div>
+        <div class="calculator" id="ct">
+            <h2>Calculadora Térmica</h2>
+            <label for="option">¿El ambiente a calefaccionar es un dormitorio o un baño?</label>
+            <select id="option">
+                <option value="SI">Sí</option>
+                <option value="NO">No</option>
+            </select>
+            <input type="number" id="value" placeholder="Ingrese m3 del ambiente">
+            <button onclick="calculateCustom()">Calcular</button>
+            <p id="customResult"></p>
+        </div>
+        <div class="calculator" id="cr">
+            <h2>Calculadora de rejillas</h2>
+            <label for="gridSize">Seleccione el tamaño de la rejilla:</label>
+            <select id="gridSize" onchange="calculateSubtraction()">
+                <option value="15x15">15x15</option>
+                <option value="30x15">30x15</option>
+            </select>
+            <div id="subtractionCalculator">
+                <div class="dataSet">
+                    <input type="number" class="data" placeholder="Calorías a evacuar u oxigenar">
+                    <button onclick="removeDataSet(this)" class="eliminar">Eliminar</button>
+                </div>
+            </div>
+            <button onclick="calculateSubtraction()">Calcular</button>
+            <p id="subtractionCount"></p>
+            <button onclick="addSubtractionData()">Agregar otro artefacto</button>
+        </div>
+        <div class="calculator" id="customCalculator">
+            <h2>Calculadora de pérdida en acc</h2>
+            <label for="element">Seleccione accesorios:</label>
+            <input type="text" id="searchKeyword" oninput="filterOptions()" placeholder="Búsqueda">
+            <select id="element">
+                <option value="0.369">Unión Normal 20 mm</option>
+                <option value="0.242">Unión Normal 25 mm</option>
+                <option value="0.408">Unión Normal 32 mm</option>
+                <option value="0.237">Unión Normal 40 mm</option>
+                <option value="0.234">Unión Normal 50 mm</option>
+                <option value="0.162">Unión Normal 63 mm</option>
+                <option value="0.103">Unión Normal 75 mm</option>
+                <option value="0.206">Unión Normal 90 mm</option>
+                <option value="0.224">Unión Normal 110 mm</option>
+                <option value="0.519">Codo Normal a 45° 20 mm</option>
+                <option value="0.583">Codo Normal a 45° 25 mm</option>
+                <option value="0.668">Codo Normal a 45° 32 mm</option>
+                <option value="0.682">Codo Normal a 45° 40 mm</option>
+                <option value="0.315">Codo Normal a 45° 50mm</option>
+                <option value="0.633">Codo Normal a 45° 63 mm</option>
+                <option value="0.845">Codo Normal a 45° 75 mm</option>
+                <option value="0.719">Codo Normal a 45° 90 mm</option>
+                <option value="1.629">Codo Normal a 45° 110 mm</option>
+                <option value="0.953">Codo Normal a 90° 20 mm</option>
+                <option value="0.856">Codo Normal a 90° 25 mm</option>
+                <option value="1.191">Codo Normal a 90° 32 mm</option>
+                <option value="1.004">Codo Normal a 90° 40 mm</option>
+                <option value="1.422">Codo Normal a 90° 50 mm</option>
+                <option value="2.283">Codo Normal a 90° 63 mm</option>
+                <option value="2.334">Codo Normal a 90° 75 mm</option>
+                <option value="2.075">Codo Normal a 90° 90 mm</option>
+                <option value="2.115">Codo Normal a 90° 110 mm</option>
+                <option value="0.57609">Codo MH a 45° de 20 mm</option>
+                <option value="0.64713">Codo MH a 45° de 25 mm</option>
+                <option value="0.74148">Codo MH a 45° de 32 mm</option>
+                <option value="0.75702">Codo MH a 45° de 40 mm</option>
+                <option value="1.05783">Codo MH a 90° de 20 MM</option>
+                <option value="0.95016">Codo MH a 90° de 25 MM</option>
+                <option value="1.32201">Codo MH a 90° de 32 MM</option>
+                <option value="1.11444">Codo MH a 90° de 40 MM</option>
+                <option value="0.651">Codo 90° con rosca hembra 20 x 1/2</option>
+                <option value="0.398">Codo 90° con rosca hembra 25 x 1/2</option>
+                <option value="0.768">Codo 90° con rosca hembra 25 x 3/4</option>
+                <option value="0.543">Codo 90° con rosca hembra 32 x 3/4</option>
+                <option value="0.899">Codo 90° con rosca hembra 32 x 1</option>
+                <option value="0.854">Codo 90° con rosca hembra 40 x 1</option>
+                <option value="1.004">Codo 90° con rosca hembra 40 x 1 1/4</option>
+                <option value="1.004">Codo 90° con rosca hembra 50 x 1 1/4</option>
+                <option value="2.528">Codo 90° con rosca hembra 50 x 1 1/2</option>
+                <option value="3.092">Codo 90° con rosca hembra 63 x 1 1/2</option>
+                <option value="2.612">Codo 90° con rosca hembra 63 x 2</option>
+                <option value="2.334">Codo 90° con rosca hembra 75 x 2 1/2</option>
+                <option value="2.48">Codo 90° con rosca hembra 90 x 3</option>
+                <option value="3.509">Codo 90° con rosca hembra110 x 4</option>
+                <option value="0.700">Codo 90° C/base H.larga 20x1/2" St</option>
+                <option value="0.500">Codo 90° C/base H.larga 25x1/2" St</option>
+                <option value="0.700">Codo 90° C/base H.extra Larga 20x1/2" ST</option>
+                <option value="0.500">Codo 90° C/base H.extra Larga 25x1/2" ST</option>
+                <option value="0.329">Cupla Reducción HH 25 a 20 mm</option>
+                <option value="0.329">Cupla Reducción HH 32 a 20 mm</option>
+                <option value="0.525">Cupla Reducción HH 32 a 25 mm</option>
+                <option value="0.490">Cupla Reducción HH 40 a 25 mm</option>
+                <option value="0.506">Cupla Reducción HH 40 a 32 mm</option>
+                <option value="0.506">Cupla Reducción HH 50 a 32 mm</option>
+                <option value="0.517">Cupla Reducción HH 50 a 40 mm</option>
+                <option value="0.676">Cupla Reducción HH 63 a 40 mm</option>
+                <option value="0.817">Cupla Reducción HH 63 a 50 mm</option>
+                <option value="0.561">Cupla Reducción HH 75 a 50 mm</option>
+                <option value="0.324">Cupla Reducción HH 75 a 63 mm</option>
+                <option value="0.205">Cupla Reducción HH 90 a 63 mm</option>
+                <option value="0.283">Cupla Reducción HH 90 a 75 mm</option>
+                <option value="0.972">Cupla Reducción HH 110 a 75 mm</option>
+                <option value="0.972">Cupla Reducción HH 110 a 90 mm</option>
+                <option value="0.375">Buje Reducción 25-20</option>
+                <option value="0.576">Buje Reducción 32-25</option>
+                <option value="0.384">Buje Reducción 32-20</option>
+                <option value="0.445">Buje Reducción MH 40 a 25 mm</option>
+                <option value="0.718">Buje Reducción MH 40 a 32 mm</option>
+                <option value="0.538">Buje Reducción MH 50 a 32 mm</option>
+                <option value="0.571">Buje Reducción MH 50 a 40 mm</option>
+                <option value="0.676">Buje Reducción MH 63 a 40 mm</option>
+                <option value="0.817">Buje Reducción MH 63 a 50 mm</option>
+                <option value="0.704">Buje Reducción MH 75 a 50 mm</option>
+                <option value="0.687">Buje Reducción MH 75 a 63 mm</option>
+                <option value="0.908">Buje Reducción MH 90 a 63 mm</option>
+                <option value="0.958">Buje Reducción MH 90 a 75 mm</option>
+                <option value="1.092">Buje Reducción MH 110 a 75 mm</option>
+                <option value="0.972">Buje Reducción MH 110 a 90 mm</option>
+                <option value="0.404">Transición Hembra 20 x 1/2</option>
+                <option value="0.159">Transición Hembra 25 x 1/2</option>
+                <option value="0.397">Transición Hembra 25 x 3/4</option>
+                <option value="0.303">Transición Hembra 32 x 1</option>
+                <option value="0.471">Transición Hembra 40 x 1 1/4</option>
+                <option value="0.498">Transición Hembra 50 x 1 1/2</option>
+                <option value="0.232">Transición Hembra 63 x 2</option>
+                <option value="0.828">Transición Hembra 75 x 2 1/2</option>
+                <option value="1.980">Transición Hembra 90 x 3</option>
+                <option value="0.958">Transición Hembra110 x 4</option>
+                <option value="0.369">Transición Macho 20 x 1/2</option>
+                <option value="0.152">Transición Macho 25 x 1/2</option>
+                <option value="0.362">Transición Macho 25 x 3/4</option>
+                <option value="0.526">Transición Macho 32 x 1</option>
+                <option value="0.396">Transición Macho 40 x 1 1/4</option>
+                <option value="0.277">Transición Macho 50 x 1 1/2</option>
+                <option value="0.232">Transición Macho 63 x 2</option>
+                <option value="0.828">Transición Macho 75 x 2 1/2</option>
+                <option value="1.980">Transición Macho 90 x 3</option>
+                <option value="0.958">Transición Macho 110 x 4</option>
+                <option value="0.771">Te Normal 20 mm, flujo a 90°</option>
+                <option value="0.392">Te Normal 20 mm, flujo a través</option>
+                <option value="0.707">Te Normal 25 mm, flujo a 90°</option>
+                <option value="0.222">Te Normal 25 mm, flujo a través</option>
+                <option value="0.928">Te Normal 32 mm, flujo a 90°</option>
+                <option value="0.235">Te Normal 32 mm, flujo a través</option>
+                <option value="0.902">Te Normal 40 mm, flujo a 90°</option>
+                <option value="0.237">Te Normal 40 mm, flujo a través</option>
+                <option value="1.262">Te Normal 50 mm, flujo a 90°</option>
+                <option value="0.270">Te Normal 50 mm, flujo a través</option>
+                <option value="1.662">Te Normal 63 mm, flujo a 90°</option>
+                <option value="0.396">Te Normal 63 mm, flujo a través</option>
+                <option value="2.577">Te Normal 75 mm, flujo a 90°</option>
+                <option value="0.829">Te Normal 75mm, flujo a través</option>
+                <option value="2.004">Te Normal 90 mm, flujo a 90°</option>
+                <option value="0.985">Te Normal 90 mm, flujo a través</option>
+                <option value="4.269">Te Normal 110 mm, flujo a 90°</option>
+                <option value="2.153">Te Normal 110 mm, flujo a través</option>
+                <option value="0.755">Te Reduc. Central 25 x 20, flujo a 90°</option>
+                <option value="0.352">Te Reduc. Central 25 x 20, flujo a través</option>
+                <option value="0.845">Te Reduc. Central 32 x 20, flujo a 90°</option>
+                <option value="0.618">Te Reduc. Central 32 x 20, flujo a través</option>
+                <option value="0.819">Te Reduc. Central 32 x 25, flujo a 90°</option>
+                <option value="0.618">Te Reduc. Central 32 x 25, flujo a través</option>
+                <option value="0.837">Te Reduc. Central 40 x 25, flujo a 90°</option>
+                <option value="0.708">Te Reduc. Central 40 x 25, flujo a través</option>
+                <option value="0.990">Te Reduc. Central 40 x 32, flujo a 90°</option>
+                <option value="0.371">Te Reduc. Central 40 x 32, flujo a través</option>
+                <option value="0.774">Te Reduc. Central 50 x 32, flujo a 90°</option>
+                <option value="0.284">Te Reduc. Central 50 x 32, flujo a través</option>
+                <option value="1.004">Te Reduc. Central 50 x 40, flujo a 90°</option>
+                <option value="0.277">Te Reduc. Central 50 x 40, flujo a través</option>
+                <option value="0.902">Te Reduc. Central 63 x 40, flujo a 90°</option>
+                <option value="0.162">Te Reduc. Central 63 x 40, flujo a través</option>
+                <option value="1.921">Te Reduc. Central 63 x 50, flujo a 90°</option>
+                <option value="0.280">Te Reduc. Central 63 x 50, flujo a través</option>
+                <option value="1.108">Te Reduc. Central 75 x 50, flujo a 90°</option>
+                <option value="0.144">Te Reduc. Central 75 x 50, flujo a través</option>
+                <option value="1.067">Te Reduc. Central 75 x 63, flujo a 90°</option>
+                <option value="0.297">Te Reduc. Central 75 x 63, flujo a través</option>
+                <option value="2.414">Te Reduc. Central 90 x 63, flujo a 90°</option>
+                <option value="0.355">Te Reduc. Central 90 x 63, flujo a través</option>
+                <option value="2.632">Te Reduc. Central 90 x 75, flujo a 90°</option>
+                <option value="0.347">Te Reduc. Central 90 x 75, flujo a través</option>
+                <option value="1.592">Te Reduc. Central 110 x 75, flujo a 90°</option>
+                <option value="0.631">Te Reduc. Central 110 x 75, flujo a través</option>
+                <option value="2.094">Te Reduc. Central 110 x 90, flujo a 90°</option>
+                <option value="0.9">Te Reduc. Central 110 x 90, flujo a través</option>
+                <option value="0.400">Te Reduc. 20 Extr. 25 Te 25 X 20 X 20</option>
+                <option value="0.704">Te Reduc. 20 Extr. 32 Te 32 X 20 X 20</option>
+                <option value="0.400">Te Reduc. 25 Extr. 20 Te 25 X 25 X 20</option>
+                <option value="0.704">Te Reduc. 32 Extr. 20 Te 32 X 32 X 20</option>
+                <option value="0.678">Llave Esférica 20 mm</option>
+                <option value="0.227">Llave Esférica 25 mm</option>
+                <option value="0.327">Llave Esférica 32 mm</option>
+                <option value="1.159">Llave Esférica 40 mm</option>
+                <option value="0.89">Llave Esférica 50 x 1 1/2</option>
+                <option value="0.78">Llave Esférica 63 x 2</option>
+                <option value="0.369">Cupla Electrofusión 20 mm</option>
+                <option value="0.242">Cupla Electrofusión 25 mm</option>
+                <option value="0.408">Cupla Electrofusión 32 mm</option>
+                <option value="0.237">Cupla Electrofusión 40 mm</option>
+                <option value="0.234">Cupla Electrofusión 50 mm</option>
+                <option value="0.162">Cupla Electrofusión 63 mm</option>
+                <option value="0.14">Cupla Electrofusión 75 mm</option>
+                <option value="0.15">Cupla Electrofusión 90 mm</option>
+                <option value="0.19">Cupla Electrofusión 110 mm</option>
+                <option value="0.476">Curva de Sobrepasaje 20 mm</option>
+                <option value="0.324">Curva de Sobrepasaje 25 mm</option>
+                <option value="0.383">Curva de Sobrepasaje 32 mm</option>
+                <option value="0.39114">Niple corto con tope 20 mm</option>
+                <option value="0.25652">Niple corto con tope 25 mm</option>
+                <option value="0.43248">Niple corto con tope 32 mm</option>
+                <option value="0.25122">Niple corto con tope 40 mm</option>
+                <option value="0.24804">Niple corto con tope 50 mm</option>
+                <option value="0.17172">Niple corto con tope 63 mm</option>
+                <option value="0.10918">Niple corto con tope 75 mm</option>
+                <option value="0.21836">Niple corto con tope 90 mm</option>
+                <option value="0.23744">Niple corto con tope 110 mm</option>
+                <option value="0.69869">Reductor Anular 32-20</option>
+                <option value="0.63547">Reductor Anular 40-20</option>
+                <option value="0.48505">Reductor Anular 40-25</option>
+                <option value="0.61258">Reductor Anular 50-25</option>
+                <option value="0.58642">Reductor Anular 50-32</option>
+                <option value="0.77935">Reductor Anular 63-32</option>
+                <option value="0.77172">Reductor Anular 63-40</option>
+                <option value="0.78698">Reductor Anular 75-32</option>
+                <option value="0.990">Reductor Anular 90-63</option>
+                <option value="1.080">Reductor Anular 90-75</option>
+                <option value="0.750">Reductor Anular 75-32</option>
+                <option value="0.750">Reductor Anular 75-40</option>
+                <option value="0.750">Reductor Anular 75-50</option>
+                <option value="0.315">Montura Derivacion 63-25</option>
+                <option value="0.300">Montura Derivacion 75-25</option>
+                <option value="0.300">Montura Derivacion 75-32</option>
+                <option value="0.540">Montura Derivacion 90-25</option>
+                <option value="0.540">Montura Derivacion 90-32</option>
+                <option value="0.880">Montura Derivacion 110-25</option>
+                <option value="0.880">Montura Derivacion 110-32</option>
+            </select>
+            <label for="quantity">Cantidad:</label>
+            <input type="number" id="quantity" placeholder="Ingrese un valor">
+            <button onclick="addElement()">Agregar acc</button>
+            <button onclick="calculateTotal()">Calcular</button>
+            <ul id="elementList"></ul> <!-- Lista para mostrar elementos agregados -->
+            <p id="elementResult2"></p>
+        </div>
+    </div>
+</body>
+</html>
+

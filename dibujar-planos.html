@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style1.css">
     <title>Herramienta para dibujo de planos</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
     <script src="https://unpkg.com/react/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@excalidraw/excalidraw/dist/excalidraw.development.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 <body>
      <div class="overlay" onclick="toggleMenu()"></div>
@@ -22,30 +21,70 @@
      <!-- Excalidraw Integration -->
     <div id="app" style="height: 500px; width: 100%;"></div>
     
-    <script>
-            const { Excalidraw } = ExcalidrawLib;
+<script>
+    const { Excalidraw } = ExcalidrawLib;
 
     const App = () => {
+        const [initialData, setInitialData] = React.useState(null);
+
+        // Cargar el estado guardado al iniciar
+        React.useEffect(() => {
+    const savedData = localStorage.getItem('excalidraw');
+    if (savedData) {
+        try {
+            const parsedData = JSON.parse(savedData);
+            // Verifica que `elements` y `appState` estén correctamente formateados
+            if (Array.isArray(parsedData.elements) && typeof parsedData.appState === 'object') {
+                // Si `collaborators` no es un array, lo convertimos a uno
+                if (!Array.isArray(parsedData.appState.collaborators)) {
+                    parsedData.appState.collaborators = Object.values(parsedData.appState.collaborators || {});
+                }
+                setInitialData(parsedData);
+            }
+        } catch (error) {
+            console.error("Error al parsear los datos guardados:", error);
+        }
+    }
+}, []);
+
+        const handleChange = (elements, appState) => {
+    // Verificar y convertir `collaborators` a un array si no lo es
+    if (!Array.isArray(appState.collaborators)) {
+        appState.collaborators = Object.values(appState.collaborators || {});
+    }
+
+    const dataToSave = {
+        elements: elements,
+        appState: appState,
+    };
+
+    localStorage.setItem('excalidraw', JSON.stringify(dataToSave));
+};
+
+
         return React.createElement(
             'div',
-            { style: { height: '100%', width: '100%'} },
-            React.createElement(Excalidraw)
+            { style: { height: '100%', width: '100%' } },
+            React.createElement(Excalidraw, {
+                initialData: initialData,
+                onChange: handleChange,
+            })
         );
     };
 
     const rootElement = document.getElementById('app');
     const root = ReactDOM.createRoot(rootElement);
     root.render(React.createElement(App));
-    
-         window.onload = () => {
-            const excalidrawContainer = document.querySelector('#app');
-            if (excalidrawContainer) {
-                excalidrawContainer.style.width = '90%';
-                excalidrawContainer.style.height = '600px';
-                excalidrawContainer.style.position = "relative";
-            }
-        };
-    </script>
+
+    window.onload = () => {
+        const excalidrawContainer = document.querySelector('#app');
+        if (excalidrawContainer) {
+            excalidrawContainer.style.width = '90%';
+            excalidrawContainer.style.height = '600px';
+            excalidrawContainer.style.position = "relative";
+        }
+    };
+</script>
     <!-- Primera tabla (4 columnas) -->
     <div class="container">
         <div class="calculator tablaDiam" id="tC1">
@@ -64,7 +103,9 @@
                 </tbody>
             </table>
             <button onclick="agregarFila('dataTable1')">Agregar material</button>
+            <button onclick="descargarTabla('dataTable1', 'lista_materiales')">Exportar como PNG</button>
         </div>
+        
     </div>
 
     <!-- Segunda tabla (5 columnas) -->
@@ -86,6 +127,7 @@
                 </tbody>
             </table>
             <button onclick="agregarFila('dataTable2')">Agregar artefacto</button>
+            <button onclick="descargarTabla('dataTable2', 'artefactos')">Exportar como PNG</button>
         </div>
     </div>
 
@@ -107,9 +149,45 @@
                 </tbody>
             </table>
             <button onclick="agregarFila('dataTable3')">Agregar material</button>
+            <button onclick="descargarTabla('dataTable3', 'materiales_gabinete')">Exportar como PNG</button>
         </div>
     </div>
 
-    <script src="scripts.js"></script>
+
+<table class="gas-table" id="gas-table">
+    <tr>
+        <th colspan="4">INSTALACIÓN PARA GAS NATURAL</th>
+    </tr>
+    <tr>
+        <td>CALLE: <input type="text" id="calle" class="auto-save"></td>
+        <td>N°: <input type="text" id="numero" class="auto-save"></td>
+        <td>PISO: <input type="text" id="piso" class="auto-save"></td>
+        <td>DTO: <input type="text" id="dto" class="auto-save"></td>
+    </tr>
+    <tr>
+        <td colspan="4">ENTRE: <input type="text" id="entre" class="auto-save"></td>
+    </tr>
+    <tr>
+        <td>LOCALIDAD: <input type="text" id="localidad" class="auto-save"></td>
+        <td colspan="3">PARTIDO: <input type="text" id="partido" class="auto-save"></td>
+    </tr>
+    <tr>
+        <td>INSTALADOR: <input type="text" id="matricula" class="auto-save"></td>
+        <td>MATRÍCULA: <input type="text" id="matricula" class="auto-save"></td>
+        <td colspan="3">CATEGORIA: <input type="text" id="categoria" class="auto-save"></td>
+    </tr>
+    <tr>
+        <td class="center" style="vertical-align: bottom; text-align: center;" colspan="2">Firma del instalador</td>
+        <td class="center" style="vertical-align: bottom; text-align: center;" colspan="2">Firma del propietario</td>
+    </tr>
+    <tr>
+        <td class="center" style="vertical-align: bottom; text-align: center;" colspan="2">Firmas del director de obra</td>
+        <td class="center" style="vertical-align: bottom; text-align: center;" colspan="2">Firma de la empresa contratista</td>
+    </tr>
+</table>
+
+<button class="eliminarDatos">Resetear Tabla</button>
+<button onclick="descargarTablaGas('gas-table', 'instalacion_gas')">Exportar como PNG</button>
+<script src="scripts.js"></script>
 </body>
 </html>

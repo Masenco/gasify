@@ -1,3 +1,4 @@
+
 // Función para alternar el menú
 function toggleMenu() {
     var menu = document.querySelector('.menu');
@@ -214,3 +215,156 @@ function generatePDF() {
     });
 }
 
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Recuperar datos guardados en localStorage
+    document.querySelectorAll('.auto-save').forEach(input => {
+        const savedValue = localStorage.getItem(input.id);
+        if (savedValue) {
+            input.value = savedValue;
+        }
+
+        // Guardar cambios automáticamente en localStorage
+        input.addEventListener('input', () => {
+            localStorage.setItem(input.id, input.value);
+        });
+    });
+
+    // Botón para resetear la tabla
+    document.querySelector('.eliminarDatos').addEventListener('click', function() {
+        document.querySelectorAll('.auto-save').forEach(input => {
+            input.value = ''; // Vaciar los campos
+            localStorage.removeItem(input.id); // Eliminar del localStorage
+        });
+    });
+});
+
+
+function descargarTabla(tableId, fileName) {
+    const table = document.getElementById(tableId);
+
+    // Crear una hoja de estilo temporal para aplicar estilos solo durante la captura
+    const style = document.createElement('style');
+    style.id = 'temporaryStyles';
+    style.innerHTML = `
+    #${tableId} td, #${tableId} th {
+        border: 1px solid #000;
+        color: black !important;
+    }
+    #${tableId} thead {
+        background: transparent !important;
+        color: black !important;
+    }
+    #${tableId} input {
+        background: transparent !important;
+        color: black !important;
+        border: none;
+        text-align: center;
+    }
+        #${tableId} tbody td:last-child {
+        display: none;
+    }
+    `;
+    document.head.appendChild(style);
+
+    // Convertir tabla a imagen
+    html2canvas(table, {
+        useCORS: true,
+        backgroundColor: null // Hacer el fondo transparente
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = `${fileName}.png`;
+        link.click();
+
+        // Eliminar estilos temporales
+        document.head.removeChild(style);
+    }).catch(error => {
+        console.error('Error al capturar la tabla:', error);
+        // Eliminar estilos temporales en caso de error
+        document.head.removeChild(style);
+    });
+}
+
+function descargarTablaGas(tableId, fileName) {
+    const table = document.getElementById(tableId);
+
+    // Crear una hoja de estilo temporal para aplicar estilos solo durante la captura
+    const style = document.createElement('style');
+    style.id = 'temporaryStyles';
+    style.innerHTML = `
+     #${tableId} {
+        border: 2px solid #000;
+        color: black !important;
+    }
+    #${tableId} td, #${tableId} th {
+        border: none;
+        color: black !important;
+    }
+    #${tableId} th {
+        background: transparent !important;
+        color: black !important;
+        border: 2px solid #000;
+    }
+    #${tableId} input {
+        background: transparent !important;
+        color: black !important;
+        border: none;
+    }
+    #${tableId} tr:nth-child(-n+5) td:nth-child(1) {
+    border-left: 3px solid #000;
+
+  }
+
+   #${tableId} tr:nth-child(-n+5) td:last-child {
+    border-right: 3px solid #000;
+  }
+
+  #${tableId} tr:nth-child(5) td {
+    border-bottom: 3px solid #000;
+  }
+  
+  #${tableId} tr:first-child th {
+    border: 3px solid #000;
+   
+  }
+
+  #${tableId} tr:nth-child(-n+7) td:nth-child(1) {
+    border-left: 3px solid #000;
+  }
+
+   #${tableId} tr:nth-child(-n+7) td:last-child {
+    border-right: 3px solid #000;
+  }
+
+  #${tableId} tr:nth-child(7) td {
+    border-bottom: 3px solid #000;
+  }
+  
+  #${tableId} tr:first-child th {
+    border-top: 3px solid #000;
+    border-left: 3px solid #000;
+    border-right: 3px solid #000;
+  }
+    `;
+    document.head.appendChild(style);
+
+    // Convertir tabla a imagen
+    html2canvas(table, {
+        useCORS: true,
+        backgroundColor: null // Hacer el fondo transparente
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = `${fileName}.png`;
+        link.click();
+
+        // Eliminar estilos temporales
+        document.head.removeChild(style);
+    }).catch(error => {
+        console.error('Error al capturar la tabla:', error);
+        // Eliminar estilos temporales en caso de error
+        document.head.removeChild(style);
+    });
+}
