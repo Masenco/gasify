@@ -26,6 +26,30 @@ function toggleMenu() {
         });
     }
 }
+function toggleCalculator(id) {
+  // Obtener la calculadora por su ID
+  const calculator = document.getElementById(id);
+
+  // Si es la calculadora 'customCalculator', también manejar 'storedLists'
+  if (id === "customCalculator") {
+    const storedLists = document.getElementById("storedLists");
+
+    if (storedLists) {
+      // Alternar visibilidad del div de listas
+      storedLists.classList.toggle("active");
+    }
+  }
+
+  if (calculator) {
+    // Alternar la clase "active" para mostrar u ocultar la calculadora
+    calculator.classList.toggle("active");
+  }
+}
+
+// Opcional: Mostrar una calculadora y su sección relacionada por defecto al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+  toggleCalculator("tC"); // Quita esta línea si no quieres mostrar nada al inicio
+});
 function descargarTabla() {
     const table = document.getElementById('dataTable');
 
@@ -34,32 +58,49 @@ function descargarTabla() {
     style.id = 'temporaryStyles';
     style.innerHTML = `
     table td, th {
-                  border: 2px solid #000;
-                  color: black !important; /* Texto negro */
-                  }
+        border: 2px solid #000 !important;
+        color: black !important;
+        font-size: 16px !important;
+        padding: 2px !important;
+    }
+
+    input[type="text"], input[type="number"] {
+    font-size: 19px !important;
+    padding: 1px !important;
+}
+    result, .result-2, .sum {
+    font-size: 19px !important;
+}
+
     .tablaDiam thead {
-                   background: transparent !important; /* Fondo transparente */
-                   color: black !important; /* Texto negro */
-                  }
+        background: transparent !important;
+        color: black !important;
+    }
     .tablaDiam tr:nth-of-type(2n) {
-                   background: transparent !important;
-                  } 
-    .tablaDiam input {
-                  background: transparent !important; /* Fondo transparente para inputs */
-                  color: black !important; /* Texto negro en inputs */
-                  border: none;
-                  }
-    #dataTable select {
-                  background: transparent !important; /* Fondo transparente para inputs */
-                  color: black !important; /* Texto negro en inputs */
-                  border: none;
-                  text-align: center;
-    }              
+        background: transparent !important;
+    }
+    .tablaDiam input, #dataTable select {
+        background: transparent !important;
+        color: black !important;
+        border: none !important;
+        text-align: center !important;
+    }
     .result, .result-2, .sum {
-                  color: black !important;
-                  }              
+        color: black !important;
+    }
+    .tablaDiam tbody td:first-child input {
+        text-transform: uppercase;
+    }
     `;
     document.head.appendChild(style);
+
+    // Guardar valores originales y transformar inputs de la primera columna a mayúsculas
+    const inputs = table.querySelectorAll('tbody td:first-child input');
+    const originalValues = [];
+    inputs.forEach(input => {
+        originalValues.push(input.value);
+        input.value = input.value.toUpperCase();
+    });
 
     // Eliminar la última columna de la tabla
     const headers = table.querySelectorAll('th');
@@ -80,15 +121,27 @@ function descargarTabla() {
         link.download = 'tabla.png';
         link.click();
 
-        // Restaurar la tabla original y eliminar estilos temporales
+        // Restaurar los valores originales de los inputs
+        inputs.forEach((input, index) => {
+            input.value = originalValues[index];
+        });
+
+        // Eliminar estilos temporales y recargar la página
         document.head.removeChild(style);
         location.reload(); // Recargar la página para restaurar la tabla original
     }).catch(error => {
         console.error('Error al capturar la tabla:', error);
-        // Restaurar la tabla original en caso de error
+
+        // Restaurar los valores originales de los inputs en caso de error
+        inputs.forEach((input, index) => {
+            input.value = originalValues[index];
+        });
+
+        // Eliminar estilos temporales
         document.head.removeChild(style);
     });
 }
+
 
 
 
@@ -222,6 +275,406 @@ function calculateCustom() {
     }
 }
 
+function saveStoredLists() {
+    var storedLists = document.getElementById("storedLists");
+    var listsData = [];
+
+    storedLists.querySelectorAll('.stored-list').forEach(function(listContainer) {
+        var listData = {
+            name: listContainer.querySelector('h3').textContent,
+            items: []
+        };
+
+        listContainer.querySelectorAll('li').forEach(function(item) {
+            var nameSpan = item.querySelector('span:first-child');
+            var quantityInput = item.querySelector('input[type="number"]');
+            var valueSpan = item.querySelector('span:nth-child(3)');
+            var totalSpan = item.querySelector('span:last-of-type');
+
+            var totalValue = parseFloat(totalSpan.textContent.replace(" metros", ""));
+
+            listData.items.push({
+                name: nameSpan.textContent.trim().slice(0, -2),
+                quantity: parseInt(quantityInput.value),
+                unitValue: parseFloat(valueSpan.textContent.match(/x ([\d.]+)/)[1]),
+                total: totalValue
+            });
+        });
+
+        listsData.push(listData);
+    });
+
+    localStorage.setItem('storedLists', JSON.stringify(listsData));
+}
+
+function loadStoredLists() {
+    var storedListsData = localStorage.getItem('storedLists');
+    if (storedListsData) {
+        var listsData = JSON.parse(storedListsData);
+        var storedLists = document.getElementById("storedLists");
+
+        // Elimina solo las listas sin afectar el <h2>
+        var listsToRemove = storedLists.querySelectorAll('.stored-list');
+        listsToRemove.forEach(function(list) {
+            storedLists.removeChild(list);
+        });
+
+        listsData.forEach(function(listData) {
+            var newListContainer = document.createElement("div");
+            newListContainer.classList.add("stored-list");
+            var uniqueId = `list-${Date.now()}`; // Generar un ID único para cada lista
+            newListContainer.id = uniqueId;
+
+            var nameHeader = document.createElement("h3");
+            nameHeader.textContent = listData.name;
+            newListContainer.appendChild(nameHeader);
+
+            var totalParagraph = document.createElement("p");
+            var newList = document.createElement("ul");
+
+            listData.items.forEach(function(item) {
+                var listItem = document.createElement("li");
+
+                var nameSpan = document.createElement("span");
+                nameSpan.textContent = item.name + " - ";
+
+                var quantityInput = document.createElement("input");
+                quantityInput.type = "number";
+                quantityInput.value = item.quantity;
+                quantityInput.style.width = "50px";
+
+                var valueSpan = document.createElement("span");
+                valueSpan.textContent = " x " + item.unitValue.toFixed(3) + " = ";
+
+                var totalSpan = document.createElement("span");
+                totalSpan.textContent = item.total.toFixed(3) + " metros";
+
+                quantityInput.addEventListener("input", function () {
+                    var newQuantity = parseInt(this.value);
+                    if (!isNaN(newQuantity) && newQuantity > 0) {
+                        var newTotal = (item.unitValue * newQuantity).toFixed(3);
+                        totalSpan.textContent = newTotal + " metros";
+                        updateTotal(newListContainer, totalParagraph);
+                        saveStoredLists();
+                    }
+                });
+
+                var deleteItemButton = document.createElement("button");
+                deleteItemButton.textContent = "X";
+                deleteItemButton.classList.add("delete-item");
+                deleteItemButton.addEventListener("click", function() {
+                    newList.removeChild(listItem);
+                    updateTotal(newListContainer, totalParagraph);
+                    saveStoredLists();
+                });
+
+                listItem.appendChild(nameSpan);
+                listItem.appendChild(quantityInput);
+                listItem.appendChild(valueSpan);
+                listItem.appendChild(totalSpan);
+                listItem.appendChild(deleteItemButton);
+
+                newList.appendChild(listItem);
+            });
+
+            newListContainer.appendChild(newList);
+            newListContainer.appendChild(totalParagraph);
+            updateTotal(newListContainer, totalParagraph);
+
+            var deleteButton = document.createElement("button");
+            deleteButton.textContent = "Eliminar tramo";
+            deleteButton.classList.add("delete-list");
+            deleteButton.addEventListener("click", function () {
+                if (confirm("¿Estás seguro de que deseas eliminar éste tramo?")) {
+                    storedLists.removeChild(newListContainer);
+                    saveStoredLists();
+                }
+            });
+            newListContainer.appendChild(deleteButton);
+
+            // Botón de descarga
+            var downloadButton = document.createElement("button");
+            downloadButton.textContent = "Descargar tramo";
+            downloadButton.classList.add("download-list");
+            downloadButton.addEventListener("click", function () {
+                descargarListaComoImagen(uniqueId, listData.name);
+            });
+            newListContainer.appendChild(downloadButton);
+
+            storedLists.appendChild(newListContainer);
+        });
+    }
+}
+
+
+// Función para crear una lista almacenada
+function createStoredList(listName, items) {
+    var newListContainer = document.createElement("div");
+    newListContainer.classList.add("stored-list");
+
+    var nameHeader = document.createElement("h3");
+    nameHeader.textContent = listName;
+    newListContainer.appendChild(nameHeader);
+
+    var totalParagraph = document.createElement("p");
+
+    var newList = document.createElement("ul");
+
+    items.forEach(function(item) {
+        var listItem = createListItem(item.name, item.quantity, item.unitValue, item.total);
+        newList.appendChild(listItem);
+    });
+    newListContainer.appendChild(newList);
+    newListContainer.appendChild(totalParagraph);
+    updateTotal(newListContainer, totalParagraph);
+    // Botón de eliminar
+    var deleteButton = document.createElement("button");
+    deleteButton.textContent = "Eliminar tramo";
+    deleteButton.classList.add("delete-list");
+    deleteButton.addEventListener("click", function () {
+        document.getElementById("storedLists").removeChild(newListContainer);
+        saveStoredLists();
+    });
+    newListContainer.appendChild(deleteButton);
+    return newListContainer;
+}
+
+// Función para crear un elemento de lista
+function createStoredList(listName, items) {
+    var newListContainer = document.createElement("div");
+    newListContainer.classList.add("stored-list");
+    var uniqueId = `list-${Date.now()}`; // Genera un ID único para cada lista
+    newListContainer.id = uniqueId;
+
+    var nameHeader = document.createElement("h3");
+    nameHeader.textContent = listName;
+    newListContainer.appendChild(nameHeader);
+
+    var totalParagraph = document.createElement("p");
+
+    var newList = document.createElement("ul");
+
+    items.forEach(function(item) {
+        var listItem = createListItem(item.name, item.quantity, item.unitValue, item.total);
+        newList.appendChild(listItem);
+    });
+
+    newListContainer.appendChild(newList);
+    newListContainer.appendChild(totalParagraph);
+    updateTotal(newListContainer, totalParagraph);
+
+    var deleteButton = document.createElement("button");
+    deleteButton.textContent = "Eliminar tramo";
+    deleteButton.classList.add("delete-list");
+    deleteButton.addEventListener("click", function () {
+        document.getElementById("storedLists").removeChild(newListContainer);
+        saveStoredLists();
+    });
+    newListContainer.appendChild(deleteButton);
+
+    var downloadButton = document.createElement("button");
+    downloadButton.textContent = "Descargar tramo";
+    downloadButton.classList.add("download-list");
+    downloadButton.addEventListener("click", function () {
+        descargarListaComoImagen(uniqueId, listName);
+    });
+    newListContainer.appendChild(downloadButton);
+
+    return newListContainer;
+}
+
+function moveList() {
+    var elementList = document.getElementById("elementList");
+
+    if (selectedElements.length === 0) {
+        alert("El tramo está vacía. Agrega accesorios antes de moverlo.");
+        return;
+    }
+
+    var listName = prompt("Nombre del tramo:");
+    if (!listName) {
+        alert("El nombre del tramo vacío.");
+        return;
+    }
+
+    var storedLists = document.getElementById("storedLists");
+    var newListContainer = document.createElement("div");
+    newListContainer.classList.add("stored-list");
+    var uniqueId = `list-${Date.now()}`; // Genera un ID único para cada lista
+    newListContainer.id = uniqueId;
+
+    var nameHeader = document.createElement("h3");
+    nameHeader.textContent = listName;
+    newListContainer.appendChild(nameHeader);
+
+    var totalParagraph = document.createElement("p");
+
+    var newList = document.createElement("ul");
+
+    for (var i = 0; i < selectedElements.length; i++) {
+        var listItem = document.createElement("li");
+
+        var nameSpan = document.createElement("span");
+        nameSpan.textContent = selectedElements[i] + " - ";
+
+        var quantityInput = document.createElement("input");
+        quantityInput.type = "number";
+        quantityInput.value = selectedQuantities[i];
+        quantityInput.style.width = "50px";
+
+        var unitValue = selectedValues[i] / selectedQuantities[i];
+
+        var valueSpan = document.createElement("span");
+        valueSpan.textContent = " x " + unitValue.toFixed(3) + " = ";
+
+        var totalSpan = document.createElement("span");
+        totalSpan.textContent = (unitValue * selectedQuantities[i]).toFixed(3) + " metros";
+
+        quantityInput.addEventListener("input", function () {
+            var newQuantity = parseInt(this.value);
+            if (!isNaN(newQuantity) && newQuantity > 0) {
+                var itemValueSpan = this.nextElementSibling;
+                var unitValueText = itemValueSpan.textContent.match(/ x ([\d.]+) =/);
+                if (unitValueText) {
+                    var currentUnitValue = parseFloat(unitValueText[1]);
+                    var totalSpan = itemValueSpan.nextElementSibling;
+                    totalSpan.textContent = (currentUnitValue * newQuantity).toFixed(3) + " metros";
+                    updateTotal(newListContainer, totalParagraph);
+                    saveStoredLists();
+                }
+            }
+        });
+
+        // Agregar botón de eliminación para cada elemento
+        var deleteItemButton = document.createElement("button");
+        deleteItemButton.textContent = "X";
+        deleteItemButton.classList.add("delete-item");
+        deleteItemButton.addEventListener("click", function() {
+            newList.removeChild(this.closest('li'));
+            updateTotal(newListContainer, totalParagraph);
+            saveStoredLists();
+        });
+
+        listItem.appendChild(nameSpan);
+        listItem.appendChild(quantityInput);
+        listItem.appendChild(valueSpan);
+        listItem.appendChild(totalSpan);
+        listItem.appendChild(deleteItemButton);
+        newList.appendChild(listItem);
+    }
+
+    newListContainer.appendChild(newList);
+    newListContainer.appendChild(totalParagraph);
+    updateTotal(newListContainer, totalParagraph);
+
+    var deleteButton = document.createElement("button");
+    deleteButton.textContent = "Eliminar tramo";
+    deleteButton.classList.add("delete-list");
+    deleteButton.addEventListener("click", function () {
+        storedLists.removeChild(newListContainer);
+        saveStoredLists();
+    });
+    newListContainer.appendChild(deleteButton);
+
+    // Botón de descarga
+    var downloadButton = document.createElement("button");
+    downloadButton.textContent = "Descargar tramo";
+    downloadButton.classList.add("download-list");
+    downloadButton.addEventListener("click", function () {
+        console.log("ID de contenedor de lista al hacer clic en descargar:", newListContainer.id);
+        descargarListaComoImagen(uniqueId, listName);
+    });
+    newListContainer.appendChild(downloadButton);
+
+    storedLists.appendChild(newListContainer);
+    saveStoredLists();
+    calculateTotal();
+}
+
+function descargarListaComoImagen(listContainerId, fileName) {
+    const listContainer = document.getElementById(listContainerId);
+
+    if (!listContainer) {
+        console.error("Elemento con ID no encontrado:", listContainerId);
+        return;
+    }
+
+    // Crear una hoja de estilo temporal para aplicar estilos solo durante la captura
+    const style = document.createElement('style');
+    style.id = 'temporaryStyles';
+    style.innerHTML = `
+    #${listContainerId} {
+        background: white !important;
+        color: black !important;
+        border: 1px solid #000 !important;
+    }
+    #${listContainerId} ul li {
+        color: #000 !important;
+    }
+    #${listContainerId} h3 {
+        color: black !important;
+    }
+    #${listContainerId} input[type="number"] {
+    background: transparent !important;
+        color: black !important;
+        border: none !important;
+        height: auto !important
+        widht: auto !important;
+        padding: 0 !important;
+        font-size: 19px !important;
+        margin: 10px -20px 0 -20px !important;
+        text-align: center !important;
+        vertical-align: center !important;
+    }
+    #${listContainerId} button {
+        display: none; /* Ocultar botones durante la captura */
+    }
+    `;
+    document.head.appendChild(style);
+
+    // Convertir lista a imagen
+    html2canvas(listContainer, {
+        useCORS: true,
+        backgroundColor: null // Hacer el fondo transparente
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = `Tramo ${fileName}.png`;
+        link.click();
+
+        // Eliminar estilos temporales
+        document.head.removeChild(style);
+    }).catch(error => {
+        console.error('Error al capturar la lista:', error);
+        // Eliminar estilos temporales en caso de error
+        document.head.removeChild(style);
+    });
+}
+
+
+
+
+// Función para actualizar el total de cada lista
+function updateTotal(container, totalParagraph) {
+    var total = 0;
+    var listItems = container.querySelectorAll("li");
+    listItems.forEach(function (item) {
+        var quantityInput = item.querySelector("input[type='number']");
+        var quantity = parseInt(quantityInput.value);
+        var unitValueSpan = item.querySelectorAll("span")[1];
+        if (unitValueSpan) {
+            var unitValueText = unitValueSpan.textContent.match(/ x ([\d.]+) =/);
+            if (unitValueText) {
+                var unitValue = parseFloat(unitValueText[1]);
+                if (!isNaN(quantity) && !isNaN(unitValue)) {
+                    total += unitValue * quantity;
+                }
+            }
+        }
+    });
+    totalParagraph.textContent = "Total: " + total.toFixed(3) + " metros";
+}
+
 // Arrays para almacenar elementos seleccionados, sus cantidades y valores
 var selectedElements = JSON.parse(localStorage.getItem('selectedElements')) || [];
 var selectedQuantities = JSON.parse(localStorage.getItem('selectedQuantities')) || [];
@@ -233,6 +686,11 @@ function saveToLocalStorage() {
     localStorage.setItem('selectedQuantities', JSON.stringify(selectedQuantities));
     localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
 }
+
+// Variables globales
+var selectedElements = [];
+var selectedQuantities = [];
+var selectedValues = [];
 
 // Función para agregar un elemento a la lista
 function addElement() {
@@ -246,9 +704,10 @@ function addElement() {
         selectedElements.push(elementSelect.options[elementSelect.selectedIndex].text);
         selectedQuantities.push(quantity);
         selectedValues.push(selectedValue * quantity);
-        quantityInput.value = ""; // Limpiar el campo de cantidad
-        saveToLocalStorage(); // Guardar en localStorage
-        updateElementList(); // Actualizar la lista de elementos agregados
+        quantityInput.value = "";
+        saveToLocalStorage();
+        updateElementList();
+        calculateTotal(); // Actualizar el total después de agregar el elemento
     } else {
         alert("Por favor, seleccione un elemento y especifique una cantidad válida.");
     }
@@ -257,34 +716,56 @@ function addElement() {
 // Función para actualizar la lista de elementos
 function updateElementList() {
     var elementList = document.getElementById("elementList");
-    elementList.innerHTML = ""; // Limpiar la lista
+    elementList.innerHTML = "";
 
-    // Agregar elementos a la lista
+    var elementSelect = document.getElementById("element");
+
     for (var i = 0; i < selectedElements.length; i++) {
         var listItem = document.createElement("li");
-        listItem.textContent = selectedElements[i] + " - Cant: " + selectedQuantities[i];
+        listItem.textContent = selectedElements[i] + " - Cant: ";
 
-        // Crear botón de eliminación
+        var quantityInput = document.createElement("input");
+        quantityInput.type = "number";
+        quantityInput.value = selectedQuantities[i];
+        quantityInput.min = "1";
+        quantityInput.dataset.index = i;
+
+        quantityInput.addEventListener("input", function () {
+            var index = parseInt(this.dataset.index);
+            var newQuantity = parseInt(this.value);
+
+            if (!isNaN(newQuantity) && newQuantity > 0) {
+                selectedQuantities[index] = newQuantity;
+
+                // Obtener el valor del elemento seleccionado
+                var elementOption = Array.from(elementSelect.options).find(option => option.text === selectedElements[index]);
+                var value = elementOption ? parseFloat(elementOption.value) : 0;
+                selectedValues[index] = newQuantity * value;
+
+                saveToLocalStorage();
+                calculateTotal();
+            } else {
+                alert("Por favor, ingrese una cantidad válida.");
+            }
+        });
+
         var deleteButton = document.createElement("button");
         deleteButton.textContent = "X";
-        deleteButton.classList.add("eliminar"); // Agregar la clase "eliminar"
-        deleteButton.dataset.index = i; // Almacenar el índice del elemento a eliminar
-        deleteButton.onclick = function () {
-            // Obtener el índice del elemento a eliminar desde el atributo dataset
+        deleteButton.classList.add("eliminar");
+        deleteButton.dataset.index = i;
+        deleteButton.addEventListener("click", function () {
             var index = parseInt(this.dataset.index);
-            // Eliminar el elemento y su cantidad de las matrices
             selectedElements.splice(index, 1);
             selectedQuantities.splice(index, 1);
             selectedValues.splice(index, 1);
-            saveToLocalStorage(); // Guardar los cambios en localStorage
-            // Actualizar la lista de elementos mostrada
+            saveToLocalStorage();
             updateElementList();
-        };
+            calculateTotal();
+        });
 
-        // Agregar botón de eliminación al elemento de la lista
+        listItem.appendChild(quantityInput);
         listItem.appendChild(deleteButton);
 
-        // Agregar elemento a la lista
         elementList.appendChild(listItem);
     }
 }
@@ -296,37 +777,39 @@ function calculateTotal() {
         total += selectedValues[i];
     }
     var elementResult = document.getElementById("elementResult2");
-    // Redondear el total a 3 números y convertirlo a cadena con coma como separador decimal
     var formattedTotal = total.toLocaleString('es-ES', {
         maximumFractionDigits: 3
     });
-    elementResult.textContent = "El valor es: " + formattedTotal + " metros.";
+    elementResult.textContent = "Long. Equiv: " + formattedTotal + " metros.";
 }
 
 // Inicializar la lista de elementos al cargar la página
 window.onload = function() {
     updateElementList();
+    calculateTotal();
+    loadStoredLists(); // Asegúrate de definir esta función
 };
 
 
 // Función para filtrar opciones en un select
 function filterOptions() {
-    var keyword = document.getElementById("searchKeyword").value.toLowerCase();
-    var select = document.getElementById("element");
+    const keyword = document.getElementById("searchKeyword").value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const select = document.getElementById("element");
+    const options = select.options;
+    
+    // Convertir la palabra clave en un array de palabras
+    const keywordParts = keyword.split(/\s+/);
 
-    for (var i = 0; i < select.options.length; i++) {
-        var optionText = select.options[i].text.toLowerCase();
-        // Eliminar acentos y caracteres especiales del texto de la opción
-        optionText = optionText.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        // Eliminar acentos y caracteres especiales de la palabra clave
-        var keywordNormalized = keyword.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        if (optionText.indexOf(keywordNormalized) > -1) {
-            select.options[i].style.display = ""; // Mostrar la opción si coincide con la palabra clave
-        } else {
-            select.options[i].style.display = "none"; // Ocultar la opción si no coincide con la palabra clave
-        }
+    for (let i = 0; i < options.length; i++) {
+        const optionText = options[i].text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+        // Comprobar si todas las palabras clave están presentes en el texto de la opción
+        const match = keywordParts.every(part => optionText.includes(part));
+
+        options[i].style.display = match ? "" : "none";
     }
 }
+
 //////////////////// Función para calcular diámetro de caños ////////////////////
 ////////////////////////////////////////////////////////////////////////////////
        var tablaTermofusion = [
@@ -450,7 +933,7 @@ function filterOptions() {
         }
 
         const resultado = valoresFijosTermofusion[columnaSeleccionada];
-        fila.querySelector('.result').textContent = resultado + "mm.";
+        fila.querySelector('.result').textContent = resultado + "mm";
 
         // Calcular columna 6
         const suma = x + valor5;
@@ -488,14 +971,12 @@ function filterOptions() {
         }
 
         const resultado2 = valoresFijosTermofusion[columnaSeleccionada2];
-        fila.querySelector('.result-2').textContent = resultado2 + "mm.";
+        fila.querySelector('.result-2').textContent = resultado2 + "mm";
     });
 
     // Guardar los datos de la tabla en localStorage
     guardarDatosTabla();
 }
-
-
         function agregarFila(datos = {}) {
             const tabla = document.querySelector('#dataTable tbody');
             const fila = document.createElement('tr');

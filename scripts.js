@@ -1,4 +1,8 @@
-
+window.onload = function () {
+    loadImagesFromLocalStorage();
+    updateInventoryVisibility(); // Ocultar o mostrar inventario
+    renderCanvas();
+};
 // Función para alternar el menú
 function toggleMenu() {
     var menu = document.querySelector('.menu');
@@ -28,8 +32,6 @@ function toggleMenu() {
     }
 }
 /////////////////////////////// TABLAS ///////////////////////////////
-// Función para cargar los datos de las tablas desde localStorage
-
       // Función para agregar fila
 function agregarFila(tableId, datos = {}) {
     const tabla = document.querySelector(`#${tableId} tbody`);
@@ -133,90 +135,6 @@ function cargarDatosDesdeLocalStorage() {
 
 // Llamar a esta función cuando se carga la página
 document.addEventListener('DOMContentLoaded', cargarDatosDesdeLocalStorage);
-
-/////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////// Función para generar el PDF ///////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////
-// Función para generar el PDF
-function generatePDF() {
-    const { jsPDF } = window.jspdf;
-
-    // Crear un nuevo documento PDF
-    const doc = new jsPDF();
-    const margin = 10; // Margen del documento
-    const canvasWidth = doc.internal.pageSize.width - 2 * margin; // Ancho del canvas ajustado
-    const canvasHeight = 100; // Alto del canvas (puedes ajustar esto según el contenido del canvas)
-    const tableMargin = 10; // Espacio entre tablas
-
-    // Función para ocultar elementos no deseados
-    function hideElements() {
-        document.querySelectorAll('button').forEach(button => button.style.display = 'none');
-    }
-
-    // Función para mostrar los elementos ocultos
-    function showElements() {
-        document.querySelectorAll('button').forEach(button => button.style.display = '');
-    }
-
-    // Capturar el canvas y las tablas como imágenes
-    function captureContent() {
-        return new Promise((resolve) => {
-            // Capturar el canvas
-            html2canvas(document.querySelector('#drawingCanvas')).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-
-                // Agregar el canvas al PDF
-                doc.addImage(imgData, 'PNG', margin, margin, canvasWidth, canvasHeight);
-                let yOffset = canvasHeight + 2 * margin; // Offset después del canvas
-
-                // Función para capturar y agregar tablas al PDF
-                function addTableAsImage(tableId) {
-                    return new Promise((resolve) => {
-                        html2canvas(document.querySelector(`#${tableId}`)).then(tableCanvas => {
-                            const tableImgData = tableCanvas.toDataURL('image/png');
-                            const imgWidth = canvasWidth; // Ancho máximo de la imagen en el PDF
-                            const imgHeight = tableCanvas.height * (imgWidth / tableCanvas.width); // Altura proporcional
-
-                            // Verificar si la tabla cabe en la página actual
-                            if (yOffset + imgHeight > doc.internal.pageSize.height - margin) {
-                                doc.addPage(); // Añadir una nueva página si el contenido excede el tamaño de la página
-                                yOffset = margin; // Reiniciar el offset para la nueva página
-                            }
-
-                            // Agregar la tabla al PDF
-                            doc.addImage(tableImgData, 'PNG', margin, yOffset, imgWidth, imgHeight); // Ajustar altura automática
-                            yOffset += imgHeight + tableMargin; // Actualizar el offset con margen
-
-                            resolve(); // Resolver la promesa cuando la tabla se haya agregado
-                        });
-                    });
-                }
-
-                // Agregar todas las tablas al PDF
-                const tables = ['dataTable1', 'dataTable2', 'dataTable3'];
-                let promiseChain = Promise.resolve();
-
-                tables.forEach(tableId => {
-                    promiseChain = promiseChain.then(() => addTableAsImage(tableId));
-                });
-
-                promiseChain.then(() => {
-                    resolve(); // Resolver la promesa cuando todas las tablas se hayan agregado
-                });
-            });
-        });
-    }
-
-    // Ocultar elementos, capturar contenido y luego mostrar elementos
-    hideElements();
-    captureContent().then(() => {
-        showElements(); // Restaurar los elementos después de la captura
-        doc.save('documento.pdf'); // Guardar el PDF
-    });
-}
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
     // Recuperar datos guardados en localStorage
     document.querySelectorAll('.auto-save').forEach(input => {
@@ -240,8 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-function descargarTabla(tableId, fileName) {
+function descargarTabla1(tableId, fileName) {
     const table = document.getElementById(tableId);
 
     // Crear una hoja de estilo temporal para aplicar estilos solo durante la captura
@@ -372,3 +289,292 @@ function descargarTablaGas(tableId, fileName) {
         document.head.removeChild(style);
     });
 }
+
+
+
+
+
+
+
+
+
+
+
+const canvas = document.getElementById("previewCanvas");
+const ctx = canvas.getContext("2d");
+let images = [];
+let selectedImage = null;
+let offsetX, offsetY;
+let isDragging = false;
+let isResizing = false;
+const resizeHandleSize = 10;
+let idCounter = 0; // Contador para IDs únicos
+
+// Función para actualizar la visibilidad del inventario de imágenes
+function updateInventoryVisibility() {
+    const inventoryDiv = document.getElementById("imageInventory");
+    if (images.length === 0) {
+        inventoryDiv.style.display = "none"; // Ocultar si no hay imágenes
+    } else {
+        inventoryDiv.style.display = "block"; // Mostrar si hay imágenes
+    }
+}
+
+function handleFiles(event) {
+    const files = event.target.files;
+    Array.from(files).forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            const img = new Image();
+            img.src = event.target.result;
+            img.onload = function () {
+                images.push({
+                    id: idCounter++, // Asigna un ID único
+                    img: img,
+                    src: img.src,
+                    name: file.name,
+                    x: 20 * (idCounter - 1),
+                    y: 20 * (idCounter - 1),
+                    width: img.width / 4,
+                    height: img.height / 4,
+                    aspectRatio: img.width / img.height,
+                    isFixed: false // Propiedad para fijar imagen
+                });
+                saveImagesToLocalStorage();
+                renderInventory();
+                renderCanvas();
+                updateInventoryVisibility(); // Actualizar visibilidad después de agregar
+            };
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function saveImagesToLocalStorage() {
+    const imageData = images.map(image => ({
+        id: image.id,
+        src: image.src,
+        name: image.name,
+        x: image.x,
+        y: image.y,
+        width: image.width,
+        height: image.height,
+        aspectRatio: image.aspectRatio,
+        isFixed: image.isFixed // Guardar estado de fijación
+    }));
+    localStorage.setItem("images", JSON.stringify(imageData));
+}
+
+function loadImagesFromLocalStorage() {
+    const imageData = JSON.parse(localStorage.getItem("images"));
+    if (imageData) {
+        images = []; // Asegurarse de limpiar antes de cargar
+        imageData.forEach(data => {
+            const img = new Image();
+            img.src = data.src;
+            img.onload = function () {
+                images.push({
+                    id: data.id, // Cargar el ID único
+                    img: img,
+                    src: data.src,
+                    name: data.name,
+                    x: data.x,
+                    y: data.y,
+                    width: data.width,
+                    height: data.height,
+                    aspectRatio: data.aspectRatio,
+                    isFixed: data.isFixed // Cargar estado de fijación
+                });
+                renderCanvas();
+                renderInventory();
+                updateInventoryVisibility(); // Actualizar visibilidad después de cargar
+            };
+        });
+    } else {
+        updateInventoryVisibility(); // Asegurar visibilidad correcta si no hay imágenes
+    }
+}
+
+
+function renderCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    images.forEach(image => {
+        ctx.drawImage(image.img, image.x, image.y, image.width, image.height);
+        ctx.fillStyle = "blue";
+        ctx.fillRect(image.x + image.width - resizeHandleSize, image.y + image.height - resizeHandleSize, resizeHandleSize, resizeHandleSize);
+    });
+}
+
+function renderInventory() {
+    const inventoryDiv = document.getElementById("imageInventory");
+    inventoryDiv.innerHTML = "<h3>Inventario de Imágenes</h3>";
+
+    images.forEach((image) => {
+        const imgContainer = document.createElement("div");
+        imgContainer.style.display = "flex";
+        imgContainer.style.alignItems = "center";
+        imgContainer.style.marginBottom = "10px";
+
+        const thumbnail = document.createElement("img");
+        thumbnail.src = image.src;
+        thumbnail.width = 200;
+        thumbnail.style.marginRight = "10px";
+
+        const fileName = document.createElement("span");
+        fileName.textContent = image.name ? image.name : "Nombre no disponible";
+        fileName.style.marginRight = "10px";
+
+        const selectButton = document.createElement("button");
+        selectButton.textContent = "Seleccionar";
+        selectButton.style.marginLeft = "auto";
+        selectButton.onclick = () => selectImageFromInventory(image.id); // Usa el ID
+
+        const fixButton = document.createElement("button");
+        fixButton.textContent = image.isFixed ? "Mover" : "Fijar"; // Cambiar texto según estado
+        fixButton.style.marginLeft = "10px";
+        fixButton.onclick = () => toggleFixImage(image.id); // Alternar fijación
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Eliminar";
+        deleteButton.style.marginLeft = "10px";
+        deleteButton.onclick = () => deleteImage(image.id); // Usa el ID
+
+        imgContainer.appendChild(thumbnail);
+        imgContainer.appendChild(fileName);
+        imgContainer.appendChild(selectButton);
+        imgContainer.appendChild(fixButton);
+        imgContainer.appendChild(deleteButton);
+        inventoryDiv.appendChild(imgContainer);
+    });
+}
+function selectImageFromInventory(id) {
+    if (isDragging) return; // Evitar seleccionar mientras se arrastra
+    selectedImage = images.find(image => image.id === id); // Busca la imagen por ID
+    offsetX = 0;
+    offsetY = 0;
+    isDragging = true;
+    renderCanvas();
+}
+
+function toggleFixImage(id) {
+    const image = images.find(image => image.id === id);
+    if (image) {
+        image.isFixed = !image.isFixed; // Alternar estado de fijación
+        saveImagesToLocalStorage();
+        renderInventory();
+        renderCanvas();
+    }
+}
+
+function deleteImage(id) {
+    images = images.filter(image => image.id !== id); // Filtra la imagen por ID
+    saveImagesToLocalStorage();
+    renderInventory();
+    renderCanvas();
+    updateInventoryVisibility(); // Actualizar visibilidad después de eliminar
+}
+
+function resetCanvas() {
+    // Mostrar una alerta de confirmación
+    const confirmReset = confirm("¿Estás seguro de que deseas eliminar el espacio de trabajo?");
+
+    if (confirmReset) {
+        // Si el usuario confirma, borrar imágenes y almacenamiento local
+        images = [];
+        localStorage.removeItem("images");
+        renderInventory();
+        renderCanvas();
+        updateInventoryVisibility(); // Ocultar inventario después de reiniciar
+    }
+}
+
+
+canvas.addEventListener("mousedown", (event) => {
+    const mouseX = event.offsetX;
+    const mouseY = event.offsetY;
+
+    // Si la imagen está seleccionada, no la muevas si está fijada
+    if (selectedImage && selectedImage.isFixed) {
+        return; // No permitir mover si está fijada
+    }
+
+    if (selectedImage) {
+        const handleX = selectedImage.x + selectedImage.width - resizeHandleSize;
+        const handleY = selectedImage.y + selectedImage.height - resizeHandleSize;
+
+        if (mouseX >= handleX && mouseY >= handleY) {
+            isResizing = true;
+            return;
+        }
+    }
+
+    // Buscamos la imagen más alta en la pila de imágenes
+    for (let i = images.length - 1; i >= 0; i--) {
+        const image = images[i];
+        if (
+            mouseX >= image.x &&
+            mouseX <= image.x + image.width &&
+            mouseY >= image.y &&
+            mouseY <= image.y + image.height
+        ) {
+            if (!image.isFixed) { // Solo permitir mover si no está fijada
+                selectedImage = image;
+
+                // Mover la imagen seleccionada al final del array
+                images.splice(i, 1);
+                images.push(selectedImage);
+
+                isDragging = true;
+                offsetX = mouseX - selectedImage.x;
+                offsetY = mouseY - selectedImage.y;
+
+                console.log("Imagen seleccionada:", selectedImage); // Debugging
+                renderCanvas();
+            }
+            return;
+        }
+    }
+    selectedImage = null;
+});
+
+canvas.addEventListener("mousemove", (event) => {
+    if (isDragging && selectedImage) {
+        const mouseX = event.offsetX;
+        const mouseY = event.offsetY;
+        selectedImage.x = mouseX - offsetX;
+        selectedImage.y = mouseY - offsetY;
+        renderCanvas();
+    } else if (isResizing && selectedImage) {
+        const mouseX = event.offsetX;
+        const newWidth = mouseX - selectedImage.x;
+        selectedImage.width = newWidth;
+        selectedImage.height = newWidth / selectedImage.aspectRatio;
+        renderCanvas();
+    }
+});
+
+canvas.addEventListener("mouseup", () => {
+    if (selectedImage) saveImagesToLocalStorage();
+    isDragging = false;
+    isResizing = false;
+});
+
+function generateImage() {
+    const finalCanvas = document.createElement("canvas");
+    finalCanvas.width = canvas.width;
+    finalCanvas.height = canvas.height;
+    const finalCtx = finalCanvas.getContext("2d");
+    images.forEach(image => {
+        finalCtx.drawImage(image.img, image.x, image.y, image.width, image.height);
+    });
+    const dataURL = finalCanvas.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.href = dataURL;
+    link.download = "PlanoFinal.png";
+    link.click();
+}
+// Ejecutar al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+    loadImagesFromLocalStorage(); // Cargar imágenes
+});
+

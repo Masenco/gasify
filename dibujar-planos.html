@@ -1,221 +1,334 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style1.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style2.css" />
     <title>Herramienta para dibujo de planos</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="apple-touch-icon" sizes="57x57" href="img/icon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="img/icon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="img/icon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="img/icon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="img/icon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="img/icon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="img/icon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="img/icon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="img/icon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="img/icon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="img/icon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/icon/favicon-16x16.png">
-    <link rel="manifest" href="img/icon/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="img/icon/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
-    <script src="https://unpkg.com/react/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="img/icon/apple-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="img/icon/apple-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="img/icon/apple-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="img/icon/apple-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="img/icon/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="img/icon/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="img/icon/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="img/icon/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="img/icon/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="img/icon/android-icon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="img/icon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="img/icon/favicon-96x96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="img/icon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="img/icon/manifest.json" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta
+      name="msapplication-TileImage"
+      content="img/icon/ms-icon-144x144.png"
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@excalidraw/excalidraw/dist/excalidraw.development.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-</head>
-<body>
-     <div class="overlay" onclick="toggleMenu()"></div>
+  </head>
+  <body>
+    <div class="overlay" onclick="toggleMenu()"></div>
     <div class="toggle" onclick="toggleMenu()">+</div>
     <div class="menu">
-        <ul>
-             <li><a href="index.html">Página principal</a></li>
-        </ul>
+      <ul>
+        <li><a href="index.html">Página principal</a></li>
+      </ul>
     </div>
-     <!-- Excalidraw Integration -->
-    <div id="app" style="height: 500px; width: 100%;"></div>
-    
-<script>
-    const { Excalidraw } = ExcalidrawLib;
-
-    const App = () => {
-        const [initialData, setInitialData] = React.useState(null);
-
-        // Cargar el estado guardado al iniciar
-        React.useEffect(() => {
-    const savedData = localStorage.getItem('excalidraw');
-    if (savedData) {
-        try {
-            const parsedData = JSON.parse(savedData);
-            // Verifica que `elements` y `appState` estén correctamente formateados
-            if (Array.isArray(parsedData.elements) && typeof parsedData.appState === 'object') {
-                // Si `collaborators` no es un array, lo convertimos a uno
-                if (!Array.isArray(parsedData.appState.collaborators)) {
-                    parsedData.appState.collaborators = Object.values(parsedData.appState.collaborators || {});
-                }
-                setInitialData(parsedData);
-            }
-        } catch (error) {
-            console.error("Error al parsear los datos guardados:", error);
-        }
-    }
-}, []);
-
-        const handleChange = (elements, appState) => {
-    // Verificar y convertir `collaborators` a un array si no lo es
-    if (!Array.isArray(appState.collaborators)) {
-        appState.collaborators = Object.values(appState.collaborators || {});
-    }
-
-    const dataToSave = {
-        elements: elements,
-        appState: appState,
-    };
-
-    localStorage.setItem('excalidraw', JSON.stringify(dataToSave));
-};
-
-
-        return React.createElement(
-            'div',
-            { style: { height: '100%', width: '100%' } },
-            React.createElement(Excalidraw, {
-                initialData: initialData,
-                onChange: handleChange,
-            })
+    <!-- Excalidraw Integration -->
+    <div id="app" style="height: 550px; width: 96%"></div>
+    <script>
+      // Verifica que ExcalidrawLib esté definido
+      if (typeof ExcalidrawLib === "undefined") {
+        console.error(
+          "ExcalidrawLib no está definido. Asegúrate de que el script de Excalidraw se cargó correctamente."
         );
-    };
+      } else {
+        const { Excalidraw } = ExcalidrawLib;
 
-    const rootElement = document.getElementById('app');
-    const root = ReactDOM.createRoot(rootElement);
-    root.render(React.createElement(App));
+        const App = () => {
+          const [initialData, setInitialData] = React.useState(null);
 
-    window.onload = () => {
-        const excalidrawContainer = document.querySelector('#app');
-        if (excalidrawContainer) {
-            excalidrawContainer.style.width = '90%';
-            excalidrawContainer.style.height = '600px';
-            excalidrawContainer.style.position = "relative";
-        }
-    };
-</script>
+          React.useEffect(() => {
+            const savedData = localStorage.getItem("excalidraw");
+            if (savedData) {
+              try {
+                const parsedData = JSON.parse(savedData);
+                if (
+                  Array.isArray(parsedData.elements) &&
+                  typeof parsedData.appState === "object"
+                ) {
+                  if (!Array.isArray(parsedData.appState.collaborators)) {
+                    parsedData.appState.collaborators = Object.values(
+                      parsedData.appState.collaborators || {}
+                    );
+                  }
+                  setInitialData(parsedData);
+                }
+              } catch (error) {
+                console.error("Error al parsear los datos guardados:", error);
+              }
+            }
+          }, []);
+
+          const handleChange = (elements, appState) => {
+            if (!Array.isArray(appState.collaborators)) {
+              appState.collaborators = Object.values(
+                appState.collaborators || {}
+              );
+            }
+            const dataToSave = {
+              elements: elements,
+              appState: appState,
+            };
+            localStorage.setItem("excalidraw", JSON.stringify(dataToSave));
+          };
+
+          return React.createElement(
+            "div",
+            { style: { height: "100%", width: "100%" } },
+            React.createElement(Excalidraw, {
+              initialData: initialData,
+              onChange: handleChange,
+            })
+          );
+        };
+
+        const rootElement = document.getElementById("app");
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(React.createElement(App));
+      }
+    </script>
     <!-- Primera tabla (4 columnas) -->
     <div class="container">
-        <div class="calculator tablaDiam" id="tC1">
-            <table id="dataTable1">
-                <thead>
-                     <tr>
-                        <th colspan="4">Lista de materiales</th>
-                    </tr>
-                    <tr>
-                        <th>Accesorios</th>
-                        <th>Marca</th>
-                        <th>Matrícula</th>
-                        <th>Material</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Las filas se generarán dinámicamente aquí -->
-                </tbody>
-            </table>
-            <button onclick="agregarFila('dataTable1')">Agregar material</button>
-            <button onclick="descargarTabla('dataTable1', 'lista_materiales')">Exportar como PNG</button>
-        </div>
-        
+      <div class="calculator tablaDiam" id="tC1">
+        <table id="dataTable1">
+          <thead>
+            <tr>
+              <th colspan="4">Lista de materiales</th>
+            </tr>
+            <tr>
+              <th>Accesorios</th>
+              <th>Marca</th>
+              <th>Matrícula</th>
+              <th>Material</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Las filas se generarán dinámicamente aquí -->
+          </tbody>
+        </table>
+        <button onclick="agregarFila('dataTable1')">Agregar material</button>
+        <button onclick="descargarTabla1('dataTable1', 'lista_materiales')">
+          Exportar como PNG
+        </button>
+      </div>
     </div>
 
     <!-- Segunda tabla (5 columnas) -->
     <div class="container">
-        <div class="calculator tablaDiam" id="tC2">
-            <table id="dataTable2">
-                <thead>
-                     <tr>
-                        <th colspan="5">Artefactos</th>
-                    </tr>
-                    <tr>
-                        <th>Punto</th>
-                        <th>Descripción</th>
-                        <th>Marca</th>
-                        <th>Matrícula</th>
-                        <th>kcal.</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Las filas se generarán dinámicamente aquí -->
-                </tbody>
-            </table>
-            <button onclick="agregarFila('dataTable2')">Agregar artefacto</button>
-            <button onclick="descargarTabla('dataTable2', 'artefactos')">Exportar como PNG</button>
-        </div>
+      <div class="calculator tablaDiam" id="tC2">
+        <table id="dataTable2">
+          <thead>
+            <tr>
+              <th colspan="5">Artefactos</th>
+            </tr>
+            <tr>
+              <th>Punto</th>
+              <th>Descripción</th>
+              <th>Marca</th>
+              <th>Matrícula</th>
+              <th>kcal.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Las filas se generarán dinámicamente aquí -->
+          </tbody>
+        </table>
+        <button onclick="agregarFila('dataTable2')">Agregar artefacto</button>
+        <button onclick="descargarTabla1('dataTable2', 'artefactos')">
+          Exportar como PNG
+        </button>
+      </div>
     </div>
 
     <!-- Tercera tabla (4 columnas) -->
     <div class="container">
-        <div class="calculator tablaDiam" id="tC3">
-            <table id="dataTable3">
-                <thead>
-                     <tr>
-                        <th colspan="4">Lista de materiales gabinete</th>
-                    </tr>
-                    <tr>
-                        <th>Accesorios</th>
-                        <th>Marca</th>
-                        <th>Matrícula</th>
-                        <th>Material</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Las filas se generarán dinámicamente aquí -->
-                </tbody>
-            </table>
-            <button onclick="agregarFila('dataTable3')">Agregar material</button>
-            <button onclick="descargarTabla('dataTable3', 'materiales_gabinete')">Exportar como PNG</button>
-        </div>
+      <div class="calculator tablaDiam" id="tC3">
+        <table id="dataTable3">
+          <thead>
+            <tr>
+              <th colspan="4">Lista de materiales gabinete</th>
+            </tr>
+            <tr>
+              <th>Accesorios</th>
+              <th>Marca</th>
+              <th>Matrícula</th>
+              <th>Material</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Las filas se generarán dinámicamente aquí -->
+          </tbody>
+        </table>
+        <button onclick="agregarFila('dataTable3')">Agregar material</button>
+        <button onclick="descargarTabla1('dataTable3', 'materiales_gabinete')">
+          Exportar como PNG
+        </button>
+      </div>
     </div>
 
-
-<table class="gas-table" id="gas-table">
-    <tr>
+    <table class="gas-table" id="gas-table">
+      <tr>
         <th colspan="4">INSTALACIÓN PARA GAS NATURAL</th>
-    </tr>
-    <tr>
-        <td>CALLE: <input type="text" id="calle" class="auto-save"></td>
-        <td>N°: <input type="text" id="numero" class="auto-save"></td>
-        <td>PISO: <input type="text" id="piso" class="auto-save"></td>
-        <td>DTO: <input type="text" id="dto" class="auto-save"></td>
-    </tr>
-    <tr>
-        <td colspan="4">ENTRE: <input type="text" id="entre" class="auto-save"></td>
-    </tr>
-    <tr>
-        <td>LOCALIDAD: <input type="text" id="localidad" class="auto-save"></td>
-        <td colspan="3">PARTIDO: <input type="text" id="partido" class="auto-save"></td>
-    </tr>
-    <tr>
-        <td>INSTALADOR: <input type="text" id="matricula" class="auto-save"></td>
-        <td>MATRÍCULA: <input type="text" id="matricula" class="auto-save"></td>
-        <td colspan="3">CATEGORIA: <input type="text" id="categoria" class="auto-save"></td>
-    </tr>
-    <tr>
-        <td class="center" style="vertical-align: bottom; text-align: center;" colspan="2">Firma del instalador</td>
-        <td class="center" style="vertical-align: bottom; text-align: center;" colspan="2">Firma del propietario</td>
-    </tr>
-    <tr>
-        <td class="center" style="vertical-align: bottom; text-align: center;" colspan="2">Firmas del director de obra</td>
-        <td class="center" style="vertical-align: bottom; text-align: center;" colspan="2">Firma de la empresa contratista</td>
-    </tr>
-</table>
+      </tr>
+      <tr>
+        <td>CALLE: <input type="text" id="calle" class="auto-save" /></td>
+        <td>N°: <input type="text" id="numero" class="auto-save" /></td>
+        <td>PISO: <input type="text" id="piso" class="auto-save" /></td>
+        <td>DTO: <input type="text" id="dto" class="auto-save" /></td>
+      </tr>
+      <tr>
+        <td colspan="4">
+          ENTRE: <input type="text" id="entre" class="auto-save" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          LOCALIDAD: <input type="text" id="localidad" class="auto-save" />
+        </td>
+        <td colspan="3">
+          PARTIDO: <input type="text" id="partido" class="auto-save" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          INSTALADOR: <input type="text" id="matricula" class="auto-save" />
+        </td>
+        <td>
+          MATRÍCULA: <input type="text" id="matricula" class="auto-save" />
+        </td>
+        <td colspan="3">
+          CATEGORIA: <input type="text" id="categoria" class="auto-save" />
+        </td>
+      </tr>
+      <tr>
+        <td
+          class="center"
+          style="vertical-align: bottom; text-align: center"
+          colspan="2"
+        >
+          Firma del instalador
+        </td>
+        <td
+          class="center"
+          style="vertical-align: bottom; text-align: center"
+          colspan="2"
+        >
+          Firma del propietario
+        </td>
+      </tr>
+      <tr>
+        <td
+          class="center"
+          style="vertical-align: bottom; text-align: center"
+          colspan="2"
+        >
+          Firmas del director de obra
+        </td>
+        <td
+          class="center"
+          style="vertical-align: bottom; text-align: center"
+          colspan="2"
+        >
+          Firma de la empresa contratista
+        </td>
+      </tr>
+    </table>
+    <button class="eliminarDatos">Resetear Tabla</button>
+    <button onclick="descargarTablaGas('gas-table', 'instalacion_gas')">
+      Exportar como PNG
+    </button>
+    <div class="generarPlanoFinal">
+        <input type="file" id="imageInput" accept="image/*" multiple onchange="handleFiles(event)">
+        <button onclick="generateImage()">Generar imagen</button>
+        <button onclick="resetCanvas()">Resetear plano</button>
 
-<button class="eliminarDatos">Resetear Tabla</button>
-<button onclick="descargarTablaGas('gas-table', 'instalacion_gas')">Exportar como PNG</button>
-<script src="scripts.js"></script>
-</body>
+        <div id="canvasContainer"
+            style="position: relative; width: 1300px; height: 600px; border: 1px solid white; background-color: white;">
+            <canvas id="previewCanvas" width="1300" height="600"></canvas>
+        </div>
+
+        <div id="imageInventory" style="margin-top: 20px;">
+            <h3>Inventario de Imágenes</h3>
+            <!-- Aquí se mostrarán las imágenes cargadas -->
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+  </body>
 </html>
