@@ -1,9 +1,28 @@
+@font-face {
+    font-family: "Mukta-Bold";
+    src: url("fonts/Mukta-Bold.ttf") format("truetype");
+}
 body {
      font-family: "Roboto", sans-serif;;
     margin: 0;
     width: 100%;
     height: 100vh;
     background-color: #01212e;
+}
+
+.gasify {
+    position: relative;
+    font-size: 100px;
+    font-family: "Mukta-Bold";
+    top: -100px;
+}
+
+.info {
+    position: relative;
+    font-size: 15px;
+    font-style: italic;
+    top: -240px;
+    color: #fff;
 }
 
 .login {
@@ -22,9 +41,8 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     align-items: center;
-    padding-top: 100px;
     background-image: linear-gradient(to bottom right, #0D1117 45%, #1b222b 0%);
 }
 
@@ -35,6 +53,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    top: -150px;
 }
 
 #formulario-sesion a {
@@ -109,11 +128,12 @@ h1, h2 {
     font-size: 30px;
     color: #fff;
     text-transform: uppercase;
+    top: -150px;
 }
 
 @media only screen and (max-width: 600px) {
 .formulario-iniciosesion {
-    padding-top: 150px;
+    padding-top: 0px;
 }
 
 #formulario-sesion {
@@ -139,6 +159,5 @@ input[type="email"], [type="password"] {
 
 h1, h2 {
     font-size: 35px;
-    margin-bottom: 50px;
 }
 }
